@@ -11,5 +11,7 @@ namespace CitrsLite.Data.Models
         public int Id { get; set; }
         public string VarietyClone { get; set; }
 
+        public string Description { get; set; }
+
     }
 }
