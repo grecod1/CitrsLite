@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace CitrsLite.Data.Models
 {
-    public class Tree
+    public class VarietyClone
     {
         public int Id { get; set; }
-        public string Number { get; set; }
-        public string VarietyClone { get; set; }
-
+        public string Name { get; set; }
         public string Description { get; set; }
 
         public bool IsActive { get; set; }
@@ -19,6 +17,5 @@ namespace CitrsLite.Data.Models
         public DateTime CreationDate { get; set; }
         public string ModifiedBy { get; set; }
         public DateTime ModificationDate { get; set; }
-
     }
 }
