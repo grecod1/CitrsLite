@@ -1,7 +1,9 @@
 using CitrsLite.Data;
+using CitrsLite.Data.Entity;
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +20,10 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
+
+builder.Services
+    .AddDbContext<CitrsLiteContext>(options => 
+        options.UseSqlServer(builder.Configuration.GetConnectionString("CitrsDatabase")));
 
 var app = builder.Build();
 
