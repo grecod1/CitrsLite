@@ -9,8 +9,7 @@ namespace CitrsLite.Data.Models
     public class Tree
     {
         public int Id { get; set; }
-        public string Number { get; set; }
-        public string VarietyClone { get; set; }
+        public string Number { get; set; }        
 
         public string Description { get; set; }
 
