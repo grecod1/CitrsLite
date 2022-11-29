@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace CitrsLite.Data.Models
 {
+    /// <summary>
+    ///  This represents an instance of a tree 
+    ///  in a location.
+    /// </summary>
     public class TreeLocation
     {
         public int Id { get; set; }
