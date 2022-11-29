@@ -15,7 +15,7 @@ namespace CitrsLite.Data.Entity
         public DbSet<VarietyClone> VarietyClones { get; set; }
         public DbSet<Tree> Trees { get; set; }
         public DbSet<TreeType> TreeTypes { get; set; }
-
+        public DbSet<Budwood> Budwoods { get; set; }
 
         public CitrsLiteContext(DbContextOptions<CitrsLiteContext> options) : base(options) { }
         
