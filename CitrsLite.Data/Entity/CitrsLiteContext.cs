@@ -24,7 +24,7 @@ namespace CitrsLite.Data.Entity
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var connectionString = "Data Source=TLHSQL17DEV\\DPI;Initial Catalog=CitrsLite;Integrated Security=True";
+            var connectionString = "Data Source=TLHSQL17DEV\\DPI;Initial Catalog=CitrsLite;Integrated Security=True; TrustServerCertificate=True";
 
             optionsBuilder.UseSqlServer(connectionString);
         }
