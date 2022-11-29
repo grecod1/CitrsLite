@@ -16,18 +16,7 @@ namespace CitrsLite.Data.Entity
 
 
         public CitrsLiteContext(DbContextOptions<CitrsLiteContext> options) : base(options) { }
-
-        public CitrsLiteContext(string connectionString)
-        {
-
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            var connectionString = "Data Source=TLHSQL17DEV\\DPI;Initial Catalog=CitrsLite;Integrated Security=True; TrustServerCertificate=True";
-
-            optionsBuilder.UseSqlServer(connectionString);
-        }
+        
         
     }
 }
