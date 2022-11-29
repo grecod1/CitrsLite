@@ -4,6 +4,7 @@ using CitrsLite.Data.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CitrsLite.Data.Migrations
 {
     [DbContext(typeof(CitrsLiteContext))]
-    partial class CitrsLiteContextModelSnapshot : ModelSnapshot
+    [Migration("20221129212655_TreeLocationParticipantRelation")]
+    partial class TreeLocationParticipantRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -270,14 +273,9 @@ namespace CitrsLite.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TreeId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ParticipantId");
-
-                    b.HasIndex("TreeId");
 
                     b.ToTable("TreeLocations");
                 });
@@ -422,15 +420,7 @@ namespace CitrsLite.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CitrsLite.Data.Models.Tree", "Tree")
-                        .WithMany()
-                        .HasForeignKey("TreeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Participant");
-
-                    b.Navigation("Tree");
                 });
 
             modelBuilder.Entity("CitrsLite.Data.Models.Registration", b =>
