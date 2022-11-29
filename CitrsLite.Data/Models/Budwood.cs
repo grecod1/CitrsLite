@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CitrsLite.Data.Models
 {
-    internal class Budwood
+    public class Budwood
     {
         public int Quantity { get; set; }
         public string Name { get; set; }
