@@ -14,16 +14,16 @@ namespace CitrsLite.Data.Models
         [Required]
         public string RegistrationNumber { get; set; }
 
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
-        bool isActive { get; set; }
+        bool IsActive { get; set; }
 
+        [Required]
         public string CreatedBy { get; set; }
-
         public DateTime CreationDate { get; set; }
 
+        [Required]
         public string ModifiedBy { get; set;}
-
         public DateTime ModificationDate { get; set;}
     }
 }
