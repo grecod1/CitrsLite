@@ -12,8 +12,11 @@ namespace CitrsLite.Data.Models
         public int Id { get; set; }
 
         [Required]
-        public string Number { get; set; }        
-        
+        public string Number { get; set; }
+
+        public int TreeTypeId { get; set; }
+        public TreeType TreeType { get; set; }
+
         public string? Description { get; set; }
 
         public bool IsActive { get; set; }
