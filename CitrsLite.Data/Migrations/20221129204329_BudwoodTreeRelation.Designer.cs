@@ -4,6 +4,7 @@ using CitrsLite.Data.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CitrsLite.Data.Migrations
 {
     [DbContext(typeof(CitrsLiteContext))]
-    partial class CitrsLiteContextModelSnapshot : ModelSnapshot
+    [Migration("20221129204329_BudwoodTreeRelation")]
+    partial class BudwoodTreeRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,7 +75,7 @@ namespace CitrsLite.Data.Migrations
 
                     b.HasIndex("TreeId");
 
-                    b.ToTable("Budwoods", (string)null);
+                    b.ToTable("Budwoods");
                 });
 
             modelBuilder.Entity("CitrsLite.Data.Models.Participant", b =>
@@ -129,7 +132,7 @@ namespace CitrsLite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Participants", (string)null);
+                    b.ToTable("Participants");
                 });
 
             modelBuilder.Entity("CitrsLite.Data.Models.Registration", b =>
@@ -173,7 +176,7 @@ namespace CitrsLite.Data.Migrations
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("Registrations", (string)null);
+                    b.ToTable("Registrations");
                 });
 
             modelBuilder.Entity("CitrsLite.Data.Models.Tree", b =>
@@ -225,7 +228,7 @@ namespace CitrsLite.Data.Migrations
 
                     b.HasIndex("VarietyCloneId");
 
-                    b.ToTable("Trees", (string)null);
+                    b.ToTable("Trees");
                 });
 
             modelBuilder.Entity("CitrsLite.Data.Models.TreeType", b =>
@@ -259,7 +262,7 @@ namespace CitrsLite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TreeTypes", (string)null);
+                    b.ToTable("TreeTypes");
                 });
 
             modelBuilder.Entity("CitrsLite.Data.Models.VarietyClone", b =>
@@ -296,7 +299,7 @@ namespace CitrsLite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("VarietyClones", (string)null);
+                    b.ToTable("VarietyClones");
                 });
 
             modelBuilder.Entity("CitrsLite.Data.Models.Budwood", b =>

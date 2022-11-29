@@ -14,6 +14,8 @@ namespace CitrsLite.Data.Models
         [Required]
         public string Name { get; set; }
 
+        public ICollection<Tree> Trees { get; set; }
+
         public string? Description { get; set; }
 
         [Required]

@@ -16,6 +16,12 @@ namespace CitrsLite.Data.Models
         [Required]
         public string Name { get; set; }
 
+        public int RegistrationId { get; set; }
+        public Registration Registration { get; set; }
+
+        public int TreeId { get; set; }
+        public Tree Tree { get; set; }
+
         public int? NumberBudded { get; set; }
         public int? NumberGrafted { get; set; }
 

@@ -4,6 +4,7 @@ using CitrsLite.Data.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CitrsLite.Data.Migrations
 {
     [DbContext(typeof(CitrsLiteContext))]
-    partial class CitrsLiteContextModelSnapshot : ModelSnapshot
+    [Migration("20221129202905_AddTreeTypeAndTreeRelation")]
+    partial class AddTreeTypeAndTreeRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,19 +63,9 @@ namespace CitrsLite.Data.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("RegistrationId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TreeId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("RegistrationId");
-
-                    b.HasIndex("TreeId");
-
-                    b.ToTable("Budwoods", (string)null);
+                    b.ToTable("Budwoods");
                 });
 
             modelBuilder.Entity("CitrsLite.Data.Models.Participant", b =>
@@ -129,7 +122,7 @@ namespace CitrsLite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Participants", (string)null);
+                    b.ToTable("Participants");
                 });
 
             modelBuilder.Entity("CitrsLite.Data.Models.Registration", b =>
@@ -157,23 +150,13 @@ namespace CitrsLite.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RecieverId")
-                        .HasColumnType("int");
-
                     b.Property<string>("RegistrationNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SupplierId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("RecieverId");
-
-                    b.HasIndex("SupplierId");
-
-                    b.ToTable("Registrations", (string)null);
+                    b.ToTable("Registrations");
                 });
 
             modelBuilder.Entity("CitrsLite.Data.Models.Tree", b =>
@@ -208,24 +191,14 @@ namespace CitrsLite.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ParentTreeId")
-                        .HasColumnType("int");
-
                     b.Property<int>("TreeTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("VarietyCloneId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ParentTreeId");
-
                     b.HasIndex("TreeTypeId");
 
-                    b.HasIndex("VarietyCloneId");
-
-                    b.ToTable("Trees", (string)null);
+                    b.ToTable("Trees");
                 });
 
             modelBuilder.Entity("CitrsLite.Data.Models.TreeType", b =>
@@ -259,7 +232,7 @@ namespace CitrsLite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TreeTypes", (string)null);
+                    b.ToTable("TreeTypes");
                 });
 
             modelBuilder.Entity("CitrsLite.Data.Models.VarietyClone", b =>
@@ -296,81 +269,21 @@ namespace CitrsLite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("VarietyClones", (string)null);
-                });
-
-            modelBuilder.Entity("CitrsLite.Data.Models.Budwood", b =>
-                {
-                    b.HasOne("CitrsLite.Data.Models.Registration", "Registration")
-                        .WithMany("Budwoods")
-                        .HasForeignKey("RegistrationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CitrsLite.Data.Models.Tree", "Tree")
-                        .WithMany()
-                        .HasForeignKey("TreeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Registration");
-
-                    b.Navigation("Tree");
-                });
-
-            modelBuilder.Entity("CitrsLite.Data.Models.Registration", b =>
-                {
-                    b.HasOne("CitrsLite.Data.Models.Participant", "Reciever")
-                        .WithMany()
-                        .HasForeignKey("RecieverId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CitrsLite.Data.Models.Participant", "Supplier")
-                        .WithMany()
-                        .HasForeignKey("SupplierId");
-
-                    b.Navigation("Reciever");
-
-                    b.Navigation("Supplier");
+                    b.ToTable("VarietyClones");
                 });
 
             modelBuilder.Entity("CitrsLite.Data.Models.Tree", b =>
                 {
-                    b.HasOne("CitrsLite.Data.Models.Tree", "ParentTree")
-                        .WithMany()
-                        .HasForeignKey("ParentTreeId");
-
                     b.HasOne("CitrsLite.Data.Models.TreeType", "TreeType")
                         .WithMany("Trees")
                         .HasForeignKey("TreeTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CitrsLite.Data.Models.VarietyClone", "VarietyClone")
-                        .WithMany("Trees")
-                        .HasForeignKey("VarietyCloneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ParentTree");
-
                     b.Navigation("TreeType");
-
-                    b.Navigation("VarietyClone");
-                });
-
-            modelBuilder.Entity("CitrsLite.Data.Models.Registration", b =>
-                {
-                    b.Navigation("Budwoods");
                 });
 
             modelBuilder.Entity("CitrsLite.Data.Models.TreeType", b =>
-                {
-                    b.Navigation("Trees");
-                });
-
-            modelBuilder.Entity("CitrsLite.Data.Models.VarietyClone", b =>
                 {
                     b.Navigation("Trees");
                 });

@@ -14,6 +14,14 @@ namespace CitrsLite.Data.Models
         [Required]
         public string RegistrationNumber { get; set; }
 
+        public int? SupplierId { get; set; }
+        public Participant? Supplier { get; set; }
+
+        public int RecieverId { get; set; }
+        public Participant Reciever { get; set; }
+
+        public ICollection<Budwood> Budwoods { get; set; }
+
         public string? Description { get; set; }
 
         bool IsActive { get; set; }
