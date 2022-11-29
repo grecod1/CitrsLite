@@ -17,6 +17,9 @@ namespace CitrsLite.Data.Models
         public int TreeTypeId { get; set; }
         public TreeType TreeType { get; set; }
 
+        public int VarietyCloneId { get; set; }
+        public VarietyClone VarietyClone { get; set; }
+
         public string? Description { get; set; }
 
         public bool IsActive { get; set; }
