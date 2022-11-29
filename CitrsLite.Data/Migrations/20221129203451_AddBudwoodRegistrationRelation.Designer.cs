@@ -4,6 +4,7 @@ using CitrsLite.Data.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CitrsLite.Data.Migrations
 {
     [DbContext(typeof(CitrsLiteContext))]
-    partial class CitrsLiteContextModelSnapshot : ModelSnapshot
+    [Migration("20221129203451_AddBudwoodRegistrationRelation")]
+    partial class AddBudwoodRegistrationRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -152,21 +155,11 @@ namespace CitrsLite.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RecieverId")
-                        .HasColumnType("int");
-
                     b.Property<string>("RegistrationNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SupplierId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("RecieverId");
-
-                    b.HasIndex("SupplierId");
 
                     b.ToTable("Registrations");
                 });
@@ -203,9 +196,6 @@ namespace CitrsLite.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ParentTreeId")
-                        .HasColumnType("int");
-
                     b.Property<int>("TreeTypeId")
                         .HasColumnType("int");
 
@@ -213,8 +203,6 @@ namespace CitrsLite.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ParentTreeId");
 
                     b.HasIndex("TreeTypeId");
 
@@ -305,29 +293,8 @@ namespace CitrsLite.Data.Migrations
                     b.Navigation("Registration");
                 });
 
-            modelBuilder.Entity("CitrsLite.Data.Models.Registration", b =>
-                {
-                    b.HasOne("CitrsLite.Data.Models.Participant", "Reciever")
-                        .WithMany()
-                        .HasForeignKey("RecieverId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CitrsLite.Data.Models.Participant", "Supplier")
-                        .WithMany()
-                        .HasForeignKey("SupplierId");
-
-                    b.Navigation("Reciever");
-
-                    b.Navigation("Supplier");
-                });
-
             modelBuilder.Entity("CitrsLite.Data.Models.Tree", b =>
                 {
-                    b.HasOne("CitrsLite.Data.Models.Tree", "ParentTree")
-                        .WithMany()
-                        .HasForeignKey("ParentTreeId");
-
                     b.HasOne("CitrsLite.Data.Models.TreeType", "TreeType")
                         .WithMany("Trees")
                         .HasForeignKey("TreeTypeId")
@@ -339,8 +306,6 @@ namespace CitrsLite.Data.Migrations
                         .HasForeignKey("VarietyCloneId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("ParentTree");
 
                     b.Navigation("TreeType");
 
