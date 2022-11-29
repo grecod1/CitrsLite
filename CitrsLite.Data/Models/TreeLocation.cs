@@ -11,6 +11,9 @@ namespace CitrsLite.Data.Models
     public class TreeLocation
     {
         public int Id { get; set; }
+
+        public int ParticipantId { get; set; }
+        public Participant Participant { get; set; }
         public string BlockNumber { get; set; }
         public string Row { get; set; }
         public DateTime DatePlanted { get; set; }
