@@ -20,6 +20,7 @@ namespace CitrsLite.Business.Repositories
         public UnitOfWork(string connectionString)
         {
             _context = new CitrsLiteContext(connectionString);
+        
         }
 
         private bool disposed = false;

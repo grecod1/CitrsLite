@@ -20,7 +20,7 @@ namespace CitrsLite.Business.Repositories.Interfaces
         /// <param name="predicate">The filter condition</param>
         /// <param name="includedProperties">included propertiers</param>
         /// <returns></returns>
-        public IList<T> GetList(Expression<Func<T, bool>> predicate, 
+        public IList<T> GetList(Expression<Func<T, bool>> predicate = null, 
             params string[] includedProperties);
 
         /// <summary>
