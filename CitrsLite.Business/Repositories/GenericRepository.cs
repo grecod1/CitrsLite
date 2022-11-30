@@ -36,9 +36,9 @@ namespace CitrsLite.Business.Repositories
         /// Get a list of models from database.
         /// </summary>
         /// <param name="predicate">Condition</param>
-        /// <param name="includedProperties"></param>
-        /// <returns></returns>
-        public virtual IList<T> GetList(Expression<Func<T, bool>> predicate = null,
+        /// <param name="includedProperties">Included properties</param>
+        /// <returns>List of models.</returns>
+        public virtual IList<T> GetList(Expression<Func<T, bool>>? predicate = null,
             params string[] includedProperties)
         {
             IQueryable<T> query = _dbSet;
@@ -64,6 +64,36 @@ namespace CitrsLite.Business.Repositories
 
         }
 
+        /// <summary>
+        /// Return a list of models from the database.
+        /// </summary>
+        /// <param name="predicate">Condition</param>
+        /// <param name="includedProperties">Included properties</param>
+        /// <returns>List of models.</returns>
+        public virtual async Task<IList<T>> GetListAsync(Expression<Func<T, bool>>? predicate = null,
+            params string[] includedProperties)
+        {
+            IQueryable<T> query = _dbSet;
+            
+            if (includedProperties != null)
+            {
+                foreach (string includedProperty in includedProperties)
+                {
+                    query = query.Include(includedProperty);
+                }
+
+            }
+            if (predicate != null)
+            {
+                //If the user includes a filter
+                return await query.Where(predicate).ToListAsync<T>();
+            }
+            else
+            {
+                // In case the user wants to return all results.
+                return await query.ToListAsync<T>();
+            }
+        }
 
         /// <summary>
         /// Creates a new Model in the Database.
