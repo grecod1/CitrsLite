@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,16 +19,51 @@ namespace CitrsLite.Business.Repositories
         internal CitrsLiteContext _dbContext;
         internal DbSet<T> _dbSet;
 
-        public GenericRepository(CitrsLiteContext, dbContext)
+        public GenericRepository(CitrsLiteContext _dbContext)
         {
             this._dbContext = _dbContext;
             this._dbSet = _dbContext.Set<T>();
 
-            protected void Dispose()
-            {
-                _dbContext.Dispose();
-            }
+            
         }
+
+        protected void Dispose()
+        {
+            _dbContext.Dispose();
+        }
+
+        /// <summary>
+        /// Get a list of models from database.
+        /// </summary>
+        /// <param name="predicate">Condition</param>
+        /// <param name="includedProperties"></param>
+        /// <returns></returns>
+        public virtual IList<T> GetList(Expression<Func<T, bool>> predicate = null,
+            params string[] includedProperties)
+        {
+            IQueryable<T> query = _dbSet;
+
+            if (includedProperties != null)
+            {
+                foreach (string includedProperty in includedProperties)
+                {
+                    query = query.Include(includedProperty);
+                }
+            }
+
+            if (predicate != null)
+            {
+                //If the user includes a filter
+                return query.Where(predicate).ToList<T>();
+            }
+            else
+            {
+                // In case the user wants to return all results.
+                return query.ToList<T>();
+            }
+
+        }
+
 
         /// <summary>
         /// Creates a new Model in the Database.
