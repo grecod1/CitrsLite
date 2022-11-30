@@ -24,8 +24,8 @@ namespace CitrsLite.Data.Entity
 
         public CitrsLiteContext(string connectionString)
         {
-            _connectionString= connectionString;
-        }
+            _connectionString = connectionString;
+        }        
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
