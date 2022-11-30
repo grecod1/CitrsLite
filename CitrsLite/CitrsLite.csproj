@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CitrsLite.Business\CitrsLite.Business.csproj" />
     <ProjectReference Include="..\CitrsLite.Data\CitrsLite.Data.csproj" />
   </ItemGroup>
 
