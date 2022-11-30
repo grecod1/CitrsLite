@@ -1,3 +1,4 @@
+using CitrsLite.Business.Repositories;
 using CitrsLite.Data;
 using CitrsLite.Data.Entity;
 using Microsoft.AspNetCore.Authentication.Negotiate;
@@ -24,6 +25,8 @@ builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services
     .AddDbContext<CitrsLiteContext>(options => 
         options.UseSqlServer(builder.Configuration.GetConnectionString("CitrsDatabase")));
+
+
 
 var app = builder.Build();
 

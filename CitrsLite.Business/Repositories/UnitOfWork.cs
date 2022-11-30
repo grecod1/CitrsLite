@@ -17,5 +17,6 @@ namespace CitrsLite.Business.Repositories
         {
             _context = new CitrsLiteContext(connectionString);
         }
+
     }    
 }
