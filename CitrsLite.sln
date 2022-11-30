@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CitrsLite", "CitrsLite\CitrsLite.csproj", "{C7E0B401-EEF3-4C13-9CE0-323B703375F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitrsLite", "CitrsLite\CitrsLite.csproj", "{C7E0B401-EEF3-4C13-9CE0-323B703375F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CitrsLite.Data", "CitrsLite.Data\CitrsLite.Data.csproj", "{600FF5AD-A0CD-436E-B4A9-96EE8604CE96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitrsLite.Data", "CitrsLite.Data\CitrsLite.Data.csproj", "{600FF5AD-A0CD-436E-B4A9-96EE8604CE96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CitrsLite.Business", "CitrsLite.Business\CitrsLite.Business.csproj", "{8565EB2A-494E-4AC8-9CD5-7E95A3EBC3A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{600FF5AD-A0CD-436E-B4A9-96EE8604CE96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{600FF5AD-A0CD-436E-B4A9-96EE8604CE96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{600FF5AD-A0CD-436E-B4A9-96EE8604CE96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8565EB2A-494E-4AC8-9CD5-7E95A3EBC3A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8565EB2A-494E-4AC8-9CD5-7E95A3EBC3A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8565EB2A-494E-4AC8-9CD5-7E95A3EBC3A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8565EB2A-494E-4AC8-9CD5-7E95A3EBC3A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
