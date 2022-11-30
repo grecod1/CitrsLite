@@ -1,4 +1,5 @@
-﻿using CitrsLite.Data.Entity;
+﻿using CitrsLite.Business.Repositories.Interfaces;
+using CitrsLite.Data.Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace CitrsLite.Business.Repositories
     /// Generic Repository Class
     /// </summary>
     /// <typeparam name="T">Entity Object</typeparam>
-    internal class GenericRepository<T> where T : class
+    internal class GenericRepository<T> : IGenericRepository<T> where T : class 
     {
         internal CitrsLiteContext _dbContext;
         internal DbSet<T> _dbSet;
@@ -35,7 +36,7 @@ namespace CitrsLite.Business.Repositories
         /// <summary>
         /// Get a list of models from database.
         /// </summary>
-        /// <param name="predicate">Condition</param>
+        /// <param name="predicate">The filter condition</param>
         /// <param name="includedProperties">Included properties</param>
         /// <returns>List of models.</returns>
         public virtual IList<T> GetList(Expression<Func<T, bool>>? predicate = null,
