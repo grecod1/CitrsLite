@@ -97,6 +97,29 @@ namespace CitrsLite.Business.Repositories
         }
 
         /// <summary>
+        /// Return First or Default onject in a List.
+        /// </summary>
+        /// <param name="predicate">Condition</param>
+        /// <param name="includedProperties">Included Properties</param>
+        /// <returns>First or Default item in the List</returns>
+        public virtual async Task<IList<T>> GetFirstAsync(Expression<Func<T, bool>> predicate,
+            params string[] includedProperties)
+        {
+            IQueryable<T> query = _dbSet;
+
+            if (includedProperties != null)
+            {
+                foreach (string includedProperty in includedProperties)
+                {
+                    query = query.Include(includedProperty);
+                }
+            }
+
+            // In case the user wants to return all results.
+            return await query.Where(predicate).ToList<T>().FirstOrDefault();            
+        }
+
+        /// <summary>
         /// Creates a new Model in the Database.
         /// </summary>
         /// <param name="t">Model being Created</param>

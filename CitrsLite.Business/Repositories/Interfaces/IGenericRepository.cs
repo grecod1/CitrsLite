@@ -33,6 +33,15 @@ namespace CitrsLite.Business.Repositories.Interfaces
             params string[] includedProperties);
 
         /// <summary>
+        /// Return the First or Default object from a List from the database.
+        /// </summary>
+        /// <param name="predicate">The filter condition</param>
+        /// <param name="includedProperties">Included properties</param>
+        /// <returns>First or Defaut item in a List.</returns>
+        public Task<IList<T>> GetFirstAsync(Expression<Func<T, bool>> predicate,
+            params string[] includedProperties);
+
+        /// <summary>
         /// Creates a new Model in the Database.
         /// </summary>
         /// <param name="t">Model being Created</param>
