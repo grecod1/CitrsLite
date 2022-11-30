@@ -1,5 +1,6 @@
 ﻿@page "/counter"
 @using CitrsLite.Business.Repositories;
+@using CitrsLite.Data.Models;
 @inject UnitOfWork Data;
 <PageTitle>Counter</PageTitle>
 
@@ -7,16 +8,28 @@
 
 <p role="status">Current count: @currentCount</p>
 
+@foreach(TreeType treeType in TreeTypes)
+{
+    <p>@treeType.Name</p>
+}
+
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+
 
 @code {
     private int currentCount = 0;
+
+    public IEnumerable<TreeType> TreeTypes { get; set; } = new List<TreeType>();
 
 
 
     private void IncrementCount()
     {
         var data = Data;
+
+        TreeTypes  = Data.TreeTypes.GetList();
+        
 
         currentCount++;
     }
