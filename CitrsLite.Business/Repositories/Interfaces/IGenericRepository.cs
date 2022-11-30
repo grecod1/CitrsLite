@@ -12,7 +12,7 @@ namespace CitrsLite.Business.Repositories.Interfaces
     /// Generic repository,
     /// </summary>
     /// <typeparam name="T">Entity Model</typeparam>
-    internal interface IGenericRepository<T> where T : class
+    public interface IGenericRepository<T> where T : class
     {
         /// <summary>
         /// Get a list of models from database.
