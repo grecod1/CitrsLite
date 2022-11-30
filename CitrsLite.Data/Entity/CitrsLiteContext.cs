@@ -11,6 +11,8 @@ namespace CitrsLite.Data.Entity
 {
     public class CitrsLiteContext : DbContext
     {
+        private readonly string _connectionString;
+
         public DbSet<Participant> Participants { get; set; }
         public DbSet<VarietyClone> VarietyClones { get; set; }
         public DbSet<Tree> Trees { get; set; }
@@ -19,6 +21,17 @@ namespace CitrsLite.Data.Entity
         public DbSet<Budwood> Budwoods { get; set; }
         public DbSet<Registration> Registrations { get; set; }
 
+
+        public CitrsLiteContext(string connectionString)
+        {
+            _connectionString= connectionString;
+        }
+        
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(_connectionString);
+        }
+        
         public CitrsLiteContext(DbContextOptions<CitrsLiteContext> options) : base(options) { }
         
         
