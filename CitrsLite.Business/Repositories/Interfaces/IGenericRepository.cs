@@ -38,7 +38,7 @@ namespace CitrsLite.Business.Repositories.Interfaces
         /// <param name="predicate">The filter condition</param>
         /// <param name="includedProperties">Included properties</param>
         /// <returns>First or Defaut item in a List.</returns>
-        public Task<IList<T>> GetFirstAsync(Expression<Func<T, bool>> predicate,
+        public Task<T> GetFirstAsync(Expression<Func<T, bool>> predicate,
             params string[] includedProperties);
 
         /// <summary>

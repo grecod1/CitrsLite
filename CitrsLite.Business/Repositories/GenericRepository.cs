@@ -102,7 +102,7 @@ namespace CitrsLite.Business.Repositories
         /// <param name="predicate">Condition</param>
         /// <param name="includedProperties">Included Properties</param>
         /// <returns>First or Default item in the List</returns>
-        public virtual async Task<IList<T>> GetFirstAsync(Expression<Func<T, bool>> predicate,
+        public virtual async Task<T> GetFirstAsync(Expression<Func<T, bool>> predicate,
             params string[] includedProperties)
         {
             IQueryable<T> query = _dbSet;
@@ -116,7 +116,8 @@ namespace CitrsLite.Business.Repositories
             }
 
             // In case the user wants to return all results.
-            return await query.Where(predicate).ToList<T>().FirstOrDefault();            
+            return await query.Where(predicate)
+                .FirstOrDefaultAsync();       
         }
 
         /// <summary>
