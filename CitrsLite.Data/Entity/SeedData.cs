@@ -21,8 +21,47 @@ namespace CitrsLite.Data.Entity
                     CreationDate = DateTime.Now,
                     ModifiedBy = "DOACS\\grecod",
                     ModificationDate = DateTime.Now
+                },
+                new TreeType()
+                {
+                    Name = "Foundation Tree",
+                    Description = "This type of source tree is used to provide budwood to participants",
+                    CreatedBy = "DOACS\\grecod",
+                    CreationDate = DateTime.Now,
+                    ModifiedBy = "DOACS\\grecod",
+                    ModificationDate = DateTime.Now
+                },
+                new TreeType()
+                {
+                    Name = "Scion Tree",
+                    Description = "This type of source tree is owned by participants",
+                    CreatedBy = "DOACS\\grecod",
+                    CreationDate = DateTime.Now,
+                    ModifiedBy = "DOACS\\grecod",
+                    ModificationDate = DateTime.Now
+                },
+                new TreeType()
+                {
+                    Name = "Increase Tree",
+                    Description = "This type of source tree cannot generate any future source trees, only field trees",
+                    CreatedBy = "DOACS\\grecod",
+                    CreationDate = DateTime.Now,
+                    ModifiedBy = "DOACS\\grecod",
+                    ModificationDate = DateTime.Now
+                },
+                new TreeType()
+                {
+                    Name = "STG Tree",
+                    Description = "This tree was grown in a lab",
+                    CreatedBy = "DOACS\\grecod",
+                    CreationDate = DateTime.Now,
+                    ModifiedBy = "DOACS\\grecod",
+                    ModificationDate = DateTime.Now
                 }
             };
+
+            db.TreeTypes.AddRange(treeTypes);
+            db.SaveChanges();
         }
     }
 }
