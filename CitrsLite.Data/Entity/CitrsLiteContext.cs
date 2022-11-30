@@ -30,10 +30,6 @@ namespace CitrsLite.Data.Entity
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(_connectionString);
-        }
-        
-        public CitrsLiteContext(DbContextOptions<CitrsLiteContext> options) : base(options) { }
-        
-        
+        }                      
     }
 }
