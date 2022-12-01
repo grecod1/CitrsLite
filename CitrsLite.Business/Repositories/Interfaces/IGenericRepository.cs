@@ -61,8 +61,5 @@ namespace CitrsLite.Business.Repositories.Interfaces
         /// <param name="t">Entry in the Database you want to Remove</param>
         public void Remove(T t);
 
-        public void SaveChanges();
-
-        public Task SaveChangesAsync();
     }
 }

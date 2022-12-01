@@ -42,6 +42,7 @@ namespace CitrsLite.Business.Services
             Participant participant = GetParticipant(formModel);
 
             _data.Participants.Create(participant);
+            _data.SaveChanges();
             
         }
 
@@ -50,6 +51,8 @@ namespace CitrsLite.Business.Services
             Participant participant = GetParticipant(formModel);
 
             await _data.Participants.CreateAsync(participant);
+
+            await _data.SaveChangesAsync();
         }
     }
 }

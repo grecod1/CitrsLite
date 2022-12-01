@@ -151,16 +151,6 @@ namespace CitrsLite.Business.Repositories
         public virtual void Remove(T t)
         {
             _dbSet.Remove(t);
-        }
-
-        public virtual void SaveChanges()
-        {
-            _dbContext.SaveChanges();
-        }
-
-        public virtual async Task SaveChangesAsync() 
-        { 
-            await _dbContext.SaveChangesAsync();
-        }
+        }        
     }
 }

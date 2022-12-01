@@ -13,5 +13,15 @@ namespace CitrsLite.Business.Repositories
         IGenericRepository<TreeType> TreeTypes { get; }
         IGenericRepository<VarietyClone> VarietyClones { get; }
 
+
+        /// <summary>
+        /// Save database changes
+        /// </summary>
+        public void SaveChanges();
+
+        /// <summary>
+        /// Save database changes
+        /// </summary>
+        public Task SaveChangesAsync();
     }
 }
