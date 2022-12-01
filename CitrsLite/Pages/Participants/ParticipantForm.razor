@@ -1,18 +1,17 @@
 ﻿@page "/participant/add"
 @using CitrsLite.Business.ViewModels.ParticipantViewModels
-@inject ParticipantFormViewModel model
 @using CitrsLite.Business.Enums
 
 <h2>Participant Form</h2>
 
-<EditForm Model=@model>
+<EditForm Model=@Model>
     <label>
         <h4>Name</h4>
-        <InputText @bind-Value=model.Name></InputText>
+        <InputText @bind-Value=Model.Name></InputText>
     </label>
     <label>
         <h4>Type</h4>
-        <InputSelect Name="type" @bind-Value=model.Type>
+        <InputSelect Name="type" @bind-Value=Model.Type>
             @foreach(var partType in Enum.GetValues(typeof(ParticipantType)))
             {
                 <option Value="@partType">@partType.ToString().Replace("_", " ")</option>
@@ -22,32 +21,32 @@
     <p></p>
     <label>
         <h4>Description</h4>
-        <InputTextArea @bind-Value=model.Description></InputTextArea>
+        <InputTextArea @bind-Value=Model.Description></InputTextArea>
     </label>
     <p></p>
     <label>
         <h4>Phone Number</h4>
-        <InputText @bind-Value=model.PhoneNumber></InputText>
+        <InputText @bind-Value=Model.PhoneNumber></InputText>
     </label>
     <p></p>
     <label>
         <h4>Address</h4>
-        <InputText @bind-Value=model.Address></InputText>
+        <InputText @bind-Value=Model.Address></InputText>
     </label>    
     <p></p>
     <label>
         <h4>City</h4>
-        <InputText @bind-Value=model.City></InputText>
+        <InputText @bind-Value=Model.City></InputText>
     </label>    
     <p></p>
     <label>
         <h4>State</h4>
-        <InputText @bind-Value=model.State></InputText>
+        <InputText @bind-Value=Model.State></InputText>
     </label>    
     <p></p>
     <label>
         <h4>Active?</h4>
-        <InputCheckbox @bind-Value="@model.IsActive"></InputCheckbox>
+        <InputCheckbox @bind-Value="@Model.IsActive"></InputCheckbox>
     </label>
     <p></p>
     <input type="submit" class="btn btn-primary" value="Save"/>
@@ -58,4 +57,6 @@
 @code {
     private String Message = String.Empty;
     
+    [Inject]
+    public ParticipantFormViewModel Model { get; set; }
 }
