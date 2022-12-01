@@ -1,5 +1,7 @@
-﻿using CitrsLite.Business.ViewModels.ParticipantViewModels;
+﻿using CitrsLite.Business.Repositories;
+using CitrsLite.Business.ViewModels.ParticipantViewModels;
 using CitrsLite.Data.Models;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +12,44 @@ namespace CitrsLite.Business.Services
 {
     public class ParticipantService
     {
+        private IUnitOfWork _data;
+
+        public ParticipantService(string connectionString)
+        {
+            _data= new UnitOfWork(connectionString);
+        }
+
+        public Participant GetParticipant(ParticipantFormViewModel formModel, string userName = null)
+        {
+            return new Participant()
+            {
+                Name = formModel.Name,
+                Type = formModel.Type,
+                Description = formModel.Description,
+                PhoneNumber = formModel.PhoneNumber,
+                Address = formModel.Address,
+                City = formModel.City,
+                State = formModel.State,
+                IsActive = true,
+                CreatedBy = userName,
+                CreationDate = DateTime.Now,
+                ModifiedBy = userName,
+            };
+        }
+
         public void Create(ParticipantFormViewModel formModel)
         {
-            Participant participant= new Participant();
+            Participant participant = GetParticipant(formModel);
+
+            _data.Participants.Create(participant);
+            
+        }
+
+        public async void CreateAysnc(ParticipantFormViewModel formModel)
+        {
+            Participant participant = GetParticipant(formModel);
+
+            await _data.Participants.CreateAsync(participant);
         }
     }
 }
