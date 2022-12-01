@@ -1,0 +1,59 @@
+﻿@page "/participant/add"
+@using CitrsLite.Business.ViewModels.ParticipantViewModels
+@inject ParticipantFormViewModel model
+@using CitrsLite.Business.Enums
+
+<h2>Participant Form</h2>
+
+<EditForm Model=@model>
+    <label>
+        <h4>Name</h4>
+        <InputText @bind-Value=model.Name></InputText>
+    </label>
+    <p></p>
+    <label>
+        <h4>Type</h4>
+        <InputRadioGroup Name="type" @bind-Value=model.Type>
+            @foreach(var partType in Enum.GetValues(typeof(ParticipantType)))
+            {
+                <label>@partType:
+                    <InputRadio Name="type" Value="@partType"></InputRadio>
+                </label>
+                <br />
+            }
+        </InputRadioGroup>
+    </label>
+    <p></p>
+    <label>
+        <h4>Description</h4>
+        <InputText @bind-Value=model.Description></InputText>
+    </label>
+    <p></p>
+    <label>
+        <h4>Phone Number</h4>
+        <InputText @bind-Value=model.PhoneNumber></InputText>
+    </label>
+    <p></p>
+    <label>
+        <h4>Address</h4>
+        <InputText @bind-Value=model.Address></InputText>
+    </label>    
+    <p></p>
+    <label>
+        <h4>City</h4>
+        <InputText @bind-Value=model.City></InputText>
+    </label>    
+    <p></p>
+    <label>
+        <h4>State</h4>
+        <InputText @bind-Value=model.State></InputText>
+    </label>    
+    <p></p>
+    <label>
+        <h4>Status</h4>
+        <InputText @bind-Value=model.Description></InputText>
+    </label>
+</EditForm>
+
+@code {
+}
