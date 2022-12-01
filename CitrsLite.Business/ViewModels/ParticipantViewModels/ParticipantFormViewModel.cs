@@ -20,8 +20,6 @@ namespace CitrsLite.Business.ViewModels.ParticipantViewModels
         /// The name of the Participant
         /// </summary>
         [Required]
-        [RegularExpression(@"^[A-Z|a-z|\s|'|,|-]+$",
-            ErrorMessage = "A name should only contain letters, no numbers or foreign characters")]
         public string Name { get; set; }
         /// <summary>
         /// The type of Participant (Government/Research/Nursery, etc.)
