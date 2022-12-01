@@ -1,7 +1,7 @@
 ﻿@page "/counter"
 @using CitrsLite.Business.Repositories;
 @using CitrsLite.Data.Models;
-@inject UnitOfWork Data;
+@inject IUnitOfWork Data;
 <PageTitle>Counter</PageTitle>
 
 <h1>Counter</h1>
@@ -21,16 +21,20 @@
     private int currentCount = 0;
 
     public IEnumerable<TreeType> TreeTypes { get; set; } = new List<TreeType>();
+    public Task<IList<TreeType>> Task { get; set; }
 
-
+    protected override void OnInitialized()
+    {
+        Task = Data.TreeTypes.GetListAsync();
+    }
 
     private void IncrementCount()
     {
-        var data = Data;
-
-        TreeTypes  = Data.TreeTypes.GetList();
-        
 
         currentCount++;
+        
+        TreeTypes = Task.Result;
     }
+
+    
 }
