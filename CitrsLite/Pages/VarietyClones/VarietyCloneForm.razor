@@ -12,22 +12,27 @@
 
 <EditForm Model=@model>
     <label>
-        <h4>Name</h4>
+        <h4><strong>Name</strong></h4>
         <InputText @bind-Value=model.Name></InputText>
     </label>
     <p></p>
     
     <label>
-        <h4>Description</h4>
-        <InputText @bind-Value=model.Description></InputText>
+        <h4><strong>Description</strong></h4>
+        <InputTextArea @bind-Value=model.Description></InputTextArea>
     </label>
     <p></p>
 
     <label>
-        <h4>Status</h4>
-        <InputText @bind-Value=model.Description></InputText>
+        <h4><strong>Status: Active?</strong></h4>
+        <InputCheckbox @bind-Value=model.IsActive></InputCheckbox>
+        <p>Yes</p>
+        <InputCheckbox @bind-Value=model.IsActive></InputCheckbox>
+        <p>No</p>
     </label>
-    <p></p>
+    
+    <hr />
+    
     
     <input type="submit" class="btn btn-primary" value="Save"/>
     <p></p>

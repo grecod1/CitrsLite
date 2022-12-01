@@ -1,5 +1,6 @@
 using CitrsLite.Business.Repositories;
 using CitrsLite.Business.ViewModels.ParticipantViewModels;
+using CitrsLite.Business.ViewModels.VarietyCloneViewModels;
 using CitrsLite.Data;
 using CitrsLite.Data.Entity;
 using Microsoft.AspNetCore.Authentication.Negotiate;
@@ -27,6 +28,7 @@ builder.Services.AddSingleton<IUnitOfWork, UnitOfWork>(u =>
     new UnitOfWork(connectionString: builder.Configuration.GetConnectionString("CitrsDatabase")));
 
 builder.Services.AddTransient<ParticipantFormViewModel>();
+builder.Services.AddTransient<VarietyCloneFormViewModel>();
 
 var app = builder.Build();
 
