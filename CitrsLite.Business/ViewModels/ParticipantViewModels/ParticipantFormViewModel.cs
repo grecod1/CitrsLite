@@ -57,7 +57,7 @@ namespace CitrsLite.Business.ViewModels.ParticipantViewModels
         /// <summary>
         /// Boolean value of whether the Participant is active
         /// </summary>
-        [Display(Name="Status")]
-        public bool IsActive { get; set; }
+        [Display(Name = "Status")]
+        public bool IsActive { get; set; } = true;
     }
 }

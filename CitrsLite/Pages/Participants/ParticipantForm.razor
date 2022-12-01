@@ -10,23 +10,19 @@
         <h4>Name</h4>
         <InputText @bind-Value=model.Name></InputText>
     </label>
-    <p></p>
     <label>
         <h4>Type</h4>
-        <InputRadioGroup Name="type" @bind-Value=model.Type>
+        <InputSelect Name="type" @bind-Value=model.Type>
             @foreach(var partType in Enum.GetValues(typeof(ParticipantType)))
             {
-                <label>@partType:
-                    <InputRadio Name="type" Value="@partType"></InputRadio>
-                </label>
-                <br />
+                <option Value="@partType">@partType.ToString().Replace("_", " ")</option>
             }
-        </InputRadioGroup>
+        </InputSelect>
     </label>
     <p></p>
     <label>
         <h4>Description</h4>
-        <InputText @bind-Value=model.Description></InputText>
+        <InputTextArea @bind-Value=model.Description></InputTextArea>
     </label>
     <p></p>
     <label>
@@ -50,8 +46,8 @@
     </label>    
     <p></p>
     <label>
-        <h4>Status</h4>
-        <InputText @bind-Value=model.Description></InputText>
+        <h4>Active?</h4>
+        <InputCheckbox @bind-Value="@model.IsActive"></InputCheckbox>
     </label>
     <p></p>
     <input type="submit" class="btn btn-primary" value="Save"/>
@@ -61,5 +57,5 @@
 
 @code {
     private String Message = String.Empty;
-
+    
 }
