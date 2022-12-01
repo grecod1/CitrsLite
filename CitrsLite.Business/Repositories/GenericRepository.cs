@@ -129,6 +129,11 @@ namespace CitrsLite.Business.Repositories
             _dbSet.Add(t);
         }
 
+        public virtual async Task CreateAsync(T t)
+        {
+            await _dbSet.AddAsync(t);
+        }
+
         /// <summary>
         /// Updates an existing Model.
         /// </summary>
@@ -146,6 +151,6 @@ namespace CitrsLite.Business.Repositories
         public virtual void Remove(T t)
         {
             _dbSet.Remove(t);
-        }
+        }        
     }
 }
