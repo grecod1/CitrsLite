@@ -1,0 +1,45 @@
+﻿@page "/varietyClone/add"
+@using CitrsLite.Business.ViewModels.VarietyCloneViewModels
+@inject VarietyCloneFormViewModel model
+@using CitrsLite.Business.Enums
+
+
+<HeadContent>
+    <h3>Variety Clone Form</h3>
+</HeadContent>
+
+<hr />
+
+<EditForm Model=@model>
+    <label>
+        <h4><strong>Name</strong></h4>
+        <InputText @bind-Value=model.Name></InputText>
+    </label>
+    <p></p>
+    
+    <label>
+        <h4><strong>Description</strong></h4>
+        <InputTextArea @bind-Value=model.Description></InputTextArea>
+    </label>
+    <p></p>
+
+    <label>
+        <h4><strong>Status: Active?</strong></h4>
+        <InputCheckbox @bind-Value=model.IsActive></InputCheckbox>
+        <p>Yes</p>
+        <InputCheckbox @bind-Value=model.IsActive></InputCheckbox>
+        <p>No</p>
+    </label>
+    
+    <hr />
+    
+    
+    <input type="submit" class="btn btn-primary" value="Save"/>
+    <p></p>
+    <div>@Message</div>
+</EditForm>
+
+
+@code {
+    private String Message = String.Empty;
+}
