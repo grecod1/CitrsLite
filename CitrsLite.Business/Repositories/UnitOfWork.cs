@@ -10,8 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CitrsLite.Business.Repositories
-{    
-    public class UnitOfWork : IDisposable
+{
+    public class UnitOfWork : IDisposable, IUnitOfWork
     {
         private CitrsLiteContext _context;
         private GenericRepository<Budwood> budwoods;
@@ -25,7 +25,7 @@ namespace CitrsLite.Business.Repositories
         public UnitOfWork(string connectionString)
         {
             _context = new CitrsLiteContext(connectionString);
-        
+
         }
 
         private bool disposed = false;
@@ -99,7 +99,7 @@ namespace CitrsLite.Business.Repositories
         {
             get
             {
-                if(this.treeTypes == null)
+                if (this.treeTypes == null)
                 {
                     this.treeTypes = new GenericRepository<TreeType>(_context);
                 }
@@ -139,5 +139,5 @@ namespace CitrsLite.Business.Repositories
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-    }    
+    }
 }
