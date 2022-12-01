@@ -28,7 +28,7 @@ builder.Services.AddSingleton<IUnitOfWork, UnitOfWork>(u =>
     new UnitOfWork(connectionString: builder.Configuration.GetConnectionString("CitrsDatabase")));
 
 
-builder.Services.AddTransient<ParticipantFormViewModel>();
+builder.Services.AddScoped<VarietyCloneFormViewModel>();
 builder.Services.AddScoped<ParticipantFormViewModel>();
 
 var app = builder.Build();
