@@ -26,7 +26,7 @@ builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddSingleton<IUnitOfWork, UnitOfWork>(u => 
     new UnitOfWork(connectionString: builder.Configuration.GetConnectionString("CitrsDatabase")));
 
-builder.Services.AddTransient<ParticipantFormViewModel>();
+builder.Services.AddScoped<ParticipantFormViewModel>();
 
 var app = builder.Build();
 
