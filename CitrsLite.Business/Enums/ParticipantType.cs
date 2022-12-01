@@ -10,11 +10,11 @@ namespace CitrsLite.Business.Enums
     public enum ParticipantType
     {
         [Description("Government Office")]
-        GovernmentOffice,
+        Government_Office,
         Nursery,
         [Description("Research Institute")]
-        ResearchInstitute,
+        Research_Institute,
         [Description("Source Tree Collector")]
-        SourceTreeCollector
+        Source_Tree_Collector
     }
 }
