@@ -59,5 +59,9 @@ namespace CitrsLite.Business.ViewModels.ParticipantViewModels
         /// </summary>
         [Display(Name = "Status")]
         public bool IsActive { get; set; } = true;
+        /// <summary>
+        /// Stores the value of username currently on the view
+        /// </summary>
+        public string UserName { get; set; }
     }
 }
