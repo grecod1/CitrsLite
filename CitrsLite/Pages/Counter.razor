@@ -21,13 +21,19 @@
     private int currentCount = 0;
 
     public IEnumerable<TreeType> TreeTypes { get; set; } = new List<TreeType>();
+    public Task<IList<TreeType>> Task { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Task = Data.TreeTypes.GetListAsync();
+    }
 
     private void IncrementCount()
     {
 
         currentCount++;
-
-        TreeTypes = Data.TreeTypes.GetList();
+        
+        TreeTypes = Task.Result;
     }
 
     
