@@ -53,7 +53,13 @@
         <h4>Status</h4>
         <InputText @bind-Value=model.Description></InputText>
     </label>
+    <p></p>
+    <input type="submit" class="btn btn-primary" value="Save"/>
+    <p></p>
+    <div>@Message</div>
 </EditForm>
 
 @code {
+    private String Message = String.Empty;
+
 }
