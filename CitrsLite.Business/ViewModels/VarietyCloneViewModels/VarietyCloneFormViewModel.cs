@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -8,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace CitrsLite.Business.ViewModels.VarietyCloneViewModels
 {
+    /// <summary>
+    /// The model for the Variety Clone Form View.
+    /// </summary>
     public class VarietyCloneFormViewModel
     {
         /// <summary>
