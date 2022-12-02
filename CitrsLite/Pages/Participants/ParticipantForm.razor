@@ -1,10 +1,11 @@
 ﻿@page "/participant/add"
 @using CitrsLite.Business.ViewModels.ParticipantViewModels
 @using CitrsLite.Business.Enums
+@inject CitrsLite.Business.Services.ParticipantService participantService
 
 <h2>Participant Form</h2>
 
-<EditForm Model=@Model>
+<EditForm Model=@Model OnValidSubmit="CreateParticipant">
     <label>
         <h4>Name</h4>
         <InputText @bind-Value=Model.Name></InputText>
@@ -56,7 +57,12 @@
 
 @code {
     private String Message = String.Empty;
-    
+
+    async Task CreateParticipant()
+    {
+        participantService.CreateAysnc(Model);
+    }
+
     [Inject]
     public ParticipantFormViewModel Model { get; set; }
 }
