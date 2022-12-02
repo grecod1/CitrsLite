@@ -19,7 +19,7 @@ namespace CitrsLite.Business.Services
             _data= new UnitOfWork(connectionString);
         }
 
-        public Participant GetParticipant(ParticipantFormViewModel formModel, string userName = null)
+        public Participant GetParticipant(ParticipantFormViewModel formModel)
         {
             return new Participant()
             {
@@ -31,9 +31,9 @@ namespace CitrsLite.Business.Services
                 City = formModel.City,
                 State = formModel.State,
                 IsActive = true,
-                CreatedBy = userName,
+                CreatedBy = formModel.UserName,
                 CreationDate = DateTime.Now,
-                ModifiedBy = userName,
+                ModifiedBy = formModel.UserName,
             };
         }
 
