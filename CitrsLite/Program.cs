@@ -1,5 +1,7 @@
 using CitrsLite.Business.Repositories;
+using CitrsLite.Business.Services;
 using CitrsLite.Business.ViewModels.ParticipantViewModels;
+using CitrsLite.Business.ViewModels.VarietyCloneViewModels;
 using CitrsLite.Data;
 using CitrsLite.Data.Entity;
 using Microsoft.AspNetCore.Authentication.Negotiate;
@@ -25,8 +27,11 @@ builder.Services.AddSingleton<WeatherForecastService>();
 
 builder.Services.AddSingleton<IUnitOfWork, UnitOfWork>(u => 
     new UnitOfWork(connectionString: builder.Configuration.GetConnectionString("CitrsDatabase")));
+builder.Services.AddSingleton<ParticipantService, ParticipantService>(p => 
+    new ParticipantService(connectionString: builder.Configuration.GetConnectionString("CitrsDatabase")));
 
-builder.Services.AddTransient<ParticipantFormViewModel>();
+builder.Services.AddScoped<VarietyCloneFormViewModel>();
+builder.Services.AddScoped<ParticipantFormViewModel>();
 
 var app = builder.Build();
 

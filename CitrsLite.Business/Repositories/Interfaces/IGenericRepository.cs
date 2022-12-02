@@ -47,6 +47,8 @@ namespace CitrsLite.Business.Repositories.Interfaces
         /// <param name="t">Model being Created</param>
         public void Create(T t);
 
+        public Task CreateAsync(T t);
+
         /// <summary>
         /// Updates an existing Model.
         /// </summary>
@@ -58,5 +60,6 @@ namespace CitrsLite.Business.Repositories.Interfaces
         /// </summary>
         /// <param name="t">Entry in the Database you want to Remove</param>
         public void Remove(T t);
+
     }
 }

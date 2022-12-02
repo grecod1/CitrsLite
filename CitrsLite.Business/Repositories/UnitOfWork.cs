@@ -121,7 +121,22 @@ namespace CitrsLite.Business.Repositories
             }
         }
 
+        /// <summary>
+        /// Save database changes
+        /// </summary>
+        public void SaveChanges()
+        {
+            _context.SaveChanges();
+        }
 
+        /// <summary>
+        /// Save database changes
+        /// </summary>
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
+        
         protected virtual void Dispose(bool disposing)
         {
             if (!this.disposed)

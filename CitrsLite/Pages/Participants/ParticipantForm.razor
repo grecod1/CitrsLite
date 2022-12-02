@@ -1,57 +1,55 @@
 ﻿@page "/participant/add"
 @using CitrsLite.Business.ViewModels.ParticipantViewModels
-@inject ParticipantFormViewModel model
 @using CitrsLite.Business.Enums
+@using Microsoft.AspNetCore.Components.Authorization
+@inject CitrsLite.Business.Services.ParticipantService participantService
+@inject AuthenticationStateProvider authenticationStateProvider
 
 <h2>Participant Form</h2>
 
-<EditForm Model=@model>
+<EditForm Model=@Model OnValidSubmit="CreateParticipant">
     <label>
         <h4>Name</h4>
-        <InputText @bind-Value=model.Name></InputText>
+        <InputText @bind-Value=Model.Name></InputText>
     </label>
-    <p></p>
     <label>
         <h4>Type</h4>
-        <InputRadioGroup Name="type" @bind-Value=model.Type>
+        <InputSelect Name="type" @bind-Value=Model.Type>
             @foreach(var partType in Enum.GetValues(typeof(ParticipantType)))
             {
-                <label>@partType:
-                    <InputRadio Name="type" Value="@partType"></InputRadio>
-                </label>
-                <br />
+                <option Value="@partType">@partType.ToString().Replace("_", " ")</option>
             }
-        </InputRadioGroup>
+        </InputSelect>
     </label>
     <p></p>
     <label>
         <h4>Description</h4>
-        <InputText @bind-Value=model.Description></InputText>
+        <InputTextArea @bind-Value=Model.Description></InputTextArea>
     </label>
     <p></p>
     <label>
         <h4>Phone Number</h4>
-        <InputText @bind-Value=model.PhoneNumber></InputText>
+        <InputText @bind-Value=Model.PhoneNumber></InputText>
     </label>
     <p></p>
     <label>
         <h4>Address</h4>
-        <InputText @bind-Value=model.Address></InputText>
+        <InputText @bind-Value=Model.Address></InputText>
     </label>    
     <p></p>
     <label>
         <h4>City</h4>
-        <InputText @bind-Value=model.City></InputText>
+        <InputText @bind-Value=Model.City></InputText>
     </label>    
     <p></p>
     <label>
         <h4>State</h4>
-        <InputText @bind-Value=model.State></InputText>
+        <InputText @bind-Value=Model.State></InputText>
     </label>    
     <p></p>
     <label>
-        <h4>Status</h4>
-        <InputText @bind-Value=model.Description></InputText>
+        <h4>Active?</h4>
+        <InputCheckbox @bind-Value="@Model.IsActive"></InputCheckbox>
     </label>
     <p></p>
     <input type="submit" class="btn btn-primary" value="Save"/>
@@ -62,4 +60,18 @@
 @code {
     private String Message = String.Empty;
 
+    public void CreateParticipant()
+    {
+        participantService.CreateAysnc(Model);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
+
+        Model.UserName = authState.User.Identity?.Name ?? "Unknown user";
+    }
+
+    [Inject]
+    public ParticipantFormViewModel Model { get; set; }
 }
