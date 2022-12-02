@@ -1,4 +1,5 @@
 using CitrsLite.Business.Repositories;
+using CitrsLite.Business.Services;
 using CitrsLite.Business.ViewModels.ParticipantViewModels;
 using CitrsLite.Business.ViewModels.VarietyCloneViewModels;
 using CitrsLite.Data;
@@ -26,7 +27,8 @@ builder.Services.AddSingleton<WeatherForecastService>();
 
 builder.Services.AddSingleton<IUnitOfWork, UnitOfWork>(u => 
     new UnitOfWork(connectionString: builder.Configuration.GetConnectionString("CitrsDatabase")));
-
+builder.Services.AddSingleton<ParticipantService, ParticipantService>(p => 
+    new ParticipantService(connectionString: builder.Configuration.GetConnectionString("CitrsDatabase")));
 
 builder.Services.AddScoped<VarietyCloneFormViewModel>();
 builder.Services.AddScoped<ParticipantFormViewModel>();

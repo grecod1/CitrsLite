@@ -1,7 +1,9 @@
 ﻿@page "/participant/add"
 @using CitrsLite.Business.ViewModels.ParticipantViewModels
 @using CitrsLite.Business.Enums
+@using Microsoft.AspNetCore.Components.Authorization
 @inject CitrsLite.Business.Services.ParticipantService participantService
+@inject AuthenticationStateProvider authenticationStateProvider
 
 <h2>Participant Form</h2>
 
@@ -58,9 +60,16 @@
 @code {
     private String Message = String.Empty;
 
-    async Task CreateParticipant()
+    public void CreateParticipant()
     {
         participantService.CreateAysnc(Model);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
+
+        Model.UserName = authState.User.Identity?.Name ?? "Unknown user";
     }
 
     [Inject]
