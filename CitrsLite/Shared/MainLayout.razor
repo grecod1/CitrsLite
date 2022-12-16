@@ -12,6 +12,7 @@
             Edge="Edge.Start" 
             OnClick="@((e) => DrawerToggle())" />
         C.I.T.R.S Lite
+        <MudSpacer/>          
     </MudAppBar>
     <MudDrawer Style="@($"background:{Colors.Lime.Darken4}; color:{Colors.Lime.Lighten5}")" 
             @bind-Open="@_drawerOpen">
@@ -34,7 +35,7 @@
 </MudLayout>
 
 @code {
-    bool _drawerOpen = true;
+    bool _drawerOpen = false;
 
     void DrawerToggle()
     {
