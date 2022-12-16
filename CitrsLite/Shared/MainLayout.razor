@@ -13,10 +13,10 @@
             OnClick="@((e) => DrawerToggle())" />
         C.I.T.R.S Lite
     </MudAppBar>
-    <MudDrawer @bind-Open="@_drawerOpen">
-
+    <MudDrawer Style="@($"background:{Colors.Lime.Darken4}; color:{Colors.Lime.Lighten5}")" 
+            @bind-Open="@_drawerOpen">
         <MudNavMenu>
-            <MudNavLink Href="/" Match="NavLinkMatch.All">Dashboard</MudNavLink>
+            <MudNavLink Href="/" Match="NavLinkMatch.Prefix">Dashboard</MudNavLink>
             <MudNavLink Href="/participant/add" Match="NavLinkMatch.Prefix">Participant</MudNavLink>
             <MudNavLink Href="/varietyClone/add" Match="NavLinkMatch.Prefix">Variety Clones</MudNavLink>
             <MudNavGroup Title="Settings" Expanded="true">
