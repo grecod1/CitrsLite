@@ -6,16 +6,19 @@
 
 <MudLayout>
     <MudAppBar Style="@($"background:{Colors.Lime.Darken4}")">
-        <MudIconButton 
-            Icon="@Icons.Material.Filled.Menu" 
-            Color="Color.Inherit" 
-            Edge="Edge.Start" 
-            OnClick="@((e) => DrawerToggle())" />
-        C.I.T.R.S Lite
-        <MudSpacer/>          
+        <MudIconButton Icon="@Icons.Material.Filled.Menu"
+                       Color="Color.Inherit"
+                       Edge="Edge.Start"
+                       OnClick="@((e) => DrawerToggle())" />
+
+        <MudNavLink Href="/">C.I.T.R.S Lite</MudNavLink>
+        <MudSpacer></MudSpacer>        
+        <MudNavLink Href="/participant/add" Match="NavLinkMatch.Prefix">Participant</MudNavLink>
+        <MudNavLink Href="/varietyClone/add" Match="NavLinkMatch.Prefix">Variety Clones</MudNavLink>
+
     </MudAppBar>
-    <MudDrawer Style="@($"background:{Colors.Lime.Darken4}; color:{Colors.Lime.Lighten5}")" 
-            @bind-Open="@_drawerOpen">
+    <MudDrawer Style="@($"background:{Colors.Lime.Darken4}; color:{Colors.Lime.Lighten5}")"
+               @bind-Open="@_drawerOpen">
         <MudNavMenu>
             <MudNavLink Href="/" Match="NavLinkMatch.Prefix">Dashboard</MudNavLink>
             <MudNavLink Href="/participant/add" Match="NavLinkMatch.Prefix">Participant</MudNavLink>
