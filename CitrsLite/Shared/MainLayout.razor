@@ -10,12 +10,17 @@
                        Color="Color.Inherit"
                        Edge="Edge.Start"
                        OnClick="@((e) => DrawerToggle())" />
-
         <MudNavLink Href="/">C.I.T.R.S Lite</MudNavLink>
-        <MudSpacer></MudSpacer>        
-        <MudNavLink Href="/participant/add" Match="NavLinkMatch.Prefix">Participant</MudNavLink>
-        <MudNavLink Href="/varietyClone/add" Match="NavLinkMatch.Prefix">Variety Clones</MudNavLink>
 
+        <MudGrid Justify="Justify.FlexStart" Spacing="3">
+            <MudItem>
+                <MudLink Class="" Href="/participant/add" Match="NavLinkMatch.Prefix">Participant</MudLink>
+            </MudItem>
+            <MudItem>
+                <MudLink Href="/varietyClone/add" Match="NavLinkMatch.Prefix">Variety Clones</MudLink>
+            </MudItem>                        
+        </MudGrid>
+        
     </MudAppBar>
     <MudDrawer Style="@($"background:{Colors.Lime.Darken4}; color:{Colors.Lime.Lighten5}")"
                @bind-Open="@_drawerOpen">
