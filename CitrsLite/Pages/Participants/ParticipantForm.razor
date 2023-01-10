@@ -7,54 +7,69 @@
 
 <h2>Participant Form</h2>
 
+
+
+
+
 <EditForm Model=@Model OnValidSubmit="CreateParticipant">
-    <label>
-        <h4>Name</h4>
-        <InputText @bind-Value=Model.Name></InputText>
-    </label>
-    <label>
-        <h4>Type</h4>
-        <InputSelect Name="type" @bind-Value=Model.Type>
-            @foreach(var partType in Enum.GetValues(typeof(ParticipantType)))
-            {
-                <option Value="@partType">@partType.ToString().Replace("_", " ")</option>
-            }
-        </InputSelect>
-    </label>
-    <p></p>
-    <label>
-        <h4>Description</h4>
-        <InputTextArea @bind-Value=Model.Description></InputTextArea>
-    </label>
-    <p></p>
-    <label>
-        <h4>Phone Number</h4>
-        <InputText @bind-Value=Model.PhoneNumber></InputText>
-    </label>
-    <p></p>
-    <label>
-        <h4>Address</h4>
-        <InputText @bind-Value=Model.Address></InputText>
-    </label>    
-    <p></p>
-    <label>
-        <h4>City</h4>
-        <InputText @bind-Value=Model.City></InputText>
-    </label>    
-    <p></p>
-    <label>
-        <h4>State</h4>
-        <InputText @bind-Value=Model.State></InputText>
-    </label>    
-    <p></p>
-    <label>
-        <h4>Active?</h4>
-        <InputCheckbox @bind-Value="@Model.IsActive"></InputCheckbox>
-    </label>
-    <p></p>
-    <input type="submit" class="btn btn-primary" value="Save"/>
-    <p></p>
-    <div>@Message</div>
+    <MudGrid Justify="Justify.Center">
+        <MudItem xs="12" md="6" xl="4">
+            <MudCard>
+                <MudCardContent>
+                    <MudTextField Label="Name"@bind-Value="Model.Name"/>
+                    <MudSelect T="string" Label="Participant Type" @bind-Value="Model.Type">
+                        @foreach(var partType in Enum.GetValues(typeof(ParticipantType)))
+                        {
+                            <MudSelectItem Value="@partType.ToString().Replace("_", " ")"/>
+                        }
+                    </MudSelect>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>        
+        <label>
+            <h4>Type</h4>
+            <InputSelect Name="type" @bind-Value=Model.Type>
+                @foreach (var partType in Enum.GetValues(typeof(ParticipantType)))
+                {
+                    <option Value="@partType">@partType.ToString().Replace("_", " ")</option>
+                }
+            </InputSelect>
+        </label>
+        <p></p>
+        <label>
+            <h4>Description</h4>
+            <InputTextArea @bind-Value=Model.Description></InputTextArea>
+        </label>
+        <p></p>
+        <label>
+            <h4>Phone Number</h4>
+            <InputText @bind-Value=Model.PhoneNumber></InputText>
+        </label>
+        <p></p>
+        <label>
+            <h4>Address</h4>
+            <InputText @bind-Value=Model.Address></InputText>
+        </label>
+        <p></p>
+        <label>
+            <h4>City</h4>
+            <InputText @bind-Value=Model.City></InputText>
+        </label>
+        <p></p>
+        <label>
+            <h4>State</h4>
+            <InputText @bind-Value=Model.State></InputText>
+        </label>
+        <p></p>
+        <label>
+            <h4>Active?</h4>
+            <InputCheckbox @bind-Value="@Model.IsActive"></InputCheckbox>
+        </label>
+        <p></p>
+        <input type="submit" class="btn btn-primary" value="Save" />
+        <p></p>
+        <div>@Message</div>
+    </MudGrid>
 </EditForm>
 
 @code {
