@@ -27,35 +27,21 @@
                 </MudCardContent>
             </MudCard>
         </MudItem>                                
-        <p></p>
-        <label>
-            <h4>Phone Number</h4>
-            <InputText @bind-Value=Model.PhoneNumber></InputText>
-        </label>
-        <p></p>
-        <label>
-            <h4>Address</h4>
-            <InputText @bind-Value=Model.Address></InputText>
-        </label>
-        <p></p>
-        <label>
-            <h4>City</h4>
-            <InputText @bind-Value=Model.City></InputText>
-        </label>
-        <p></p>
-        <label>
-            <h4>State</h4>
-            <InputText @bind-Value=Model.State></InputText>
-        </label>
-        <p></p>
-        <label>
-            <h4>Active?</h4>
-            <InputCheckbox @bind-Value="@Model.IsActive"></InputCheckbox>
-        </label>
-        <p></p>
-        <input type="submit" class="btn btn-primary" value="Save" />
-        <p></p>
-        <div>@Message</div>
+        <MudItem xs="12" md="6" xl="4">
+            <MudCard>
+                <MudCardContent>
+                    <MudTextField Label="Phone" @bind-Value="Model.PhoneNumber" InputType="InputType.Telephone" />
+                    <MudTextField Label="Street Address" @bind-Value="Model.Address" />
+                    <MudTextField Label="City" @bind-Value="Model.City" />
+                    <MudTextField Label="State" @bind-Value="Model.State" />
+                </MudCardContent>
+            </MudCard>
+        </MudItem>       
+        <MudItem xs="12">
+            <MudPaper>
+                <MudButton Color="Color.Success" OnClick="@CreateParticipant">Save</MudButton>
+            </MudPaper>
+        </MudItem>        
     </MudGrid>
 </EditForm>
 
