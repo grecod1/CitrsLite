@@ -23,23 +23,10 @@
                             <MudSelectItem Value="@partType.ToString().Replace("_", " ")"/>
                         }
                     </MudSelect>
+                    <MudTextField Label="Description" @bind-Value="Model.Description" Lines="5"/>
                 </MudCardContent>
             </MudCard>
-        </MudItem>        
-        <label>
-            <h4>Type</h4>
-            <InputSelect Name="type" @bind-Value=Model.Type>
-                @foreach (var partType in Enum.GetValues(typeof(ParticipantType)))
-                {
-                    <option Value="@partType">@partType.ToString().Replace("_", " ")</option>
-                }
-            </InputSelect>
-        </label>
-        <p></p>
-        <label>
-            <h4>Description</h4>
-            <InputTextArea @bind-Value=Model.Description></InputTextArea>
-        </label>
+        </MudItem>                                
         <p></p>
         <label>
             <h4>Phone Number</h4>
