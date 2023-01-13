@@ -7,41 +7,34 @@
 
 <h2>Participant Form</h2>
 
-
-
-
-
 <EditForm Model=@Model OnValidSubmit="CreateParticipant">
     <MudGrid Justify="Justify.Center">
         <MudItem xs="12" md="6" xl="4">
             <MudCard>
                 <MudCardContent>
-                    <MudTextField Label="Name"@bind-Value="Model.Name"/>
+                    <MudTextField Label="Name" @bind-Value="Model.Name" />
                     <MudSelect T="string" Label="Participant Type" @bind-Value="Model.Type">
-                        @foreach(var partType in Enum.GetValues(typeof(ParticipantType)))
+                        @foreach (var partType in Enum.GetValues(typeof(ParticipantType)))
                         {
-                            <MudSelectItem Value="@partType.ToString().Replace("_", " ")"/>
+                            <MudSelectItem Value="@partType.ToString().Replace("_", " ")" />
                         }
                     </MudSelect>
-                    <MudTextField Label="Description" @bind-Value="Model.Description" Lines="5"/>
-                </MudCardContent>
-            </MudCard>
-        </MudItem>                                
-        <MudItem xs="12" md="6" xl="4">
-            <MudCard>
-                <MudCardContent>
+                    <MudTextField Label="Description" @bind-Value="Model.Description" Lines="5" />
                     <MudTextField Label="Phone" @bind-Value="Model.PhoneNumber" InputType="InputType.Telephone" />
                     <MudTextField Label="Street Address" @bind-Value="Model.Address" />
                     <MudTextField Label="City" @bind-Value="Model.City" />
                     <MudTextField Label="State" @bind-Value="Model.State" />
                 </MudCardContent>
+                <MudCardActions>
+                    <MudButton ButtonType="ButtonType.Submit" 
+                            Color="Color.Success" 
+                            Variant="Variant.Filled" 
+                            OnClick="@CreateParticipant">
+                        Save
+                    </MudButton>
+                </MudCardActions>
             </MudCard>
-        </MudItem>       
-        <MudItem xs="12">
-            <MudPaper>
-                <MudButton Color="Color.Success" OnClick="@CreateParticipant">Save</MudButton>
-            </MudPaper>
-        </MudItem>        
+        </MudItem>
     </MudGrid>
 </EditForm>
 
