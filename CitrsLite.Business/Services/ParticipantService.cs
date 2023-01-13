@@ -29,7 +29,7 @@ namespace CitrsLite.Business.Services
                 PhoneNumber = formModel.PhoneNumber,
                 Address = formModel.Address,
                 City = formModel.City,
-                State = formModel.State,
+                State = formModel.State ?? "FL",
                 IsActive = true,
                 CreatedBy = formModel.UserName,
                 CreationDate = DateTime.Now,

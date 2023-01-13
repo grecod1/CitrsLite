@@ -23,7 +23,7 @@
                     <MudTextField Label="Phone" @bind-Value="Model.PhoneNumber" InputType="InputType.Telephone" />
                     <MudTextField Label="Street Address" @bind-Value="Model.Address" />
                     <MudTextField Label="City" @bind-Value="Model.City" />
-                    <MudTextField Label="State" @bind-Value="Model.State" />
+                    <MudTextField Label="State" @bind-Value="Model.State" />                    
                 </MudCardContent>
                 <MudCardActions>
                     <MudButton ButtonType="ButtonType.Submit" 
@@ -43,7 +43,7 @@
 
     public void CreateParticipant()
     {
-        participantService.CreateAysnc(Model);
+        participantService.Create(Model);
     }
 
     protected override async Task OnInitializedAsync()
