@@ -6,7 +6,7 @@
 @inject AuthenticationStateProvider authenticationStateProvider
 
 <h2>Participant Form</h2>
-
+<p>@Message</p>
 <EditForm Model=@Model OnValidSubmit="CreateParticipant">
     <MudGrid Justify="Justify.Center">
         <MudItem xs="12" md="6" xl="4">
@@ -26,10 +26,10 @@
                     <MudTextField Label="State" @bind-Value="Model.State" />                    
                 </MudCardContent>
                 <MudCardActions>
-                    <MudButton ButtonType="ButtonType.Submit" 
+                    <MudButton 
+                            ButtonType="ButtonType.Submit" 
                             Color="Color.Success" 
-                            Variant="Variant.Filled" 
-                            OnClick="@CreateParticipant">
+                            Variant="Variant.Filled">
                         Save
                     </MudButton>
                 </MudCardActions>
@@ -41,9 +41,11 @@
 @code {
     private String Message = String.Empty;
 
-    public void CreateParticipant()
+    public void CreateParticipant(EditContext context)
     {
-        participantService.Create(Model);
+        if (context.Validate()) participantService.Create(Model);
+        else Message = "Error";
+
     }
 
     protected override async Task OnInitializedAsync()
