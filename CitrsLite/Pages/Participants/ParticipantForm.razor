@@ -39,7 +39,8 @@
 </EditForm>
 
 @code {
-    private String Message = String.Empty;
+
+    private String Message = String.Empty;    
 
     public void CreateParticipant(EditContext context)
     {
@@ -52,9 +53,10 @@
     {
         var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
 
-        Model.UserName = authState.User.Identity?.Name ?? "Unknown user";
+        Model.UserName = authState.User.Identity?.Name ?? "Unknown user";        
     }
 
     [Inject]
     public ParticipantFormViewModel Model { get; set; }
+      
 }
