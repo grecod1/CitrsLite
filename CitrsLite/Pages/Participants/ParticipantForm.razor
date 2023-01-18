@@ -5,14 +5,18 @@
 @inject CitrsLite.Business.Services.ParticipantService participantService
 @inject AuthenticationStateProvider authenticationStateProvider
 
-<h2>Participant Form</h2>
 <EditForm Model=@Model OnSubmit="@CreateParticipant">
-    <ValidationSummary></ValidationSummary>
-    <DataAnnotationsValidator />
+    
     <MudGrid Justify="Justify.Center">
         <MudItem xs="12" md="6" xl="4">
             <MudCard>
+                <MudText Typo="Typo.h2">Participant Form</MudText>
                 <MudCardContent>
+                    <DataAnnotationsValidator />
+                    <MudText Color="Color.Error">
+                        <ValidationSummary></ValidationSummary>
+                    </MudText>
+                    
                     <MudTextField Label="Name" @bind-Value="Model.Name" Required="true" For="(() => Model.Name)" />
                     <MudSelect T="string" Label="Participant Type" @bind-Value="Model.Type" Required="true">
                         @foreach (var partType in Enum.GetValues(typeof(ParticipantType)))
