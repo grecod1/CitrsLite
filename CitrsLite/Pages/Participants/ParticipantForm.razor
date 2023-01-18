@@ -7,7 +7,8 @@
 
 <h2>Participant Form</h2>
 <p>@Message</p>
-<EditForm Model=@Model OnValidSubmit="CreateParticipant">
+<EditForm Model=@Model EditContext="this.context" OnSubmit="@CreateParticipant">
+    <DataAnnotationsValidator />
     <MudGrid Justify="Justify.Center">
         <MudItem xs="12" md="6" xl="4">
             <MudCard>
@@ -20,18 +21,21 @@
                         }
                     </MudSelect>
                     <MudTextField Label="Description" @bind-Value="Model.Description" Lines="5" />
-                    <MudTextField Label="Phone" @bind-Value="Model.PhoneNumber" InputType="InputType.Telephone" />
+                    <MudTextField Label="Phone" 
+                        @bind-Value="Model.PhoneNumber" 
+                        InputType="InputType.Telephone"  
+                        For="(() => Model.PhoneNumber)" />
                     <MudTextField Label="Street Address" @bind-Value="Model.Address" />
                     <MudTextField Label="City" @bind-Value="Model.City" />
-                    <MudTextField Label="State" @bind-Value="Model.State" />                    
+                    <MudTextField Label="State" @bind-Value="Model.State" />
                 </MudCardContent>
                 <MudCardActions>
-                    <MudButton 
-                            ButtonType="ButtonType.Submit" 
-                            Color="Color.Success" 
-                            Variant="Variant.Filled">
+                    <MudButton ButtonType="ButtonType.Submit"
+                               Variant="Variant.Filled"
+                               Color="Color.Success">
+                                
                         Save
-                    </MudButton>
+                    </MudButton>                    
                 </MudCardActions>
             </MudCard>
         </MudItem>
@@ -40,23 +44,34 @@
 
 @code {
 
-    private String Message = String.Empty;    
+    private String Message = String.Empty;
+    EditContext context;
+
 
     public void CreateParticipant(EditContext context)
     {
-        if (context.Validate()) participantService.Create(Model);
-        else Message = "Error";
+        var valid = context.Validate();
 
-    }
+        if (valid)
+        {
+            participantService.Create(Model);
+        }
+        else
+        {
+            Message = "Error"; 
+        }
+
+    }    
+
 
     protected override async Task OnInitializedAsync()
     {
         var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
 
-        Model.UserName = authState.User.Identity?.Name ?? "Unknown user";        
+        Model.UserName = authState.User.Identity?.Name ?? "Unknown user";
     }
 
     [Inject]
     public ParticipantFormViewModel Model { get; set; }
-      
+
 }
