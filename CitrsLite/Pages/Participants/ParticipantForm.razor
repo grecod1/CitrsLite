@@ -10,29 +10,50 @@
     <MudGrid Justify="Justify.Center">
         <MudItem xs="12" md="6" xl="4">
             <MudCard>
-                <MudText Typo="Typo.h2">Participant Form</MudText>
+                <MudText Typo="Typo.h2" Align="Align.Center">Participant Form</MudText>
                 <MudCardContent>
                     <DataAnnotationsValidator />
                     <MudText Color="Color.Error">
                         <ValidationSummary></ValidationSummary>
                     </MudText>
                     
-                    <MudTextField Label="Name" @bind-Value="Model.Name" Required="true" For="(() => Model.Name)" />
-                    <MudSelect T="string" Label="Participant Type" @bind-Value="Model.Type" Required="true">
+                    <MudTextField Label="Name" 
+                        @bind-Value="Model.Name" 
+                        Variant="Variant.Outlined" 
+                        Required="true" 
+                        For="(() => Model.Name)" />
+                    <MudSelect Label="Participant Type" 
+                        T="string" 
+                        @bind-Value="Model.Type" 
+                        Variant="Variant.Outlined"
+                        Required="true">
                         @foreach (var partType in Enum.GetValues(typeof(ParticipantType)))
                         {
                             <MudSelectItem Value="@partType.ToString().Replace("_", " ")" />
                         }
                     </MudSelect>
-                    <MudTextField Label="Description" @bind-Value="Model.Description" Lines="5" />
+                    <MudTextField Label="Description" 
+                        @bind-Value="Model.Description" 
+                        Variant="Variant.Outlined"
+                        Lines="5" />
                     <MudTextField Label="Phone" 
-                        @bind-Value="Model.PhoneNumber" 
+                        @bind-Value="Model.PhoneNumber"
+                        Variant="Variant.Outlined"
                         InputType="InputType.Telephone"
                         Required="true"
                         For="(() => Model.PhoneNumber)" />
-                    <MudTextField Label="Street Address" @bind-Value="Model.Address" Required="true" />
-                    <MudTextField Label="City" @bind-Value="Model.City" Required="true" />
-                    <MudTextField Label="State" @bind-Value="Model.State" Required="true" />
+                    <MudTextField Label="Street Address" 
+                        @bind-Value="Model.Address" 
+                        Variant="Variant.Outlined" 
+                        Required="true" />
+                    <MudTextField Label="City" 
+                        @bind-Value="Model.City"
+                        Variant="Variant.Outlined"
+                        Required="true" />
+                    <MudTextField Label="State" 
+                        @bind-Value="Model.State" 
+                        Variant="Variant.Outlined" 
+                        Required="true" />
                 </MudCardContent>
                 <MudCardActions>
                     <MudButton ButtonType="ButtonType.Submit"
