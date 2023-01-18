@@ -7,7 +7,7 @@
 
 <h2>Participant Form</h2>
 <p>@Message</p>
-<EditForm Model=@Model EditContext="this.context" OnSubmit="@CreateParticipant">
+<EditForm Model=@Model OnSubmit="@CreateParticipant">
     <DataAnnotationsValidator />
     <MudGrid Justify="Justify.Center">
         <MudItem xs="12" md="6" xl="4">
@@ -44,9 +44,7 @@
 
 @code {
 
-    private String Message = String.Empty;
-    EditContext context;
-
+    private String Message = String.Empty;    
 
     public void CreateParticipant(EditContext context)
     {
