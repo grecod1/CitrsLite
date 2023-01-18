@@ -6,15 +6,15 @@
 @inject AuthenticationStateProvider authenticationStateProvider
 
 <h2>Participant Form</h2>
-<p>@Message</p>
 <EditForm Model=@Model OnSubmit="@CreateParticipant">
+    <ValidationSummary></ValidationSummary>
     <DataAnnotationsValidator />
     <MudGrid Justify="Justify.Center">
         <MudItem xs="12" md="6" xl="4">
             <MudCard>
                 <MudCardContent>
-                    <MudTextField Label="Name" @bind-Value="Model.Name" For="(() => Model.Name)" />
-                    <MudSelect T="string" Label="Participant Type" @bind-Value="Model.Type">
+                    <MudTextField Label="Name" @bind-Value="Model.Name" Required="true" For="(() => Model.Name)" />
+                    <MudSelect T="string" Label="Participant Type" @bind-Value="Model.Type" Required="true">
                         @foreach (var partType in Enum.GetValues(typeof(ParticipantType)))
                         {
                             <MudSelectItem Value="@partType.ToString().Replace("_", " ")" />
@@ -23,11 +23,12 @@
                     <MudTextField Label="Description" @bind-Value="Model.Description" Lines="5" />
                     <MudTextField Label="Phone" 
                         @bind-Value="Model.PhoneNumber" 
-                        InputType="InputType.Telephone"  
+                        InputType="InputType.Telephone"
+                        Required="true"
                         For="(() => Model.PhoneNumber)" />
-                    <MudTextField Label="Street Address" @bind-Value="Model.Address" />
-                    <MudTextField Label="City" @bind-Value="Model.City" />
-                    <MudTextField Label="State" @bind-Value="Model.State" />
+                    <MudTextField Label="Street Address" @bind-Value="Model.Address" Required="true" />
+                    <MudTextField Label="City" @bind-Value="Model.City" Required="true" />
+                    <MudTextField Label="State" @bind-Value="Model.State" Required="true" />
                 </MudCardContent>
                 <MudCardActions>
                     <MudButton ButtonType="ButtonType.Submit"
