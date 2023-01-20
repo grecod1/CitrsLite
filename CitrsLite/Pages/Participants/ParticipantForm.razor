@@ -2,93 +2,97 @@
 @using CitrsLite.Business.ViewModels.ParticipantViewModels
 @using CitrsLite.Business.Enums
 @using Microsoft.AspNetCore.Components.Authorization
+@using MudBlazor.Services;
 @inject CitrsLite.Business.Services.ParticipantService participantService
 @inject AuthenticationStateProvider authenticationStateProvider
 
 <EditForm Model=@Model OnSubmit="@CreateParticipant">
+    <MudContainer>
+        <MudPaper Class="pa-2">
+            <MudGrid Justify="Justify.Center">
+                <MudItem xl="10" lg="12" xs="12">
+                    <MudText Typo="Typo.h4" Align="Align.Center">Participant Form</MudText>
+                    <DataAnnotationsValidator />
+                    <MudGrid>
+                        <MudItem xs="12" lg="8">
+                            <MudText Typo="Typo.h5" Align="Align.Center">New Participant</MudText>
 
-    <MudGrid Justify="Justify.Center">
-        <MudItem xl="10" lg="12" xs="12">
-            <MudCard Elevation="3" Class="pa-2 ma-3">
-                <MudText Typo="Typo.h4" Align="Align.Center">Participant Form</MudText>
-                <DataAnnotationsValidator />
-                <MudGrid>
-                    <MudItem lg="8" xl="7" md="12" xs="12">
-                        <MudText Typo="Typo.h5" Align="Align.Center">New Participant</MudText>
-                        <MudCardContent>
-                            <MudPaper Elevation="4" Class="pa-5">
-                                <MudGrid>
-                                    <MudItem lg="6">
+                            <MudGrid>
+                                <MudItem lg="6">
+                                    <MudTextField Label="Name"
+                                                  @bind-Value="Model.Name"
+                                                  Required="true"
+                                                  For="(() => Model.Name)" />
+                                </MudItem>
+                                <MudItem lg="6">
+                                    <MudSelect Label="Participant Type"
+                                               T="string"
+                                               @bind-Value="Model.Type"
+                                               Required="true">
+                                        @foreach (var partType in Enum.GetValues(typeof(ParticipantType)))
+                                        {
+                                            <MudSelectItem Value="@partType.ToString().Replace("_", " ")" />
+                                        }
+                                    </MudSelect>
+                                </MudItem>
+                            </MudGrid>
+                            <MudGrid>
+                                <MudItem lg="8" sm="12" xs="12">
+                                    <MudTextField Label="Phone"
+                                                  @bind-Value="Model.PhoneNumber"
+                                                  Class="w-75"
+                                                  InputType="InputType.Telephone"
+                                                  Required="true"
+                                                  For="(() => Model.PhoneNumber)" />
+                                </MudItem>
+                                <MudItem xs="12">
+                                    <MudTextField Label="Description"
+                                                  @bind-Value="Model.Description"
+                                                  Lines="5" />
+                                </MudItem>
+                            </MudGrid>
 
-                                        <MudTextField Label="Name"
-                                                      @bind-Value="Model.Name"
-                                                      Required="true"
-                                                      For="(() => Model.Name)" />
-                                    </MudItem>
-                                    <MudItem lg="6">
-                                        <MudSelect Label="Participant Type"
-                                                   T="string"
-                                                   @bind-Value="Model.Type"
-                                                   Required="true">
-                                            @foreach (var partType in Enum.GetValues(typeof(ParticipantType)))
-                                            {
-                                                <MudSelectItem Value="@partType.ToString().Replace("_", " ")" />
-                                            }
-                                        </MudSelect>
-                                    </MudItem>
-                                </MudGrid>
-                                <MudGrid>
-                                    <MudItem lg="8" sm="12" xs="12">
-                                        <MudTextField Label="Phone"
-                                                      @bind-Value="Model.PhoneNumber"
-                                                      Class="w-75"
-                                                      InputType="InputType.Telephone"
-                                                      Required="true"
-                                                      For="(() => Model.PhoneNumber)" />
-                                    </MudItem>
-                                    <MudItem xs="12">
-                                        <MudTextField Label="Description"
-                                                      @bind-Value="Model.Description"
-                                                      Lines="5" />
-                                    </MudItem>
-                                </MudGrid>
-                            </MudPaper>
-                        </MudCardContent>
-                    </MudItem>
-                    <MudItem lg="8" xl="5" md="12" xs="12">
-                        <MudText Typo="Typo.h5" Align="Align.Center">Location Information</MudText>
-                        <MudCardContent>
-                            <MudPaper Elevation="4" Class="pa-5">
-                                <MudTextField Label="Street Address"
-                                              @bind-Value="Model.Address"
-                                              Required="true" />
-                                <MudTextField Label="City"
-                                              @bind-Value="Model.City"
-                                              Required="true" />
-                                <MudTextField Label="State"
-                                              @bind-Value="Model.State"
-                                              Required="true" />
-                            </MudPaper>
-                        </MudCardContent>
-                    </MudItem>
-                </MudGrid>
+                        </MudItem>                        
+                        
+                        
+                        <MudItem xs="12" lg="4">
+                            <MudText Typo="Typo.h5" Align="Align.Center">Location Information</MudText>
 
-                <MudCardActions>
-                    <MudButton ButtonType="ButtonType.Submit"
-                               Variant="Variant.Filled"
-                               Color="Color.Success">
+                            <MudTextField Label="Street Address"
+                                          @bind-Value="Model.Address"
+                                          Required="true" />
+                            <MudTextField Label="City"
+                                          @bind-Value="Model.City"
+                                          Required="true" />
+                            <MudTextField Label="State"
+                                          @bind-Value="Model.State"
+                                          Required="true" />
 
-                        Save
-                    </MudButton>
-                </MudCardActions>
-            </MudCard>
-        </MudItem>
-    </MudGrid>
+                        </MudItem>
+                        <MudItem xs="12">
+                            <MudButton ButtonType="ButtonType.Submit"
+                                       Variant="Variant.Filled"
+                                       Color="Color.Success">
+
+                                Save
+                            </MudButton>
+                        </MudItem>
+                    </MudGrid>
+
+                    
+
+                </MudItem>
+            </MudGrid>
+        </MudPaper>
+    </MudContainer>
 </EditForm>
 
 @code {
 
+
     private String Message = String.Empty;
+
+   
 
     public void CreateParticipant(EditContext context)
     {
@@ -110,7 +114,7 @@
     {
         var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
 
-        Model.UserName = authState.User.Identity?.Name ?? "Unknown user";
+        Model.UserName = authState.User.Identity?.Name ?? "Unknown user";        
     }
 
     [Inject]
