@@ -1,6 +1,7 @@
 ﻿using CitrsLite.Business.Services;
 using CitrsLite.Business.ViewModels.ParticipantViewModels;
 using CitrsLite.Data.Models;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,9 +13,12 @@ namespace CitrsLite.API.Controllers
     public class ParticipantAPIController : ControllerBase
     {
         private ParticipantService _participantService;
-        public ParticipantAPIController(ParticipantService participantService)
+        private AuthenticationStateProvider _authenticationStateProvider;
+        public ParticipantAPIController(ParticipantService participantService, 
+            AuthenticationStateProvider authentication)
         {
             _participantService = participantService;
+            _authenticationStateProvider = authentication;
         }
 
         [HttpPost]
@@ -29,6 +33,7 @@ namespace CitrsLite.API.Controllers
         [HttpGet]
         public Participant Get()
         {
+
             return _participantService.GetParticipant(new ParticipantFormViewModel());
         }
     }

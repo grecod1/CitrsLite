@@ -1,6 +1,7 @@
 ﻿using CitrsLite.Business.ViewModels.ParticipantViewModels;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components;
+using MudBlazor.Extensions;
 
 namespace CitrsLite.Pages.Participants
 {
@@ -12,7 +13,7 @@ namespace CitrsLite.Pages.Participants
         [Inject]
         public ParticipantFormViewModel Model { get; set; }
         
-        public async Task PostAysnc()
+        public async Task PostAysnc(EditContext context)
         {
             if(Id != null && Id > 0)
             {
@@ -21,7 +22,7 @@ namespace CitrsLite.Pages.Participants
             }
             else
             {
-                var response = await HttpClient.PostAsJsonAsync(NavigationManager.BaseUri + "/api/ParticipantAPI", participantService);
+                var response = await HttpClient.PostAsJsonAsync("http://localhost:5006" + "/api/ParticipantAPI", Model);
 
                 var result = await response.Content.ReadFromJsonAsync<int>();
 
