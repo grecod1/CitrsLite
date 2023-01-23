@@ -1,4 +1,5 @@
 ﻿@page "/participant/add"
+@page "/participant/edit/{Id:int}"
 @using CitrsLite.Business.ViewModels.ParticipantViewModels
 @using CitrsLite.Business.Enums
 @using Microsoft.AspNetCore.Components.Authorization
@@ -6,7 +7,7 @@
 @inject CitrsLite.Business.Services.ParticipantService participantService
 @inject AuthenticationStateProvider authenticationStateProvider
 
-<EditForm Model=@Model OnValidSubmit="@CreateParticipant">
+<EditForm Model=@Model OnValidSubmit="@Post">
     <MudContainer MaxWidth="MaxWidth.Large">
         <MudCard Class="pa-4">
             <MudCardContent>
@@ -14,8 +15,6 @@
                 <MudDivider Class="my-2"></MudDivider>
                 <DataAnnotationsValidator />
                 <MudText Typo="Typo.h5" Align="Align.Center">New Participant</MudText>
-
-
                 <MudGrid Class="my-3">
                     <MudItem lg="4" md="6" xs="12">
                         <MudTextField Label="Name"
@@ -88,9 +87,3 @@
         </MudCard>
     </MudContainer>
 </EditForm>
-
-@code {
-
-
-
-}

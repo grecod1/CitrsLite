@@ -6,23 +6,23 @@ namespace CitrsLite.Pages.Participants
 {
     public partial class ParticipantForm
     {
-        private String Message = String.Empty;
+        [Parameter]
+        public int? Id { get; set; }
 
-
-
-        public void CreateParticipant(EditContext context)
+        [Inject]
+        public ParticipantFormViewModel Model { get; set; }
+        
+        public void Post()
         {
-            var valid = context.Validate();
-
-            if (valid)
+            if(Id != null && Id > 0)
             {
-                participantService.Create(Model);
+                Model.Id = participantService.Create(Model);
             }
             else
             {
-                Message = "Error";
+                // Edit Participant
             }
-
+            
         }
 
 
@@ -30,11 +30,12 @@ namespace CitrsLite.Pages.Participants
         {
             var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
 
-            Model.UserName = authState.User.Identity?.Name ?? "Unknown user";
+            Model = await participantService.GetFormViewModelAsync(Id);
+
+            Model.UserName = authState.User.Identity?.Name ?? "Unknown user";                       
+
         }
 
-        [Inject]
-        public ParticipantFormViewModel Model { get; set; }
 
     }
 }
