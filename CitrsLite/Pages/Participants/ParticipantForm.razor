@@ -8,116 +8,89 @@
 
 <EditForm Model=@Model OnValidSubmit="@CreateParticipant">
     <MudContainer MaxWidth="MaxWidth.Large">
-        <MudPaper Class="pa-4">
-            <MudText Typo="Typo.h4" Align="Align.Center">Participant Form</MudText>
-            <MudDivider Class="my-2"></MudDivider>
-            <DataAnnotationsValidator />
-            <MudText Typo="Typo.h5" Align="Align.Center">New Participant</MudText>
+        <MudCard Class="pa-4">
+            <MudCardContent>
+                <MudText Typo="Typo.h4" Align="Align.Center">Participant Form</MudText>
+                <MudDivider Class="my-2"></MudDivider>
+                <DataAnnotationsValidator />
+                <MudText Typo="Typo.h5" Align="Align.Center">New Participant</MudText>
 
 
-            <MudGrid Class="my-3">
-                <MudItem lg="4" md="6" xs="12">
-                    <MudTextField Label="Name"
-                        @bind-Value="Model.Name"
-                        Variant="Variant.Outlined"
-                        Required="true"
-                        For="(() => Model.Name)" />
-                </MudItem>
-                <MudItem lg="4" md="6" xs="12">
-                    <MudSelect Label="Participant Type"
-                        T="string"
-                        @bind-Value="Model.Type"
-                        Variant="Variant.Outlined"
-                        Required="true"
-                        For="(() => Model.Type)">
-                        @foreach (var partType in Enum.GetValues(typeof(ParticipantType)))
-                        {
-                            <MudSelectItem Value="@partType.ToString().Replace("_", " ")" />
-                        }
-                    </MudSelect>
-                </MudItem>
-                <MudItem lg="4" md="6" xs="12">
-                    <MudTextField Label="Phone"
-                        @bind-Value="Model.PhoneNumber"
-                        Class="w-75"
-                        InputType="InputType.Telephone"
-                        Variant="Variant.Outlined"
-                        Required="true"
-                        For="(() => Model.PhoneNumber)" />
-                </MudItem>
-                <MudItem lg="8" xs="12">
-                    <MudTextField Label="Description"
-                        @bind-Value="Model.Description"
-                        Variant="Variant.Outlined"
-                        Lines="5"
-                        For="(() => Model.Description)"/>
-                </MudItem>
-                <MudItem xs="12">
-                    <MudDivider Class="my-2"></MudDivider>
-                    <MudText Typo="Typo.h5" Align="Align.Center">Location Information</MudText>
-                </MudItem>
+                <MudGrid Class="my-3">
+                    <MudItem lg="4" md="6" xs="12">
+                        <MudTextField Label="Name"
+                                      @bind-Value="Model.Name"
+                                      Variant="Variant.Outlined"
+                                      Required="true"
+                                      For="(() => Model.Name)" />
+                    </MudItem>
+                    <MudItem lg="4" md="6" xs="12">
+                        <MudSelect Label="Participant Type"
+                                   T="string"
+                                   @bind-Value="Model.Type"
+                                   Variant="Variant.Outlined"
+                                   Required="true"
+                                   For="(() => Model.Type)">
+                            @foreach (var partType in Enum.GetValues(typeof(ParticipantType)))
+                            {
+                                <MudSelectItem Value="@partType.ToString().Replace("_", " ")" />
+                            }
+                        </MudSelect>
+                    </MudItem>
+                    <MudItem lg="4" md="6" xs="12">
+                        <MudTextField Label="Phone"
+                                      @bind-Value="Model.PhoneNumber"
+                                      Class="w-75"
+                                      InputType="InputType.Telephone"
+                                      Variant="Variant.Outlined"
+                                      Required="true"
+                                      For="(() => Model.PhoneNumber)" />
+                    </MudItem>
+                    <MudItem lg="8" xs="12">
+                        <MudTextField Label="Description"
+                                      @bind-Value="Model.Description"
+                                      Variant="Variant.Outlined"
+                                      Lines="5"
+                                      For="(() => Model.Description)" />
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudDivider Class="my-2"></MudDivider>
+                        <MudText Typo="Typo.h5" Align="Align.Center">Location Information</MudText>
+                    </MudItem>
 
-                <MudItem lg="7" md="8" xs="12">
-                    <MudTextField Label="Street Address" 
-                        @bind-Value="Model.Address" 
-                        Variant="Variant.Outlined"
-                        Required="true" 
-                        For="(() => Model.Address)"/>
+                    <MudItem lg="7" md="8" xs="12">
+                        <MudTextField Label="Street Address"
+                                      @bind-Value="Model.Address"
+                                      Variant="Variant.Outlined"
+                                      Required="true"
+                                      For="(() => Model.Address)" />
 
-                </MudItem>
-                <MudItem lg="3" sm="9" xs="12">
-                    <MudTextField Label="City"
-                        @bind-Value="Model.City"
-                        Variant="Variant.Outlined"
-                        Required="true" 
-                        For="(() => Model.City)"/>
-                </MudItem>
-                <MudItem lg="2" sm="3" xs="12">
-                    <MudTextField Label="State"
-                        @bind-Value="Model.State"
-                        Variant="Variant.Outlined"
-                        Required="true" 
-                        For="(() => Model.State)"/>
-                </MudItem>
-                <MudItem xs="12">
-                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Success">Save</MudButton>
-                </MudItem>
-            </MudGrid>
-        </MudPaper>
+                    </MudItem>
+                    <MudItem lg="3" sm="9" xs="12">
+                        <MudTextField Label="City"
+                                      @bind-Value="Model.City"
+                                      Variant="Variant.Outlined"
+                                      Required="true"
+                                      For="(() => Model.City)" />
+                    </MudItem>
+                    <MudItem lg="2" sm="3" xs="12">
+                        <MudTextField Label="State"
+                                      @bind-Value="Model.State"
+                                      Variant="Variant.Outlined"
+                                      Required="true"
+                                      For="(() => Model.State)" />
+                    </MudItem>                    
+                </MudGrid>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Success">Save</MudButton>
+            </MudCardActions>
+        </MudCard>
     </MudContainer>
 </EditForm>
 
 @code {
 
 
-    private String Message = String.Empty;
-
-
-
-    public void CreateParticipant(EditContext context)
-    {
-        var valid = context.Validate();
-
-        if (valid)
-        {
-            participantService.Create(Model);
-        }
-        else
-        {
-            Message = "Error";
-        }
-
-    }
-
-
-    protected override async Task OnInitializedAsync()
-    {
-        var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
-
-        Model.UserName = authState.User.Identity?.Name ?? "Unknown user";
-    }
-
-    [Inject]
-    public ParticipantFormViewModel Model { get; set; }
 
 }
