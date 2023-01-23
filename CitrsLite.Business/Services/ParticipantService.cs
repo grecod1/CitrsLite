@@ -37,12 +37,40 @@ namespace CitrsLite.Business.Services
             };
         }
 
-        public void Create(ParticipantFormViewModel formModel)
+        public async Task<ParticipantFormViewModel> GetFormViewModelAsync(int? id = null)
+        {
+            if(id != null)
+            {
+                var participant = await _data.Participants.GetFirstAsync(x => x.Id == id);
+
+                return new ParticipantFormViewModel()
+                {
+                    Id = participant.Id,
+                    Name = participant.Name,
+                    Type = participant.Type,
+                    Description = participant.Description,
+                    PhoneNumber = participant.PhoneNumber,
+                    Address = participant.Address,
+                    City = participant.City,
+                    State = participant.State,
+                    IsActive = participant.IsActive
+                };
+
+            }
+            else
+            {
+                return new ParticipantFormViewModel();
+            }
+        }
+
+        public int Create(ParticipantFormViewModel formModel)
         {
             Participant participant = GetParticipant(formModel);
 
             _data.Participants.Create(participant);
             _data.SaveChanges();
+
+            return participant.Id;
             
         }
 
