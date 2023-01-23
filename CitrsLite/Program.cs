@@ -35,6 +35,7 @@ builder.Services.AddScoped<VarietyCloneFormViewModel>();
 builder.Services.AddScoped<ParticipantFormViewModel>();
 builder.Services.AddMudServices();
 builder.Services.AddMudBlazorResizeListener();
+builder.Services.AddHttpClient();
 
 
 var app = builder.Build();

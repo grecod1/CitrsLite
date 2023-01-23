@@ -12,15 +12,20 @@ namespace CitrsLite.Pages.Participants
         [Inject]
         public ParticipantFormViewModel Model { get; set; }
         
-        public void Post()
+        public async Task PostAysnc()
         {
             if(Id != null && Id > 0)
             {
-                Model.Id = participantService.Create(Model);
+
+                // Edit
             }
             else
             {
-                // Edit Participant
+                var response = await HttpClient.PostAsJsonAsync(NavigationManager.BaseUri + "/api/ParticipantAPI", participantService);
+
+                var result = await response.Content.ReadFromJsonAsync<int>();
+
+                Model.Id = result;
             }
             
         }

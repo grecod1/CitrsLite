@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CitrsLite.API\CitrsLite.API.csproj" />
     <ProjectReference Include="..\CitrsLite.Business\CitrsLite.Business.csproj" />
     <ProjectReference Include="..\CitrsLite.Data\CitrsLite.Data.csproj" />
   </ItemGroup>
