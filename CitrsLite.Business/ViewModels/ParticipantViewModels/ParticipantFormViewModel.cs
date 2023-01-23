@@ -34,7 +34,7 @@ namespace CitrsLite.Business.ViewModels.ParticipantViewModels
         /// The phone number for the Participant
         /// </summary>
         [Required]
-        [Phone]
+        [Phone(ErrorMessage = "Please type in a valid phone number")]
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
         /// <summary>

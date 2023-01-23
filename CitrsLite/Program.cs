@@ -34,6 +34,7 @@ builder.Services.AddSingleton<ParticipantService, ParticipantService>(p =>
 builder.Services.AddScoped<VarietyCloneFormViewModel>();
 builder.Services.AddScoped<ParticipantFormViewModel>();
 builder.Services.AddMudServices();
+builder.Services.AddMudBlazorResizeListener();
 
 
 var app = builder.Build();
