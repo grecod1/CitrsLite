@@ -13,7 +13,7 @@
                 <MudItem xl="10" lg="12" xs="12">
                     <MudText Typo="Typo.h4" Align="Align.Center">Participant Form</MudText>
                     <DataAnnotationsValidator />
-                    <MudGrid>
+                    <MudGrid Spacing="4">
                         <MudItem xs="12" lg="8">
                             <MudText Typo="Typo.h5" Align="Align.Center">New Participant</MudText>
 
@@ -51,10 +51,7 @@
                                                   Lines="5" />
                                 </MudItem>
                             </MudGrid>
-
                         </MudItem>                        
-                        
-                        
                         <MudItem xs="12" lg="4">
                             <MudText Typo="Typo.h5" Align="Align.Center">Location Information</MudText>
 
@@ -79,7 +76,7 @@
                         </MudItem>
                     </MudGrid>
 
-                    
+
 
                 </MudItem>
             </MudGrid>
@@ -92,7 +89,7 @@
 
     private String Message = String.Empty;
 
-   
+
 
     public void CreateParticipant(EditContext context)
     {
@@ -114,7 +111,7 @@
     {
         var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
 
-        Model.UserName = authState.User.Identity?.Name ?? "Unknown user";        
+        Model.UserName = authState.User.Identity?.Name ?? "Unknown user";
     }
 
     [Inject]
