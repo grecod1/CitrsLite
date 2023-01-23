@@ -74,13 +74,15 @@ namespace CitrsLite.Business.Services
             
         }
 
-        public async void CreateAysnc(ParticipantFormViewModel formModel)
+        public async Task<int> CreateAysnc(ParticipantFormViewModel formModel)
         {
             Participant participant = GetParticipant(formModel);
 
             await _data.Participants.CreateAsync(participant);
 
             await _data.SaveChangesAsync();
+
+            return participant.Id;
         }
     }
 }
