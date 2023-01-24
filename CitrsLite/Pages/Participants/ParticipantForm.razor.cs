@@ -21,33 +21,28 @@ namespace CitrsLite.Pages.Participants
         {
             if(Id != null && Id > 0)
             {
-
-                participantService.EditAsync(Model);
-
+                await participantService.EditAsync(Model);
                 await setPropertiesAsync();
-
             }
             else
             {
-
                 Id = await participantService.CreateAysnc(Model);
-
                 await setPropertiesAsync();
             }
             
         }
 
 
-        protected override async Task OnInitializedAsync() => await setPropertiesAsync();
+        protected override async Task OnInitializedAsync() => await setPropertiesAsync();        
         
 
         private async Task setPropertiesAsync()
         {
             var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
-            
-            Model = await participantService.GetFormViewModelAsync(Id);
-            heading = Id != null ? Model.Name : "New Participant";
+
+            Model = await participantService.GetFormViewModelAsync(Id);           
             Model.UserName = authState.User.Identity?.Name ?? "Unknown user";
+            heading = Id != null ? Model.Name : "New Participant";
         }
 
 

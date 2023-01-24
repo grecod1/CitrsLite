@@ -86,7 +86,7 @@ namespace CitrsLite.Business.Services
             return participant.Id;
         }
 
-        public async void EditAsync(ParticipantFormViewModel model)
+        public async Task EditAsync(ParticipantFormViewModel model)
         {
             var participant = await _data.Participants
                 .GetFirstAsync(p => p.Id == model.Id);
