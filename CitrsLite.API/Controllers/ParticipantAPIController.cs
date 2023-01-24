@@ -13,7 +13,7 @@ namespace CitrsLite.API.Controllers
     public class ParticipantAPIController : ControllerBase
     {
         private ParticipantService _participantService;
-        private AuthenticationStateProvider _authenticationStateProvider;
+        
         public ParticipantAPIController(ParticipantService participantService)
         {
             _participantService = participantService;            

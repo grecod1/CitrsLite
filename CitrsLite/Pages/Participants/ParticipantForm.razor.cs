@@ -23,7 +23,7 @@ namespace CitrsLite.Pages.Participants
             else
             {
 
-                var route = NavigationManager.BaseUri + "/api/ParticipantAPI";
+                var route = NavigationManager.BaseUri + "api/ParticipantAPI";
                 
                 var response = await HttpClient.PostAsJsonAsync(route, Model);
 
