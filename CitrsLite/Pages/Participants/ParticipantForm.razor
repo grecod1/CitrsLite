@@ -8,6 +8,7 @@
 @inject AuthenticationStateProvider authenticationStateProvider
 @inject HttpClient HttpClient;
 @inject NavigationManager NavigationManager;
+@inject ISnackbar Snackbar;
 
 <EditForm Model=@Model OnValidSubmit="@PostAysnc">
     <MudContainer MaxWidth="MaxWidth.Large">

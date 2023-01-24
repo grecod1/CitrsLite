@@ -5,6 +5,7 @@ using MudBlazor.Extensions;
 using System.Text.Json;
 using System.Text;
 using Microsoft.Extensions.Primitives;
+using MudBlazor;
 
 namespace CitrsLite.Pages.Participants
 {
@@ -22,11 +23,13 @@ namespace CitrsLite.Pages.Participants
             if(Id != null && Id > 0)
             {
                 await participantService.EditAsync(Model);
+                Snackbar.Add("Edit Complete", Severity.Success);
                 await setPropertiesAsync();
             }
             else
             {
                 Id = await participantService.CreateAysnc(Model);
+                Snackbar.Add("Participant Created", Severity.Success);
                 await setPropertiesAsync();
             }
             
