@@ -19,7 +19,8 @@ namespace CitrsLite.Business.Services
             _data= new UnitOfWork(connectionString);
         }
 
-        public Participant GetParticipant(ParticipantFormViewModel formModel)
+        
+        public Participant BuildParticipant(ParticipantFormViewModel formModel)
         {
             return new Participant()
             {
@@ -63,9 +64,9 @@ namespace CitrsLite.Business.Services
             }
         }
 
-        public int Create(ParticipantFormViewModel formModel)
+        public int Create(ParticipantFormViewModel model)
         {
-            Participant participant = GetParticipant(formModel);
+            Participant participant = BuildParticipant(model);
 
             _data.Participants.Create(participant);
             _data.SaveChanges();
@@ -73,13 +74,34 @@ namespace CitrsLite.Business.Services
             return participant.Id;
             
         }
-
-        public async void CreateAysnc(ParticipantFormViewModel formModel)
+        
+        public async Task<int> CreateAysnc(ParticipantFormViewModel model)
         {
-            Participant participant = GetParticipant(formModel);
+            Participant participant = BuildParticipant(model);
 
             await _data.Participants.CreateAsync(participant);
 
+            await _data.SaveChangesAsync();
+
+            return participant.Id;
+        }
+
+        public async Task EditAsync(ParticipantFormViewModel model)
+        {
+            var participant = await _data.Participants
+                .GetFirstAsync(p => p.Id == model.Id);
+
+            participant.Name = model.Name;
+            participant.Type = model.Type;
+            participant.Description = model.Description;
+            participant.PhoneNumber = model.PhoneNumber;
+            participant.Address = model.Address;
+            participant.City = model.City;                
+            participant.State = model.State;
+            participant.ModifiedBy = model.UserName;
+            participant.ModificationDate = DateTime.Now;
+
+            _data.Participants.Edit(participant);
             await _data.SaveChangesAsync();
         }
     }

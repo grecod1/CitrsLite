@@ -1,3 +1,4 @@
+using CitrsLite.API.Controllers;
 using CitrsLite.Business.Repositories;
 using CitrsLite.Business.Services;
 using CitrsLite.Business.ViewModels.ParticipantViewModels;
@@ -22,6 +23,9 @@ builder.Services.AddAuthorization(options =>
     options.FallbackPolicy = options.DefaultPolicy;
 });
 
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
@@ -35,6 +39,7 @@ builder.Services.AddScoped<VarietyCloneFormViewModel>();
 builder.Services.AddScoped<ParticipantFormViewModel>();
 builder.Services.AddMudServices();
 builder.Services.AddMudBlazorResizeListener();
+builder.Services.AddHttpClient();
 
 
 var app = builder.Build();
@@ -42,9 +47,14 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error");
+    app.UseExceptionHandler("/Error");    
 }
 
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseStaticFiles();
 
@@ -52,8 +62,10 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapFallbackToPage("/_Host");
+
+app.UseEndpoints(endpoints => endpoints.MapControllers());
 
 app.MapBlazorHub();
-app.MapFallbackToPage("/_Host");
 
 app.Run();
