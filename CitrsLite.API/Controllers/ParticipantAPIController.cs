@@ -1,6 +1,7 @@
 ﻿using CitrsLite.Business.Services;
 using CitrsLite.Business.ViewModels.ParticipantViewModels;
 using CitrsLite.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +20,7 @@ namespace CitrsLite.API.Controllers
             _participantService = participantService;            
         }
 
-        [HttpPost]
+        [HttpPost]        
         public async Task<ActionResult<int>> Post(ParticipantFormViewModel model)
         {
 

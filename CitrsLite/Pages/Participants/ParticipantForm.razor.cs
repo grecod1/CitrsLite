@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components;
 using MudBlazor.Extensions;
+using System.Text.Json;
+using System.Text;
 
 namespace CitrsLite.Pages.Participants
 {
@@ -24,8 +26,10 @@ namespace CitrsLite.Pages.Participants
             {
 
                 var route = NavigationManager.BaseUri + "api/ParticipantAPI";
-                
-                var response = await HttpClient.PostAsJsonAsync(route, Model);
+
+                var request = new StringContent(JsonSerializer.Serialize(Model), Encoding.UTF8, "application/json");
+
+                var response = await HttpClient.PostAsync(route, request);
 
                 var result = await response.Content.ReadFromJsonAsync<int>();
 
