@@ -22,7 +22,10 @@ namespace CitrsLite.Pages.Participants
             }
             else
             {
-                var response = await HttpClient.PostAsJsonAsync("http://localhost:5006" + "/api/ParticipantAPI", Model);
+
+                var route = NavigationManager.BaseUri + "/api/ParticipantAPI";
+                
+                var response = await HttpClient.PostAsJsonAsync(route, Model);
 
                 var result = await response.Content.ReadFromJsonAsync<int>();
 
