@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components;
 using MudBlazor.Extensions;
 using System.Text.Json;
 using System.Text;
+using Microsoft.Extensions.Primitives;
 
 namespace CitrsLite.Pages.Participants
 {
@@ -14,37 +15,39 @@ namespace CitrsLite.Pages.Participants
 
         [Inject]
         public ParticipantFormViewModel Model { get; set; }
-        
+
+        string heading;
         public async Task PostAysnc(EditContext context)
         {
             if(Id != null && Id > 0)
             {
 
-                // Edit
+                participantService.EditAsync(Model);
+
+                await setPropertiesAsync();
+
             }
             else
             {
 
-                //var route = NavigationManager.BaseUri + "api/ParticipantAPI";
-                
-                //var response = await HttpClient.PostAsJsonAsync(route, Model);
+                Id = await participantService.CreateAysnc(Model);
 
-                //var result = await response.Content.ReadFromJsonAsync<int>();
-
-                Model.Id = await participantService.CreateAysnc(Model);
+                await setPropertiesAsync();
             }
             
         }
 
 
-        protected override async Task OnInitializedAsync()
+        protected override async Task OnInitializedAsync() => await setPropertiesAsync();
+        
+
+        private async Task setPropertiesAsync()
         {
             var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
-
+            
             Model = await participantService.GetFormViewModelAsync(Id);
-
-            Model.UserName = authState.User.Identity?.Name ?? "Unknown user";                       
-
+            heading = Id != null ? Model.Name : "New Participant";
+            Model.UserName = authState.User.Identity?.Name ?? "Unknown user";
         }
 
 

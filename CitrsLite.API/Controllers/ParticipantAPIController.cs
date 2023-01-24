@@ -33,7 +33,7 @@ namespace CitrsLite.API.Controllers
         public Participant Get()
         {
 
-            return _participantService.GetParticipant(new ParticipantFormViewModel());
+            return _participantService.BuildParticipant(new ParticipantFormViewModel());
         }
     }
 }
