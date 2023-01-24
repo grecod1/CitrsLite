@@ -25,15 +25,13 @@ namespace CitrsLite.Pages.Participants
             else
             {
 
-                var route = NavigationManager.BaseUri + "api/ParticipantAPI";
+                //var route = NavigationManager.BaseUri + "api/ParticipantAPI";
+                
+                //var response = await HttpClient.PostAsJsonAsync(route, Model);
 
-                var request = new StringContent(JsonSerializer.Serialize(Model), Encoding.UTF8, "application/json");
+                //var result = await response.Content.ReadFromJsonAsync<int>();
 
-                var response = await HttpClient.PostAsync(route, request);
-
-                var result = await response.Content.ReadFromJsonAsync<int>();
-
-                Model.Id = result;
+                Model.Id = await participantService.CreateAysnc(Model);
             }
             
         }
