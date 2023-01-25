@@ -70,10 +70,10 @@ namespace CitrsLite.Business.Services
             IEnumerable<Expression<Func<Participant, bool>>> predicates = 
                 new List<Expression<Func<Participant, bool>>>()
             {
-                p => p.Type == model.Type,
-                p => p.Name == model.Name,
-                p => p.City== model.City,
-                p => p.PhoneNumber == model.Phone
+                p => model.Type == null || p.Type == model.Type,
+                p => model.Name == null || p.Name == model.Name,
+                p => model.City == null || p.City== model.City,
+                p => model.Phone == null || p.PhoneNumber == model.Phone
             };            
 
             return await _data.Participants.GetListAsync(predicates);
