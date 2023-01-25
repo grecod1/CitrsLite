@@ -8,9 +8,9 @@ namespace CitrsLite.Business.ViewModels.ParticipantViewModels
 {
     public class ParticipantIndexViewModel
     {
-        public string Name { get; set; }
-        public string Type { get; set; }
-        public string Phone { get; set; }
-        public string City { get; set; }
+        public string? Name { get; set; }
+        public string? Type { get; set; }
+        public string? Phone { get; set; }
+        public string? City { get; set; }
     }
 }

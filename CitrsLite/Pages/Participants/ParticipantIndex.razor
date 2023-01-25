@@ -30,22 +30,16 @@
                     Color="Color.Primary">
                 Search
             </MudButton>
+            <MudButton ButtonType="ButtonType.Button"
+                       Variant="Variant.Filled"
+                       Color="Color.Secondary"
+                        OnClick="reset">
+                Reset
+            </MudButton>
         </MudCardActions>
     </MudCard>
 </MudContainer>
 
 @code {
-    private IEnumerable<Participant> participants;
-
-    protected override void OnInitialized()
-    {
-        participants = new List<Participant>();
-    }
-
-    private async Task getParticipants()
-    {
-        participants = await ParticipantService.GetParticipantsAsync(Model);
-    }
-
     
 }
