@@ -96,7 +96,7 @@ namespace CitrsLite.Business.Repositories
             }
         }
 
-        public virtual async Task<IList<T>> GetListAsync(IEnumerable<Expression<Func<T, bool>>>? predicates = null,
+        public virtual async Task<IList<T>> GetListAsync(IEnumerable<Expression<Func<T, bool>>> predicates,
             params string[] includedProperties)
         {
             IQueryable<T> query = _dbSet;

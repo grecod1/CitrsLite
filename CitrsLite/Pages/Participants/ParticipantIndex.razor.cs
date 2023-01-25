@@ -4,7 +4,7 @@ namespace CitrsLite.Pages.Participants
 {
     public partial class ParticipantIndex
     {
-        private IEnumerable<Participant> participants;
+        private IEnumerable<Participant>? participants;
 
         protected override void OnInitialized()
         {
