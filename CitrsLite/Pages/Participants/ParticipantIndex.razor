@@ -1,8 +1,10 @@
 ﻿@page "/participant"
 @using CitrsLite.Business.Enums;
+@using CitrsLite.Business.Services;
 @using CitrsLite.Business.ViewModels.ParticipantViewModels;
 @using CitrsLite.Data.Models;
 @inject ParticipantIndexViewModel Model;
+@inject ParticipantService ParticipantService;
 
 <MudContainer>
     <MudCard>
@@ -10,7 +12,7 @@
             <MudText Typo="Typo.h2">Participant Search</MudText>
         </MudCardHeader>
         <MudCardContent>
-            <EditForm Model="Model">
+            <EditForm Model="Model" OnValidSubmit="getParticipants">
                 <MudTextField Label="Name" @bind-Value="Model.Name" />
                 <MudSelect Label="Type" T="string" @bind-Values="Model.Type">
                     @foreach (var partType in Enum.GetValues(typeof(ParticipantType)))
@@ -22,6 +24,13 @@
                 <MudTextField Label="City" @bind-Value="Model.City" />
             </EditForm>
         </MudCardContent>
+        <MudCardActions>
+            <MudButton ButtonType="ButtonType.Submit" 
+                    Variant="Variant.Filled" 
+                    Color="Color.Primary">
+                Search
+            </MudButton>
+        </MudCardActions>
     </MudCard>
 </MudContainer>
 
@@ -33,4 +42,10 @@
         participants = new List<Participant>();
     }
 
+    private async Task getParticipants()
+    {
+        participants = await ParticipantService.GetParticipantsAsync(Model);
+    }
+
+    
 }

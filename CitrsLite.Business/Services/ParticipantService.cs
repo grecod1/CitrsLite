@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -62,6 +63,20 @@ namespace CitrsLite.Business.Services
             {
                 return new ParticipantFormViewModel();
             }
+        }
+
+        public async Task<IEnumerable<Participant>> GetParticipantsAsync(ParticipantIndexViewModel model)
+        {
+            IEnumerable<Expression<Func<Participant, bool>>> predicates = 
+                new List<Expression<Func<Participant, bool>>>()
+            {
+                p => p.Type == model.Type,
+                p => p.Name == model.Name,
+                p => p.City== model.City,
+                p => p.PhoneNumber == model.Phone
+            };            
+
+            return await _data.Participants.GetListAsync(predicates);
         }
 
         public int Create(ParticipantFormViewModel model)
