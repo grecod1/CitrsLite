@@ -6,23 +6,24 @@
 @inject ParticipantIndexViewModel Model;
 @inject ParticipantService ParticipantService;
 
-<MudContainer>
+<MudContainer MaxWidth="MaxWidth.Large">
     <EditForm Model="Model" OnValidSubmit="getParticipants">
         <MudCard>
             <MudCardHeader>
                 <MudText Typo="Typo.h2">Participant Search</MudText>
             </MudCardHeader>
-            <MudCardContent>
+            <MudCardContent Class="w-75">
 
-                <MudTextField Label="Name" @bind-Value="Model.Name" />
-                <MudSelect Label="Type" T="string" @bind-Values="Model.Type">
+                <MudTextField Label="Name" @bind-Value="Model.Name" Variant="Variant.Filled" />
+                <MudSelect Label="Type" T="string" @bind-Values="Model.Type"  Variant="Variant.Filled">
                     @foreach (var partType in Enum.GetValues(typeof(ParticipantType)))
                     {
                         <MudSelectItem Value="@partType.ToString().Replace("_", " ")" />
                     }
                 </MudSelect>
-                <MudTextField Label="Phone" @bind-Value="Model.Phone" />
-                <MudTextField Label="City" @bind-Value="Model.City" />
+                <MudTextField Label="Phone" @bind-Value="Model.Phone" Variant="Variant.Filled" />
+                <MudTextField Label="Phone" @bind-Value="Model.Phone" Variant="Variant.Filled" />
+                <MudTextField Label="City" @bind-Value="Model.City" Variant="Variant.Filled" />
 
             </MudCardContent>
             <MudCardActions>
