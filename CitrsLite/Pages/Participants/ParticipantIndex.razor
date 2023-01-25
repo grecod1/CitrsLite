@@ -1,6 +1,8 @@
 ﻿@page "/participant"
+@using CitrsLite.Business.Enums;
+@using CitrsLite.Business.ViewModels.ParticipantViewModels;
 @using CitrsLite.Data.Models;
-
+@inject ParticipantIndexViewModel Model;
 
 <MudContainer>
     <MudCard>
@@ -8,15 +10,27 @@
             <MudText Typo="Typo.h2">Participant Search</MudText>
         </MudCardHeader>
         <MudCardContent>
-            <MudForm>
-                <MudTextField Label="Name" @bind-Value="name"/>
-            </MudForm>
+            <EditForm Model="Model">
+                <MudTextField Label="Name" @bind-Value="Model.Name" />
+                <MudSelect Label="Type" T="string" @bind-Values="Model.Type">
+                    @foreach (var partType in Enum.GetValues(typeof(ParticipantType)))
+                    {
+                        <MudSelectItem Value="@partType.ToString().Replace("_", " ")" />
+                    }
+                </MudSelect>
+                <MudTextField Label="Phone" @bind-Value="Model.Phone" />
+                <MudTextField Label="City" @bind-Value="Model.City" />
+            </EditForm>
         </MudCardContent>
     </MudCard>
 </MudContainer>
 
 @code {
     private IEnumerable<Participant> participants;
-    private string name;
+
+    protected override void OnInitialized()
+    {
+        participants = new List<Participant>();
+    }
 
 }
