@@ -67,7 +67,9 @@ namespace CitrsLite.Business.Services
 
         public async Task<IEnumerable<Participant>> GetParticipantsAsync(ParticipantIndexViewModel model)
         {
-            IEnumerable<Expression<Func<Participant, bool>>> predicates = 
+            
+            
+                IEnumerable<Expression<Func<Participant, bool>>> predicates = 
                 new List<Expression<Func<Participant, bool>>>()
             {
                 p => model.Type == null || p.Type == model.Type,
