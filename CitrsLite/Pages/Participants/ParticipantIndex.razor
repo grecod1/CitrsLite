@@ -6,13 +6,13 @@
 @inject ParticipantIndexViewModel Model;
 @inject ParticipantService ParticipantService;
 
-<MudContainer MaxWidth="MaxWidth.Large">
+<MudContainer MaxWidth="MaxWidth.Small">
     <EditForm Model="Model" OnValidSubmit="getParticipants">
-        <MudCard>
+        <MudCard> 
             <MudCardHeader>
                 <MudText Typo="Typo.h2">Participant Search</MudText>
             </MudCardHeader>
-            <MudCardContent Class="w-75">
+            <MudCardContent>
 
                 <MudTextField Label="Name" @bind-Value="Model.Name" Variant="Variant.Filled" />
                 <MudSelect Label="Type" T="string" @bind-Values="Model.Type"  Variant="Variant.Filled">
@@ -26,7 +26,7 @@
                 <MudTextField Label="City" @bind-Value="Model.City" Variant="Variant.Filled" />
 
             </MudCardContent>
-            <MudCardActions>
+            <MudCardActions Class="gap-3">
                 <MudButton ButtonType="ButtonType.Submit"
                            Variant="Variant.Filled"
                            Color="Color.Primary">
@@ -41,4 +41,7 @@
             </MudCardActions>
         </MudCard>
     </EditForm>
+</MudContainer>
+<MudContainer>
+    <ParticipantTable Participants="participants" />
 </MudContainer>
