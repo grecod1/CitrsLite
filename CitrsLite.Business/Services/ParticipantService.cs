@@ -66,19 +66,14 @@ namespace CitrsLite.Business.Services
         }
 
         public async Task<IEnumerable<Participant>> GetParticipantsAsync(ParticipantIndexViewModel model)
-        {
-            
-            
-                IEnumerable<Expression<Func<Participant, bool>>> predicates = 
-                new List<Expression<Func<Participant, bool>>>()
-            {
-                p => model.Type == null || p.Type == model.Type,
-                p => model.Name == null || p.Name == model.Name,
-                p => model.City == null || p.City== model.City,
-                p => model.Phone == null || p.PhoneNumber == model.Phone
-            };            
+        {           
+            var participants = await _data.Participants
+                .GetListAsync(p => model.Type == null || p.Type == model.Type);
 
-            return await _data.Participants.GetListAsync(predicates);
+            return participants
+                .Where(p => model.Name == null || p.Name.Contains(model.Name))
+                .Where(p => model.City == null || p.City.Contains(model.City))
+                .Where(p => model.Phone == null || p.PhoneNumber.Contains(model.Phone));
         }
 
         public int Create(ParticipantFormViewModel model)

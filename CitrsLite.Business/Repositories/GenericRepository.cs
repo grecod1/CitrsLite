@@ -96,36 +96,6 @@ namespace CitrsLite.Business.Repositories
             }
         }
 
-        public virtual async Task<IList<T>> GetListAsync(IEnumerable<Expression<Func<T, bool>>> predicates,
-            params string[] includedProperties)
-        {
-            IQueryable<T> query = _dbSet;
-
-            if (includedProperties != null)
-            {
-                foreach (string includedProperty in includedProperties)
-                {
-                    query = query.Include(includedProperty);
-                }
-
-            }
-            if (predicates != null)
-            {
-                //If the user includes a filter
-                foreach(var predicate in predicates)
-                {
-                    query = query.Where(predicate);
-                }
-
-                return await query.ToListAsync<T>();
-            }
-            else
-            {
-                // In case the user wants to return all results.
-                return await query.ToListAsync<T>();
-            }
-        }
-
         /// <summary>
         /// Return First or Default onject in a List.
         /// </summary>
