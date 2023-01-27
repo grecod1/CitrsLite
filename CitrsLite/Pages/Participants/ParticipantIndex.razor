@@ -15,14 +15,13 @@
             <MudCardContent>
 
                 <MudTextField Label="Name" @bind-Value="Model.Name" Variant="Variant.Filled" />
-                <MudSelect Label="Type" T="string" @bind-Values="Model.Type"  Variant="Variant.Filled">
+                <MudSelect Label="Type" T="string" @bind-Value="Model.Type"  Variant="Variant.Filled">
                     @foreach (var partType in Enum.GetValues(typeof(ParticipantType)))
                     {
                         <MudSelectItem Value="@partType.ToString().Replace("_", " ")" />
                     }
                 </MudSelect>
-                <MudTextField Label="Phone" @bind-Value="Model.Phone" Variant="Variant.Filled" />
-                <MudTextField Label="Phone" @bind-Value="Model.Phone" Variant="Variant.Filled" />
+                <MudTextField Label="Phone" @bind-Value="Model.Phone" Variant="Variant.Filled" />                
                 <MudTextField Label="City" @bind-Value="Model.City" Variant="Variant.Filled" />
 
             </MudCardContent>
