@@ -66,7 +66,7 @@ namespace CitrsLite.Business.Services
         }
 
         public async Task<IEnumerable<Participant>> GetParticipantsAsync(ParticipantIndexViewModel model)
-        {           
+        {            
             var participants = await _data.Participants
                 .GetListAsync(p => model.Type == null || p.Type == model.Type);
 
