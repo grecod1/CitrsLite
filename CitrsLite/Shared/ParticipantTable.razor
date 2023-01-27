@@ -1,9 +1,30 @@
 ﻿@using CitrsLite.Data.Models;
 
-<MudText Typo="Typo.caption">Under Development</MudText>
+
+<MudTable Items="Participants" Hover="true">
+    <ToolBarContent>
+        <MudText  Typo="Typo.h6">Participants</MudText>
+        <MudSpacer />
+        <MudTextField @bind-Value="search" Placeholder="Search"></MudTextField>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Name</MudTh>
+        <MudTh>Type</MudTh>
+        <MudTh>City</MudTh>
+        <MudTh>Phone</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+        <MudTd DataLabel="Type">@context.Type</MudTd>
+        <MudTd DataLabel="City">@context.City</MudTd>
+        <MudTd DataLabel="Phone Number">@context.PhoneNumber</MudTd>
+    </RowTemplate>
+</MudTable>
 
 @code {
-    
+
     [Parameter]
     public IEnumerable<Participant> Participants { get; set; }
+
+    private string search;
 }

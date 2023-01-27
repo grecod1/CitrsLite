@@ -6,7 +6,7 @@
 @inject ParticipantIndexViewModel Model;
 @inject ParticipantService ParticipantService;
 
-<MudContainer MaxWidth="MaxWidth.Small">
+<MudContainer MaxWidth="MaxWidth.Small" Class="ma-3">
     <EditForm Model="Model" OnValidSubmit="getParticipants">
         <MudCard> 
             <MudCardHeader>
@@ -42,6 +42,6 @@
         </MudCard>
     </EditForm>
 </MudContainer>
-<MudContainer>
+<MudContainer MaxWidth="MaxWidth.Large" Class="ma-3">
     <ParticipantTable Participants="participants" />
 </MudContainer>
