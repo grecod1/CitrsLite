@@ -5,11 +5,7 @@ namespace CitrsLite.Pages.Participants
     public partial class ParticipantIndex
     {
         private IEnumerable<Participant>? participants;
-
-        protected override void OnInitialized()
-        {
-            participants = new List<Participant>();
-        }
+        
 
         private async Task getParticipants()
         {

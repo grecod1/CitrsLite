@@ -8,20 +8,25 @@
 
 <MudContainer MaxWidth="MaxWidth.Small" Class="ma-3">
     <EditForm Model="Model" OnValidSubmit="getParticipants">
-        <MudCard> 
+        <MudCard>
             <MudCardHeader>
                 <MudText Typo="Typo.h2">Participant Search</MudText>
             </MudCardHeader>
             <MudCardContent>
 
                 <MudTextField Label="Name" @bind-Value="Model.Name" Variant="Variant.Filled" />
-                <MudSelect Label="Type" T="string" @bind-Value="Model.Type"  Variant="Variant.Filled">
+                <MudSelect Label="Type"
+                           T="string"
+                           @bind-Value="Model.Type"
+                           Placeholder="Any"
+                           Variant="Variant.Filled"
+                           Clearable>
                     @foreach (var partType in Enum.GetValues(typeof(ParticipantType)))
                     {
                         <MudSelectItem Value="@partType.ToString().Replace("_", " ")" />
                     }
                 </MudSelect>
-                <MudTextField Label="Phone" @bind-Value="Model.Phone" Variant="Variant.Filled" />                
+                <MudTextField Label="Phone" @bind-Value="Model.Phone" Variant="Variant.Filled" />
                 <MudTextField Label="City" @bind-Value="Model.City" Variant="Variant.Filled" />
 
             </MudCardContent>
