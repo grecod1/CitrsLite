@@ -6,9 +6,9 @@ namespace CitrsLite.Shared
     public partial class ParticipantTable
     {
         [Parameter]
-        public IEnumerable<Participant> Participants { get; set; }
+        public IEnumerable<Participant>? Participants { get; set; }
 
-        private string search;
+        private string? search;
 
         private bool filterFunc1(Participant participant) => filterFunc(participant, search);
 
