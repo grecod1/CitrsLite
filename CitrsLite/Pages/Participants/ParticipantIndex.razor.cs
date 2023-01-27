@@ -5,11 +5,16 @@ namespace CitrsLite.Pages.Participants
     public partial class ParticipantIndex
     {
         private IEnumerable<Participant>? participants;
-        
+        private bool _loading = false;
 
         private async Task getParticipants()
         {
-            participants = await ParticipantService.GetParticipantsAsync(Model);
+            var task = ParticipantService.GetParticipantsAsync(Model);
+            _loading= true;
+            await Task.Run(() => task);
+            
+            participants = task.Result;            
+
         }
 
         private void reset()

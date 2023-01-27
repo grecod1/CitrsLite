@@ -8,6 +8,9 @@ namespace CitrsLite.Shared
         [Parameter]
         public IEnumerable<Participant>? Participants { get; set; }
 
+        [Parameter]
+        public bool Loading { get; set; } = false;
+
         private string? search;
 
         private bool filterFunc1(Participant participant) => filterFunc(participant, search);

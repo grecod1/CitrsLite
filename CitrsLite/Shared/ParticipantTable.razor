@@ -1,7 +1,8 @@
 ﻿@using CitrsLite.Data.Models;
 
-
-<MudTable Items="Participants" Hover="true" Filter="new Func<Participant, bool>(filterFunc1)">
+@if(Participants != null)
+{
+<MudTable Items="Participants" Hover="true" Filter="new Func<Participant, bool>(filterFunc1)" Elevation="3">
     <ToolBarContent>
         <MudText Typo="Typo.h6">Participants</MudText>
         <MudSpacer />
@@ -32,5 +33,11 @@
     <PagerContent>
         <MudTablePager />
     </PagerContent>
-</MudTable>
+    </MudTable>
+}
+else if(Loading)
+{
+    <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+}
+
 
