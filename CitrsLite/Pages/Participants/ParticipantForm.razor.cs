@@ -18,7 +18,7 @@ namespace CitrsLite.Pages.Participants
         public ParticipantFormViewModel Model { get; set; }
 
         string heading;
-        public async Task PostAysnc(EditContext context)
+        public async Task PostAysnc(EditContext context)    
         {
             if(Id != null && Id > 0)
             {

@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitrsLite.Data", "CitrsLite
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitrsLite.Business", "CitrsLite.Business\CitrsLite.Business.csproj", "{8565EB2A-494E-4AC8-9CD5-7E95A3EBC3A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CitrsLite.API", "CitrsLite.API\CitrsLite.API.csproj", "{D26BFDAA-1BB7-433B-8DB6-0DCF9275F748}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitrsLite.API", "CitrsLite.API\CitrsLite.API.csproj", "{D26BFDAA-1BB7-433B-8DB6-0DCF9275F748}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,43 @@
+﻿@using CitrsLite.Data.Models;
+
+@if(Participants != null)
+{
+<MudTable Items="Participants" Hover="true" Filter="new Func<Participant, bool>(filterFunc1)" Elevation="3">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Participants</MudText>
+        <MudSpacer />
+
+        <MudTextField @bind-Value="search" Placeholder="Search"></MudTextField>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>View</MudTh>
+        <MudTh>Name</MudTh>
+        <MudTh>Type</MudTh>
+        <MudTh>City</MudTh>
+        <MudTh>Phone</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Id">
+            <MudButton Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       Size="Size.Small"
+                       Href="@($"Participant/Edit/{context.Id}")">
+                Edit
+            </MudButton>
+        </MudTd>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+        <MudTd DataLabel="Type">@context.Type</MudTd>
+        <MudTd DataLabel="City">@context.City</MudTd>
+        <MudTd DataLabel="Phone Number">@context.PhoneNumber</MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+    </MudTable>
+}
+else if(Loading)
+{
+    <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+}
+
+

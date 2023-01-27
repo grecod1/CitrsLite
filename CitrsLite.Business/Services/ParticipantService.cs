@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -62,6 +63,17 @@ namespace CitrsLite.Business.Services
             {
                 return new ParticipantFormViewModel();
             }
+        }
+
+        public async Task<IEnumerable<Participant>> GetParticipantsAsync(ParticipantIndexViewModel model)
+        {           
+            var participants = await _data.Participants
+                .GetListAsync(p => model.Type == null || p.Type == model.Type);
+
+            return participants
+                .Where(p => model.Name == null || p.Name.Contains(model.Name))
+                .Where(p => model.City == null || p.City.Contains(model.City))
+                .Where(p => model.Phone == null || p.PhoneNumber.Contains(model.Phone));
         }
 
         public int Create(ParticipantFormViewModel model)
