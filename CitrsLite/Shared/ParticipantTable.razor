@@ -7,14 +7,23 @@
         <MudSpacer />
 
         <MudTextField @bind-Value="search" Placeholder="Search"></MudTextField>
-    </ToolBarContent>    
+    </ToolBarContent>
     <HeaderContent>
+        <MudTh>View</MudTh>
         <MudTh>Name</MudTh>
         <MudTh>Type</MudTh>
         <MudTh>City</MudTh>
         <MudTh>Phone</MudTh>
     </HeaderContent>
     <RowTemplate>
+        <MudTd DataLabel="Id">
+            <MudButton Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       Size="Size.Small"
+                       Href="@($"Participant/Edit/{context.Id}")">
+                Edit
+            </MudButton>
+        </MudTd>
         <MudTd DataLabel="Name">@context.Name</MudTd>
         <MudTd DataLabel="Type">@context.Type</MudTd>
         <MudTd DataLabel="City">@context.City</MudTd>
