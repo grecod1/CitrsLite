@@ -9,12 +9,9 @@ namespace CitrsLite.Pages.Participants
 
         private async Task getParticipants()
         {
-            var task = ParticipantService.GetParticipantsAsync(Model);
-            _loading= true;
-            await Task.Run(() => task);
-            
-            participants = task.Result;            
-
+            _loading = true;
+            participants = await ParticipantService.GetParticipantsAsync(Model);            
+            _loading = false;            
         }
 
         private void reset()
