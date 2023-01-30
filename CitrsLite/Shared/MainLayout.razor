@@ -1,6 +1,6 @@
 ﻿@inherits LayoutComponentBase
 
-<MudThemeProvider  />
+<MudThemeProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
 
@@ -16,7 +16,7 @@
                 <MudNavLink Href="/">C.I.T.R.S Lite</MudNavLink>
             </MudText>
             <MudItem>
-                <MudNavLink Class="" Href="/participant" Match="NavLinkMatch.Prefix">Participant</MudNavLink>
+                <MudNavLink Class="" Href="/participants" Match="NavLinkMatch.Prefix">Participant</MudNavLink>
             </MudItem>
             <MudItem>
                 <MudNavLink Href="/varietyClone/add" Match="NavLinkMatch.Prefix">Variety Clones</MudNavLink>
@@ -24,12 +24,12 @@
         </MudGrid>
 
     </MudAppBar>
-    <MudDrawer Style="@($"background:{Colors.Lime.Lighten4}; color:{Colors.Lime.Darken4}")"
+    <MudDrawer Variant="DrawerVariant.Temporary" Style="@($"background:{Colors.Lime.Lighten4}; color:{Colors.Lime.Darken4}")"
                @bind-Open="@_drawerOpen">
         <MudNavMenu>
             <MudNavLink Href="/" Match="NavLinkMatch.Prefix">Dashboard</MudNavLink>
             <MudNavLink Href="/participant/add" Match="NavLinkMatch.Prefix">Add Participant</MudNavLink>
-            <MudNavLink Href="/participant" Match="NavLinkMatch.Prefix">Participants</MudNavLink>
+            <MudNavLink Href="/participants" Match="NavLinkMatch.Prefix">Participants</MudNavLink>
             <MudNavLink Href="/varietyClone/add" Match="NavLinkMatch.Prefix">Variety Clones</MudNavLink>
             <MudNavGroup Title="Settings" Expanded="true">
                 <MudNavLink Href="/users" Match="NavLinkMatch.Prefix">Users</MudNavLink>
