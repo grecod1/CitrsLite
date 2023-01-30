@@ -38,6 +38,7 @@ builder.Services.AddSingleton<ParticipantService, ParticipantService>(p =>
 builder.Services.AddScoped<VarietyCloneFormViewModel>();
 builder.Services.AddScoped<ParticipantFormViewModel>();
 builder.Services.AddScoped<ParticipantIndexViewModel>();
+builder.Services.AddScoped<ParticipantDetailsViewModel>();
 builder.Services.AddMudServices();
 builder.Services.AddMudBlazorResizeListener();
 builder.Services.AddHttpClient();
