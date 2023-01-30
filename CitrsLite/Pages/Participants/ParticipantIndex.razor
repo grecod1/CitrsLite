@@ -6,46 +6,49 @@
 @inject ParticipantIndexViewModel Model;
 @inject ParticipantService ParticipantService;
 
-<MudContainer MaxWidth="MaxWidth.Small" Class="ma-3">
-    <EditForm Model="Model" OnValidSubmit="getParticipants">
-        <MudCard>
-            <MudCardHeader>
-                <MudText Typo="Typo.h2">Participant Search</MudText>
-            </MudCardHeader>
-            <MudCardContent>
+<div class="d-flex flex-wrap justify-center">
+    <MudContainer MaxWidth="MaxWidth.Small" Class="ma-3">
+        <EditForm Model="Model" OnValidSubmit="getParticipants">
+            <MudCard>
+                <MudCardHeader>
+                    <MudText Typo="Typo.h2">Participant Search</MudText>
+                </MudCardHeader>
+                <MudCardContent>
 
-                <MudTextField Label="Name" @bind-Value="Model.Name" Variant="Variant.Filled" />
-                <MudSelect Label="Type"
-                           T="string"
-                           @bind-Value="Model.Type"
-                           Placeholder="Any"
-                           Variant="Variant.Filled"
-                           Clearable>
-                    @foreach (var partType in Enum.GetValues(typeof(ParticipantType)))
-                    {
-                        <MudSelectItem Value="@partType.ToString().Replace("_", " ")" />
-                    }
-                </MudSelect>
-                <MudTextField Label="Phone" @bind-Value="Model.Phone" Variant="Variant.Filled" />
-                <MudTextField Label="City" @bind-Value="Model.City" Variant="Variant.Filled" />
+                    <MudTextField Label="Name" @bind-Value="Model.Name" Variant="Variant.Filled" />
+                    <MudSelect Label="Type"
+                               T="string"
+                               @bind-Value="Model.Type"
+                               Placeholder="Any"
+                               Variant="Variant.Filled"
+                               Clearable>
+                        @foreach (var partType in Enum.GetValues(typeof(ParticipantType)))
+                        {
+                            <MudSelectItem Value="@partType.ToString().Replace("_", " ")" />
+                        }
+                    </MudSelect>
+                    <MudTextField Label="Phone" @bind-Value="Model.Phone" Variant="Variant.Filled" />
+                    <MudTextField Label="City" @bind-Value="Model.City" Variant="Variant.Filled" />
 
-            </MudCardContent>
-            <MudCardActions Class="gap-3">
-                <MudButton ButtonType="ButtonType.Submit"
-                           Variant="Variant.Filled"
-                           Color="Color.Primary">
-                    Search
-                </MudButton>
-                <MudButton ButtonType="ButtonType.Button"
-                           Variant="Variant.Filled"
-                           Color="Color.Secondary"
-                           OnClick="reset">
-                    Reset
-                </MudButton>
-            </MudCardActions>
-        </MudCard>
-    </EditForm>
-</MudContainer>
-<MudContainer MaxWidth="MaxWidth.Large" Class="ma-3">
-    <ParticipantTable Participants="participants" Loading="@_loading" />
-</MudContainer>
+                </MudCardContent>
+                <MudCardActions Class="gap-3">
+                    <MudButton ButtonType="ButtonType.Submit"
+                               Variant="Variant.Filled"
+                               Color="Color.Primary">
+                        Search
+                    </MudButton>
+                    <MudButton ButtonType="ButtonType.Button"
+                               Variant="Variant.Filled"
+                               Color="Color.Secondary"
+                               OnClick="reset">
+                        Reset
+                    </MudButton>
+                </MudCardActions>
+            </MudCard>
+        </EditForm>
+    </MudContainer>
+    <MudContainer MaxWidth="MaxWidth.Large" Class="ma-3">
+        <ParticipantTable Participants="participants" Loading="@_loading" />
+    </MudContainer>
+</div>
+
