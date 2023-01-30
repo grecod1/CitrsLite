@@ -5,16 +5,18 @@ namespace CitrsLite.Shared
 {
     public partial class ParticipantTable
     {
+        private string? search;
+
         [Parameter]
         public IEnumerable<Participant>? Participants { get; set; }
 
         [Parameter]
         public bool Loading { get; set; } = false;
-
-        private string? search;
+        
 
         private bool filterFunc1(Participant participant) => filterFunc(participant, search);
 
+        
         private bool filterFunc(Participant participant, string searchString)
         {
             if (string.IsNullOrWhiteSpace(searchString))

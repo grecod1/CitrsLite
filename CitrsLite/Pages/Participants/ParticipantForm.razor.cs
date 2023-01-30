@@ -11,39 +11,43 @@ namespace CitrsLite.Pages.Participants
 {
     public partial class ParticipantForm
     {
-        [Parameter]
-        public int? Id { get; set; }
+        string heading = "New Participant";
+
 
         [Inject]
         public ParticipantFormViewModel Model { get; set; }
 
-        string heading;
+
+        protected override async Task OnInitializedAsync() => await setPropertiesAsync();
+
+
+        [Parameter]
+        public int? Id { get; set; }
+
+       
         public async Task PostAysnc(EditContext context)    
         {
             if(Id != null && Id > 0)
             {
-                await participantService.EditAsync(Model);
+                await ParticipantService.EditAsync(Model);
                 Snackbar.Add("Edit Complete", Severity.Success);
                 await setPropertiesAsync();
             }
             else
             {
-                Id = await participantService.CreateAysnc(Model);
+                Id = await ParticipantService.CreateAysnc(Model);
                 Snackbar.Add("Participant Created", Severity.Success);
                 await setPropertiesAsync();
             }
             
         }
 
-
-        protected override async Task OnInitializedAsync() => await setPropertiesAsync();        
-        
-
+                
         private async Task setPropertiesAsync()
         {
             var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
 
-            Model = await participantService.GetFormViewModelAsync(Id);           
+            Model = await ParticipantService.GetFormViewModelAsync(Id);           
             Model.UserName = authState.User.Identity?.Name ?? "Unknown user";
             heading = Id != null ? Model.Name : "New Participant";
         }
