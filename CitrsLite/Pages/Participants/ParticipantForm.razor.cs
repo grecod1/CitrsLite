@@ -17,15 +17,14 @@ namespace CitrsLite.Pages.Participants
         [Inject]
         public ParticipantFormViewModel Model { get; set; }
 
-
-        protected override async Task OnInitializedAsync() => await setPropertiesAsync();
-
+        
+        protected override async Task OnParametersSetAsync() => await setPropertiesAsync();
 
         [Parameter]
-        public int? Id { get; set; }
+        public int? Id { get; set; } = null;
 
        
-        public async Task PostAysnc(EditContext context)    
+        private async Task postAysnc(EditContext context)    
         {
             if(Id != null && Id > 0)
             {

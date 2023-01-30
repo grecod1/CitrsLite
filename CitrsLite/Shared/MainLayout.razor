@@ -24,7 +24,7 @@
         </MudGrid>
 
     </MudAppBar>
-    <MudDrawer Style="@($"background:{Colors.Lime.Lighten4}; color:{Colors.Lime.Darken4}")"
+    <MudDrawer Variant="DrawerVariant.Temporary" Style="@($"background:{Colors.Lime.Lighten4}; color:{Colors.Lime.Darken4}")"
                @bind-Open="@_drawerOpen">
         <MudNavMenu>
             <MudNavLink Href="/" Match="NavLinkMatch.Prefix">Dashboard</MudNavLink>

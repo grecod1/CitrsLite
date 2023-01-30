@@ -10,7 +10,7 @@
 @inject NavigationManager NavigationManager;
 @inject ISnackbar Snackbar;
 
-<EditForm Model=@Model OnValidSubmit="@PostAysnc">
+<EditForm Model=@Model OnValidSubmit="@postAysnc">
     <MudContainer MaxWidth="MaxWidth.Large">
         <MudCard Class="pa-4">
             <MudCardContent>
@@ -81,7 +81,7 @@
                                       Variant="Variant.Outlined"
                                       Required="true"
                                       For="(() => Model.State)" />
-                    </MudItem>                    
+                    </MudItem>
                 </MudGrid>
             </MudCardContent>
             <MudCardActions>
