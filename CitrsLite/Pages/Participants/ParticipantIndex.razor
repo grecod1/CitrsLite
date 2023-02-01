@@ -5,6 +5,7 @@
 @using CitrsLite.Data.Models;
 @inject ParticipantIndexViewModel Model;
 @inject ParticipantService ParticipantService;
+@inject IJSRuntime JS;
 
 <div class="d-flex flex-wrap justify-center">
     <MudContainer MaxWidth="MaxWidth.Small" Class="ma-3">
@@ -46,7 +47,8 @@
                     <MudButton ButtonType="ButtonType.Button"
                                Variant="Variant.Filled"
                                Color="Color.Info"
-                               Href="@($"/participant/excel?={Model}")">
+                               OnClick="getExcel"
+                               Target="_blank">
                         Excel
                     </MudButton>
                 </MudCardActions>

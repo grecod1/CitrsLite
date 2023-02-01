@@ -1,4 +1,5 @@
 ﻿using CitrsLite.Data.Models;
+using Microsoft.JSInterop;
 
 namespace CitrsLite.Pages.Participants
 {
@@ -20,6 +21,13 @@ namespace CitrsLite.Pages.Participants
             Model.Type = null;
             Model.City = null;
             Model.Phone = null;
+        }
+
+        private async Task getExcel()
+        {
+            var fileName = "participants.xlxs";
+            var url = $"/participant/excel?Name={Model.Name}&Type={Model.Type}&City={Model.City}";            
+            await JS.InvokeVoidAsync("triggerFileDownload",fileName ,url);
         }
 
     }

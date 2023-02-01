@@ -100,6 +100,7 @@ namespace CitrsLite.Business.Services
                     row++;
                 }
 
+                sheet.Cells["A:C"].AutoFitColumns();
                 return await package.GetAsByteArrayAsync();
             }
         }
