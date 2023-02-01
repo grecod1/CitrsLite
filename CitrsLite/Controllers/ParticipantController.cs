@@ -1,23 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CitrsLite.Business.Services;
+using CitrsLite.Business.ViewModels.ParticipantViewModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CitrsLite.Controllers
 {
     public class ParticipantController : Controller
-    {
-        public IActionResult Index()
+    {   
+        private ParticipantService _participantService;
+        public ParticipantController(ParticipantService participantService)
         {
-            return View();
+            _participantService = participantService;
         }
 
         [HttpGet]
-        public IActionResult Excel()
+        public async Task<IActionResult> Excel(ParticipantIndexViewModel model)
         {
-            byte[] excelData = new byte[8];
+            byte[] excelData = await _participantService.GetExcelAsync(model);
 
             var contentType = 
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-
-
 
             return File(excelData, contentType, "report.xlxs");
         }
