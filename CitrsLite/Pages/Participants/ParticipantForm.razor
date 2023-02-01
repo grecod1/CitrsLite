@@ -84,8 +84,18 @@
                     </MudItem>
                 </MudGrid>
             </MudCardContent>
-            <MudCardActions>
+            <MudDivider></MudDivider>
+            <MudCardActions Class="gap-3">
                 <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Success">Save</MudButton>
+                @if (Id != null)
+                {
+                    <MudButton ButtonType="ButtonType.Button"
+                           Variant="Variant.Filled"
+                           Color="Color.Primary"
+                           Href=@($"/Participant/Details/{Id}")>
+                        Details
+                    </MudButton>
+                }
             </MudCardActions>
         </MudCard>
     </MudContainer>

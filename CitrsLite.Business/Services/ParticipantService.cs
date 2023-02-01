@@ -19,10 +19,10 @@ namespace CitrsLite.Business.Services
 
         public ParticipantService(string connectionString)
         {
-            _data= new UnitOfWork(connectionString);
+            _data = new UnitOfWork(connectionString);
         }
 
-        
+
         public Participant BuildParticipant(ParticipantFormViewModel formModel)
         {
             return new Participant()
@@ -43,7 +43,7 @@ namespace CitrsLite.Business.Services
 
         public async Task<ParticipantFormViewModel> GetFormViewModelAsync(int? id = null)
         {
-            if(id != null)
+            if (id != null)
             {
                 var participant = await _data.Participants.GetFirstAsync(x => x.Id == id);
 
@@ -67,8 +67,23 @@ namespace CitrsLite.Business.Services
             }
         }
 
+        public async Task<ParticipantDetailsViewModel> DetailsAsync(int id)
+        {
+            var participant = await _data.Participants.GetFirstAsync(p => p.Id == id);
+
+            return new ParticipantDetailsViewModel()
+            {
+                Id = participant.Id,
+                Name = participant.Name,
+                Type = participant.Type,
+                City = participant.City,
+                PhoneNumber = participant.PhoneNumber,
+                Description = participant.Description
+            };
+        }
+
         public async Task<IEnumerable<Participant>> GetParticipantsAsync(ParticipantIndexViewModel model)
-        {            
+        {
             var participants = await _data.Participants
                 .GetListAsync(p => model.Type == null || p.Type == model.Type);
 
@@ -92,7 +107,7 @@ namespace CitrsLite.Business.Services
 
                 var row = 2;
 
-                foreach(var participant in participants)
+                foreach (var participant in participants)
                 {
                     sheet.Cells[$"A{row}"].Value = participant.Name;
                     sheet.Cells[$"B{row}"].Value = participant.Type;
@@ -113,9 +128,9 @@ namespace CitrsLite.Business.Services
             _data.SaveChanges();
 
             return participant.Id;
-            
+
         }
-        
+
         public async Task<int> CreateAysnc(ParticipantFormViewModel model)
         {
             Participant participant = BuildParticipant(model);
@@ -137,7 +152,7 @@ namespace CitrsLite.Business.Services
             participant.Description = model.Description;
             participant.PhoneNumber = model.PhoneNumber;
             participant.Address = model.Address;
-            participant.City = model.City;                
+            participant.City = model.City;
             participant.State = model.State;
             participant.ModifiedBy = model.UserName;
             participant.ModificationDate = DateTime.Now;

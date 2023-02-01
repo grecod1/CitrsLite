@@ -1,18 +1,24 @@
 ﻿@page "/participant/details/{Id:int}"
+@using CitrsLite.Business.Services;
 @using CitrsLite.Business.ViewModels.ParticipantViewModels;
-
-<h3>Participant Details</h3>
-<MudContainer MaxWidth="MaxWidth.Small" Class="ma-3">
-    <MudCard>
+@inject ParticipantService ParticipantService;
+<MudContainer MaxWidth="MaxWidth.Small" Class="ma-3" >
+    <MudCard Elevation="3">
         <MudCardHeader>
-            <MudText Typo="Typo.h3">@Model?.Name</MudText>
+            <MudText Typo="Typo.h3">@Model.Name</MudText>
         </MudCardHeader>
         <MudCardContent>
             <MudList>
                 <MudListSubheader>Information</MudListSubheader>
-                <MudListItem><strong>Type: </strong> @(Model?.Name)</MudListItem>
+                <MudListItem><strong>Type: </strong> @Model.Type</MudListItem>
+                <MudListItem><strong>City: </strong> @Model.City</MudListItem>
+                <MudListItem><strong>Phone: </strong> @Model.PhoneNumber</MudListItem>
             </MudList>
+            <MudText Typo="Typo.body1">
+                @Model.Description
+            </MudText>
         </MudCardContent>
+        <MudDivider></MudDivider>
         <MudCardActions>
             <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="@($"Participant/Edit/{Id}")" >Edit</MudButton>
         </MudCardActions>
@@ -21,8 +27,10 @@
 @code {
 
     [Inject]
-    public ParticipantDetailsViewModel Model { get; set; }
+    public ParticipantDetailsViewModel Model { get; set; }    
 
     [Parameter]
     public int Id { get; set; }
+
+    protected override async Task OnInitializedAsync() => Model = await ParticipantService.DetailsAsync(Id);
 }
