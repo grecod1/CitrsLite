@@ -42,7 +42,6 @@ builder.Services.AddScoped<ParticipantDetailsViewModel>();
 builder.Services.AddMudServices();
 builder.Services.AddMudBlazorResizeListener();
 builder.Services.AddHttpClient();
-builder.Services.AddControllers();
 
 
 var app = builder.Build();
