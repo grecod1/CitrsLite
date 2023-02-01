@@ -61,7 +61,7 @@ if (app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.MapControllerRoute("default", "{controller=Home}/{action=Index}");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapFallbackToPage("/_Host");

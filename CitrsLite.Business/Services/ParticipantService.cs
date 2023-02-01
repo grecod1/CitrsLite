@@ -2,10 +2,12 @@
 using CitrsLite.Business.ViewModels.ParticipantViewModels;
 using CitrsLite.Data.Models;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -74,6 +76,33 @@ namespace CitrsLite.Business.Services
                 .Where(p => model.Name == null || p.Name.Contains(model.Name))
                 .Where(p => model.City == null || p.City.Contains(model.City))
                 .Where(p => model.Phone == null || p.PhoneNumber.Contains(model.Phone));
+        }
+
+        public async Task<byte[]> GetExcelAsync(ParticipantIndexViewModel model)
+        {
+            var participants = await GetParticipantsAsync(model);
+
+            using (ExcelPackage package = new ExcelPackage())
+            {
+                ExcelWorksheet sheet = package.Workbook.Worksheets.Add("Participants");
+
+                sheet.Cells["A1"].Value = "Name";
+                sheet.Cells["B1"].Value = "Type";
+                sheet.Cells["C1"].Value = "City";
+
+                var row = 2;
+
+                foreach(var participant in participants)
+                {
+                    sheet.Cells[$"A{row}"].Value = participant.Name;
+                    sheet.Cells[$"B{row}"].Value = participant.Type;
+                    sheet.Cells[$"C{row}"].Value = participant.City;
+                    row++;
+                }
+
+                sheet.Cells["A:C"].AutoFitColumns();
+                return await package.GetAsByteArrayAsync();
+            }
         }
 
         public int Create(ParticipantFormViewModel model)

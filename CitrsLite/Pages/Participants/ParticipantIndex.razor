@@ -5,6 +5,7 @@
 @using CitrsLite.Data.Models;
 @inject ParticipantIndexViewModel Model;
 @inject ParticipantService ParticipantService;
+@inject IJSRuntime JS;
 
 <div class="d-flex flex-wrap justify-center">
     <MudContainer MaxWidth="MaxWidth.Small" Class="ma-3">
@@ -43,12 +44,19 @@
                                OnClick="reset">
                         Reset
                     </MudButton>
+                    <MudButton ButtonType="ButtonType.Button"
+                               Variant="Variant.Filled"
+                               Color="Color.Info"
+                               OnClick="getExcel"
+                               Target="_blank">
+                        Excel
+                    </MudButton>
                 </MudCardActions>
             </MudCard>
         </EditForm>
     </MudContainer>
     <MudContainer MaxWidth="MaxWidth.Large" Class="ma-3">
-        <ParticipantTable Participants="participants" Loading="@_loading" />
+        <ParticipantTable Participants="participants" Loading="@loading" />
     </MudContainer>
 </div>
 
