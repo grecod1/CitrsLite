@@ -1,5 +1,28 @@
-﻿<h3>Participant Details</h3>
+﻿@page "/participant/details/{Id:int}"
+@using CitrsLite.Business.ViewModels.ParticipantViewModels;
 
+<h3>Participant Details</h3>
+<MudContainer MaxWidth="MaxWidth.Small" Class="ma-3">
+    <MudCard>
+        <MudCardHeader>
+            <MudText Typo="Typo.h3">@Model?.Name</MudText>
+        </MudCardHeader>
+        <MudCardContent>
+            <MudList>
+                <MudListSubheader>Information</MudListSubheader>
+                <MudListItem><strong>Type: </strong> @(Model?.Name)</MudListItem>
+            </MudList>
+        </MudCardContent>
+        <MudCardActions>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="@($"Participant/Edit/{Id}")" >Edit</MudButton>
+        </MudCardActions>
+    </MudCard>
+</MudContainer>
 @code {
 
+    [Inject]
+    public ParticipantDetailsViewModel Model { get; set; }
+
+    [Parameter]
+    public int Id { get; set; }
 }
