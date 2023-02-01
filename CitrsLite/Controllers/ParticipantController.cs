@@ -20,7 +20,7 @@ namespace CitrsLite.Controllers
             var contentType = 
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
-            return File(excelData, contentType, "report.xlxs");
+            return File(excelData, contentType, "report.xlsx");
         }
     }
 }

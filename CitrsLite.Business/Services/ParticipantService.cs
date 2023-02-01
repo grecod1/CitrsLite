@@ -97,6 +97,7 @@ namespace CitrsLite.Business.Services
                     sheet.Cells[$"A{row}"].Value = participant.Name;
                     sheet.Cells[$"B{row}"].Value = participant.Type;
                     sheet.Cells[$"C{row}"].Value = participant.City;
+                    row++;
                 }
 
                 return await package.GetAsByteArrayAsync();
