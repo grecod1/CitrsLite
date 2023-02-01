@@ -42,6 +42,7 @@ builder.Services.AddScoped<ParticipantDetailsViewModel>();
 builder.Services.AddMudServices();
 builder.Services.AddMudBlazorResizeListener();
 builder.Services.AddHttpClient();
+builder.Services.AddControllers();
 
 
 var app = builder.Build();
@@ -61,7 +62,7 @@ if (app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.MapControllerRoute("default", "{controller=Home}/{action=Index}");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapFallbackToPage("/_Host");
