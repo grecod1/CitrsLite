@@ -25,7 +25,7 @@ namespace CitrsLite.Pages.Participants
         private async Task generateChartData()
         {
             var participants = await ParticipantService
-                .GetParticipantsAsync(new ParticipantIndexViewModel());
+                .GetParticipantsAsync();
 
             labels = participants.Select(p => p.Type).Distinct().ToArray();
 

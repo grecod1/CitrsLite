@@ -82,15 +82,15 @@ namespace CitrsLite.Business.Services
             };
         }
 
-        public async Task<IEnumerable<Participant>> GetParticipantsAsync(ParticipantIndexViewModel model)
+        public async Task<IEnumerable<Participant>> GetParticipantsAsync(ParticipantIndexViewModel? model = null)
         {
             var participants = await _data.Participants
-                .GetListAsync(p => model.Type == null || p.Type == model.Type);
+                .GetListAsync(p => model == null|| model.Type == null || p.Type == model.Type);
 
             return participants
-                .Where(p => model.Name == null || p.Name.Contains(model.Name))
-                .Where(p => model.City == null || p.City.Contains(model.City))
-                .Where(p => model.Phone == null || p.PhoneNumber.Contains(model.Phone));
+                .Where(p => model?.Name == null || p.Name.Contains(model.Name))
+                .Where(p => model?.City == null || p.City.Contains(model.City))
+                .Where(p => model?.Phone == null || p.PhoneNumber.Contains(model.Phone));
         }
 
         public async Task<byte[]> GetExcelAsync(ParticipantIndexViewModel model)
