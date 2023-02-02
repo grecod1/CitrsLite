@@ -4,67 +4,47 @@
 @inject ParticipantService ParticipantService;
 <div class="d-flex flex-wrap justify-center">
     <MudContainer MaxWidth="MaxWidth.Small" Class="ma-3">
-        <MudCard Elevation="3">
-            <MudCardHeader>
-                <MudText Typo="Typo.h3">@Model?.Name</MudText>
-            </MudCardHeader>
-            <MudCardContent>
-                <MudText Typo="Typo.subtitle1">Information</MudText>
-                <MudList>
-                    <MudListItem><strong>Type: </strong> @Model?.Type</MudListItem>
-                    <MudDivider></MudDivider>
-                    <MudListItem><strong>City: </strong> @Model?.City</MudListItem>
-                    <MudDivider></MudDivider>
-                    <MudListItem><strong>Phone: </strong> @Model?.PhoneNumber</MudListItem>
-                    <MudDivider></MudDivider>
-                </MudList>
-                <MudText Typo="Typo.subtitle1">Description</MudText>
-                <MudText Typo="Typo.body1" Class="pa-3">
-                    @Model?.Description
-                </MudText>
-            </MudCardContent>
-            <MudDivider></MudDivider>
-            <MudCardActions Class="gap-3">
-                <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="@($"Participant/Edit/{Id}")">Edit</MudButton>
-            </MudCardActions>
-        </MudCard>
+        @if(Model?.Name != null)
+        {
+            <MudCard Elevation="3">
+                <MudCardHeader>
+                    <MudText Typo="Typo.h3">@Model?.Name</MudText>
+                </MudCardHeader>
+                <MudCardContent>
+                    <MudText Typo="Typo.subtitle1">Information</MudText>
+                    <MudList>
+                        <MudListItem><strong>Type: </strong> @Model?.Type</MudListItem>
+                        <MudDivider></MudDivider>
+                        <MudListItem><strong>City: </strong> @Model?.City</MudListItem>
+                        <MudDivider></MudDivider>
+                        <MudListItem><strong>Phone: </strong> @Model?.PhoneNumber</MudListItem>
+                        <MudDivider></MudDivider>
+                    </MudList>
+                    <MudText Typo="Typo.subtitle1">Description</MudText>
+                    <MudText Typo="Typo.body1" Class="pa-3">
+                        @Model?.Description
+                    </MudText>
+                </MudCardContent>
+                <MudDivider></MudDivider>
+                <MudCardActions Class="gap-3">
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="@($"Participant/Edit/{Id}")">Edit</MudButton>
+                </MudCardActions>
+            </MudCard>
+
+        }
+        else
+        {
+            <MudSkeleton />
+            <MudSkeleton SkeletonType="SkeletonType.Text" />
+            <MudSkeleton SkeletonType="SkeletonType.Text" />
+            <MudSkeleton SkeletonType="SkeletonType.Text" />
+            <MudSkeleton SkeletonType="SkeletonType.Rectangle" Height="25rem"/>
+            <MudDivider Class="my-4"></MudDivider>
+            <MudSkeleton SkeletonType="SkeletonType.Rectangle" Width="7rem" Height="3rem"/>
+        }
+
     </MudContainer>
     <MudContainer MaxWidth="MaxWidth.Small" Class="ma-3">
         <Chart Labels="labels" Data="chartData"></Chart>        
     </MudContainer>
 </div>
-
-@code {
-    [Inject]
-    public ParticipantDetailsViewModel? Model { get; set; }
-
-    [Parameter]
-    public int Id { get; set; }
-
-    private string[] labels = new string[]{"One", "Seven"};
-    private double[] chartData = new double[] { 1, 7 };
-
-    protected override async Task OnInitializedAsync()
-    {
-        Model = await ParticipantService.DetailsAsync(Id);
-        await generateChartData();
-    }
-
-
-    private async Task generateChartData()
-    {
-        var participants = await ParticipantService
-            .GetParticipantsAsync(new ParticipantIndexViewModel());
-
-        labels = participants.Select(p => p.Type).Distinct().ToArray();
-
-        IList<double> counts = new List<double>();
-        foreach(string label in labels)
-        {
-            counts.Add(participants.Count(p => p.Type == label));
-        }
-
-        chartData = counts.ToArray();
-    }
-
-}

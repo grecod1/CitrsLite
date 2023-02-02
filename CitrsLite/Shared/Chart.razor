@@ -1,7 +1,15 @@
 ﻿
 <MudPaper Elevation="3" Class="pa-3">
-    <MudText Typo="Typo.h3">Chart</MudText>
-    <MudChart ChartType="ChartType.Pie" InputData="Data" InputLabels="Labels" />
+    @if(Labels != null && Data != null)
+    {
+        <MudText Typo="Typo.h3">Chart</MudText>
+        <MudChart ChartType="ChartType.Pie" InputData="Data" InputLabels="Labels" />
+    }
+    else
+    {
+        <MudSkeleton SkeletonType="SkeletonType.Circle" Height="30rem" />
+    }
+
 </MudPaper>
 
 @code {
