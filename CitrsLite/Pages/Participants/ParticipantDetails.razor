@@ -35,9 +35,8 @@
 </div>
 
 @code {
-
     [Inject]
-    public ParticipantDetailsViewModel Model { get; set; }   
+    public ParticipantDetailsViewModel Model { get; set; } = new ParticipantDetailsViewModel();
 
     [Parameter]
     public int Id { get; set; }
