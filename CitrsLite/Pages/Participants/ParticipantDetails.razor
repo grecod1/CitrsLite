@@ -13,13 +13,14 @@
                 <MudListItem><strong>Type: </strong> @Model.Type</MudListItem>
                 <MudListItem><strong>City: </strong> @Model.City</MudListItem>
                 <MudListItem><strong>Phone: </strong> @Model.PhoneNumber</MudListItem>
-            </MudList>
-            <MudText Typo="Typo.body1">
+            </MudList>            
+            <MudText Typo="Typo.subtitle1">Description</MudText>
+            <MudText Typo="Typo.body1" Class="pa-3">
                 @Model.Description
             </MudText>
         </MudCardContent>
         <MudDivider></MudDivider>
-        <MudCardActions>
+        <MudCardActions Class="gap-3">
             <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="@($"Participant/Edit/{Id}")" >Edit</MudButton>
         </MudCardActions>
     </MudCard>
