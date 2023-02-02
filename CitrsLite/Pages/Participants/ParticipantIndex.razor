@@ -25,7 +25,7 @@
                                Clearable>
                         @foreach (var partType in Enum.GetValues(typeof(ParticipantType)))
                         {
-                            <MudSelectItem Value="@partType.ToString().Replace("_", " ")" />
+                            <MudSelectItem Value="@partType!.ToString()!.Replace("_", " ")" />
                         }
                     </MudSelect>
                     <MudTextField Label="Phone" @bind-Value="Model.Phone" Variant="Variant.Filled" />
