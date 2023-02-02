@@ -23,26 +23,33 @@ builder.Services.AddAuthorization(options =>
     options.FallbackPolicy = options.DefaultPolicy;
 });
 
+// Native to Blazor
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+builder.Services.AddHttpClient();
+
+// Mud Blazor
+builder.Services.AddMudServices();
+builder.Services.AddMudBlazorResizeListener();
+
+
+// Service Classes
 builder.Services.AddSingleton<WeatherForecastService>();
 
 builder.Services.AddSingleton<IUnitOfWork, UnitOfWork>(u => 
-    new UnitOfWork(connectionString: builder.Configuration.GetConnectionString("CitrsDatabase")));
-builder.Services.AddSingleton<ParticipantService, ParticipantService>(p => 
-    new ParticipantService(connectionString: builder.Configuration.GetConnectionString("CitrsDatabase")));
+    new UnitOfWork(connectionString: builder.Configuration!.GetConnectionString("CitrsDatabase")!));
 
+builder.Services.AddSingleton<ParticipantService, ParticipantService>(p => 
+    new ParticipantService(connectionString: builder.Configuration!.GetConnectionString("CitrsDatabase")!));
+
+// View Models
 builder.Services.AddScoped<VarietyCloneFormViewModel>();
 builder.Services.AddScoped<ParticipantFormViewModel>();
 builder.Services.AddScoped<ParticipantIndexViewModel>();
 builder.Services.AddScoped<ParticipantDetailsViewModel>();
-builder.Services.AddMudServices();
-builder.Services.AddMudBlazorResizeListener();
-builder.Services.AddHttpClient();
-
 
 var app = builder.Build();
 

@@ -1,28 +1,50 @@
 ﻿@page "/participant/details/{Id:int}"
+@using CitrsLite.Business.Services;
 @using CitrsLite.Business.ViewModels.ParticipantViewModels;
+@inject ParticipantService ParticipantService;
+<div class="d-flex flex-wrap justify-center">
+    <MudContainer MaxWidth="MaxWidth.Small" Class="ma-3">
+        @if(Model?.Name != null)
+        {
+            <MudCard Elevation="3">
+                <MudCardHeader>
+                    <MudText Typo="Typo.h3">@Model?.Name</MudText>
+                </MudCardHeader>
+                <MudCardContent>
+                    <MudText Typo="Typo.subtitle1">Information</MudText>
+                    <MudList>
+                        <MudListItem><strong>Type: </strong> @Model?.Type</MudListItem>
+                        <MudDivider></MudDivider>
+                        <MudListItem><strong>City: </strong> @Model?.City</MudListItem>
+                        <MudDivider></MudDivider>
+                        <MudListItem><strong>Phone: </strong> @Model?.PhoneNumber</MudListItem>
+                        <MudDivider></MudDivider>
+                    </MudList>
+                    <MudText Typo="Typo.subtitle1">Description</MudText>
+                    <MudText Typo="Typo.body1" Class="pa-3">
+                        @Model?.Description
+                    </MudText>
+                </MudCardContent>
+                <MudDivider></MudDivider>
+                <MudCardActions Class="gap-3">
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="@($"Participant/Edit/{Id}")">Edit</MudButton>
+                </MudCardActions>
+            </MudCard>
 
-<h3>Participant Details</h3>
-<MudContainer MaxWidth="MaxWidth.Small" Class="ma-3">
-    <MudCard>
-        <MudCardHeader>
-            <MudText Typo="Typo.h3">@Model?.Name</MudText>
-        </MudCardHeader>
-        <MudCardContent>
-            <MudList>
-                <MudListSubheader>Information</MudListSubheader>
-                <MudListItem><strong>Type: </strong> @(Model?.Name)</MudListItem>
-            </MudList>
-        </MudCardContent>
-        <MudCardActions>
-            <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="@($"Participant/Edit/{Id}")" >Edit</MudButton>
-        </MudCardActions>
-    </MudCard>
-</MudContainer>
-@code {
+        }
+        else
+        {
+            <MudSkeleton />
+            <MudSkeleton SkeletonType="SkeletonType.Text" />
+            <MudSkeleton SkeletonType="SkeletonType.Text" />
+            <MudSkeleton SkeletonType="SkeletonType.Text" />
+            <MudSkeleton SkeletonType="SkeletonType.Rectangle" Height="25rem"/>
+            <MudDivider Class="my-4"></MudDivider>
+            <MudSkeleton SkeletonType="SkeletonType.Rectangle" Width="7rem" Height="3rem"/>
+        }
 
-    [Inject]
-    public ParticipantDetailsViewModel Model { get; set; }
-
-    [Parameter]
-    public int Id { get; set; }
-}
+    </MudContainer>
+    <MudContainer MaxWidth="MaxWidth.Small" Class="ma-3">
+        <Chart Labels="labels" Data="chartData"></Chart>        
+    </MudContainer>
+</div>

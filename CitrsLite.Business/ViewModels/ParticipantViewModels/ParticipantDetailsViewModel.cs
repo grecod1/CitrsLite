@@ -13,5 +13,8 @@ namespace CitrsLite.Business.ViewModels.ParticipantViewModels
         public string? Name { get; set; }
         public string? City { get; set; }
         public string? PhoneNumber { get; set; }
+        public string? Description { get; set; }
+
+
     }
 }
