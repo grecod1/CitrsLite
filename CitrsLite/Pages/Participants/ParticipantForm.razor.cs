@@ -15,7 +15,7 @@ namespace CitrsLite.Pages.Participants
 
 
         [Inject]
-        public ParticipantFormViewModel Model { get; set; }
+        public ParticipantFormViewModel? Model { get; set; }
 
         
         protected override async Task OnParametersSetAsync() => await setPropertiesAsync();
