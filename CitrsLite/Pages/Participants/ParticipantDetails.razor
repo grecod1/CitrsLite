@@ -6,21 +6,21 @@
     <MudContainer MaxWidth="MaxWidth.Small" Class="ma-3">
         <MudCard Elevation="3">
             <MudCardHeader>
-                <MudText Typo="Typo.h3">@Model.Name</MudText>
+                <MudText Typo="Typo.h3">@Model?.Name</MudText>
             </MudCardHeader>
             <MudCardContent>
                 <MudText Typo="Typo.subtitle1">Information</MudText>
                 <MudList>
-                    <MudListItem><strong>Type: </strong> @Model.Type</MudListItem>
+                    <MudListItem><strong>Type: </strong> @Model?.Type</MudListItem>
                     <MudDivider></MudDivider>
-                    <MudListItem><strong>City: </strong> @Model.City</MudListItem>
+                    <MudListItem><strong>City: </strong> @Model?.City</MudListItem>
                     <MudDivider></MudDivider>
-                    <MudListItem><strong>Phone: </strong> @Model.PhoneNumber</MudListItem>
+                    <MudListItem><strong>Phone: </strong> @Model?.PhoneNumber</MudListItem>
                     <MudDivider></MudDivider>
                 </MudList>
                 <MudText Typo="Typo.subtitle1">Description</MudText>
                 <MudText Typo="Typo.body1" Class="pa-3">
-                    @Model.Description
+                    @Model?.Description
                 </MudText>
             </MudCardContent>
             <MudDivider></MudDivider>
@@ -30,16 +30,41 @@
         </MudCard>
     </MudContainer>
     <MudContainer MaxWidth="MaxWidth.Small" Class="ma-3">
-        <Chart Labels="@(new string[]{"One", "Seven"})" Data="@(new double[]{1, 7})"></Chart>
+        <Chart Labels="labels" Data="chartData"></Chart>        
     </MudContainer>
 </div>
 
 @code {
     [Inject]
-    public ParticipantDetailsViewModel Model { get; set; } = new ParticipantDetailsViewModel();
+    public ParticipantDetailsViewModel? Model { get; set; }
 
     [Parameter]
     public int Id { get; set; }
 
-    protected override async Task OnInitializedAsync() => Model = await ParticipantService.DetailsAsync(Id);
+    private string[] labels = new string[]{"One", "Seven"};
+    private double[] chartData = new double[] { 1, 7 };
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model = await ParticipantService.DetailsAsync(Id);
+        await generateChartData();
+    }
+
+
+    private async Task generateChartData()
+    {
+        var participants = await ParticipantService
+            .GetParticipantsAsync(new ParticipantIndexViewModel());
+
+        labels = participants.Select(p => p.Type).Distinct().ToArray();
+
+        IList<double> counts = new List<double>();
+        foreach(string label in labels)
+        {
+            counts.Add(participants.Count(p => p.Type == label));
+        }
+
+        chartData = counts.ToArray();
+    }
+
 }
