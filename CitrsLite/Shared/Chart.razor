@@ -1,0 +1,14 @@
+﻿
+<MudPaper Elevation="3" Class="pa-3">
+    <MudText Typo="Typo.h3">Chart</MudText>
+    <MudChart ChartType="ChartType.Pie" InputData="Data" InputLabels="Labels" />
+</MudPaper>
+
+@code {
+    
+    [Parameter]
+    public string[] Labels { get; set; }
+
+    [Parameter]
+    public double[] Data { get; set; }
+}

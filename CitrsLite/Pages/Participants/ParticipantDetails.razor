@@ -2,29 +2,38 @@
 @using CitrsLite.Business.Services;
 @using CitrsLite.Business.ViewModels.ParticipantViewModels;
 @inject ParticipantService ParticipantService;
-<MudContainer MaxWidth="MaxWidth.Small" Class="ma-3" >
-    <MudCard Elevation="3">
-        <MudCardHeader>
-            <MudText Typo="Typo.h3">@Model.Name</MudText>
-        </MudCardHeader>
-        <MudCardContent>
-            <MudList>
-                <MudListSubheader>Information</MudListSubheader>
-                <MudListItem><strong>Type: </strong> @Model.Type</MudListItem>
-                <MudListItem><strong>City: </strong> @Model.City</MudListItem>
-                <MudListItem><strong>Phone: </strong> @Model.PhoneNumber</MudListItem>
-            </MudList>            
-            <MudText Typo="Typo.subtitle1">Description</MudText>
-            <MudText Typo="Typo.body1" Class="pa-3">
-                @Model.Description
-            </MudText>
-        </MudCardContent>
-        <MudDivider></MudDivider>
-        <MudCardActions Class="gap-3">
-            <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="@($"Participant/Edit/{Id}")" >Edit</MudButton>
-        </MudCardActions>
-    </MudCard>
-</MudContainer>
+<div class="d-flex flex-wrap justify-center">
+    <MudContainer MaxWidth="MaxWidth.Small" Class="ma-3">
+        <MudCard Elevation="3">
+            <MudCardHeader>
+                <MudText Typo="Typo.h3">@Model.Name</MudText>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudText Typo="Typo.subtitle1">Information</MudText>
+                <MudList>
+                    <MudListItem><strong>Type: </strong> @Model.Type</MudListItem>
+                    <MudDivider></MudDivider>
+                    <MudListItem><strong>City: </strong> @Model.City</MudListItem>
+                    <MudDivider></MudDivider>
+                    <MudListItem><strong>Phone: </strong> @Model.PhoneNumber</MudListItem>
+                    <MudDivider></MudDivider>
+                </MudList>
+                <MudText Typo="Typo.subtitle1">Description</MudText>
+                <MudText Typo="Typo.body1" Class="pa-3">
+                    @Model.Description
+                </MudText>
+            </MudCardContent>
+            <MudDivider></MudDivider>
+            <MudCardActions Class="gap-3">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="@($"Participant/Edit/{Id}")">Edit</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </MudContainer>
+    <MudContainer MaxWidth="MaxWidth.Small" Class="ma-3">
+        <Chart Labels="@(new string[]{"One", "Seven"})" Data="@(new double[]{1, 7})"></Chart>
+    </MudContainer>
+</div>
+
 @code {
 
     [Inject]
