@@ -3,6 +3,7 @@ using CitrsLite.Business.ViewModels.ParticipantViewModels;
 using CitrsLite.Data.Models;
 using iText.Html2pdf;
 using iText.IO.Source;
+using iText.Kernel.Pdf;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using OfficeOpenXml;
@@ -138,16 +139,18 @@ namespace CitrsLite.Business.Services
 
             templateString.Replace("(Name)", participant.Name);
             templateString.Replace("(Type)", participant.Type);
-            templateString.Replace("(Description)", participant.Description);
+            templateString.Replace("(Description)", participant.Description);            
 
+            
 
-            using (MemoryStream stream = new MemoryStream())
-            {
-                HtmlConverter.ConvertToPdf(templateString, stream);
+            using var stream = new MemoryStream();
 
-                return stream.ToArray();
+            ConverterProperties converterProperties = new ConverterProperties();            
 
-            }
+            HtmlConverter.ConvertToPdf(templateString, stream, converterProperties);
+
+            return stream.ToArray();
+            
         }
 
         public async Task<int> CreateAysnc(ParticipantFormViewModel model)
