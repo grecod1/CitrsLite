@@ -7,7 +7,7 @@
 @inject ParticipantService ParticipantService;
 @inject IJSRuntime JS;
 
-<div class="d-flex flex-wrap">
+<div class="justify-center d-flex flex-wrap">
     <MudContainer MaxWidth="MaxWidth.Small" Class="ma-3">
         <EditForm Model="Model" OnValidSubmit="getParticipants">
             <MudCard Elevation="3">
@@ -39,7 +39,7 @@
                                Color="Color.Primary">
                         Search
                     </MudButton>
-                    <MudButton ButtonType="ButtonType.Button"%
+                    <MudButton ButtonType="ButtonType.Button"
                                Variant="Variant.Filled"
                                Color="Color.Secondary"
                                EndIcon="@Icons.Material.Filled.Clear"
@@ -48,8 +48,7 @@
                     </MudButton>
                     <MudButton ButtonType="ButtonType.Button"
                                Variant="Variant.Filled"
-                               Color="Color.Info"
-                               EndIcon="@Icons.Material.Filled.GridOn"
+                               Color="Color.Info"                               
                                OnClick="getExcel">
                         Excel
                     </MudButton>                            
