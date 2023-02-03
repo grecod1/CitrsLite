@@ -1,4 +1,6 @@
-﻿using CitrsLite.Data.Models;
+﻿using CitrsLite.Business.ViewModels.ParticipantViewModels;
+using CitrsLite.Data.Models;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
 namespace CitrsLite.Pages.Participants
