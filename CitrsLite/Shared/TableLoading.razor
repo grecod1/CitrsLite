@@ -1,0 +1,32 @@
+﻿
+<MudSimpleTable>
+    <thead>
+        <tr>
+            @for (int x = 1; x <= ColumnAmount; x++)
+            {
+                <th><MudSkeleton SkeletonType="SkeletonType.Rectangle" Height="40px"></MudSkeleton></th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @for (int x = 1; x <= RowAmount; x++)
+        {
+            <tr>
+                @for (int xx = 1; xx <= ColumnAmount; xx++)
+                {
+                    <td><MudSkeleton SkeletonType="SkeletonType.Rectangle"></MudSkeleton></td>
+                }
+            </tr>
+        }
+
+    </tbody>
+</MudSimpleTable>
+
+@code {
+    
+    [Parameter]
+    public int ColumnAmount { get; set; }
+    
+    [Parameter]
+    public int RowAmount { get; set; } = 5;
+}

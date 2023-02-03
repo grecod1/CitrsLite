@@ -47,17 +47,19 @@
                     <MudButton ButtonType="ButtonType.Button"
                                Variant="Variant.Filled"
                                Color="Color.Info"
-                               OnClick="getExcel"
-                               Target="_blank">
+                               OnClick="getExcel">
                         Excel
-                    </MudButton>
+                    </MudButton>                            
                 </MudCardActions>
             </MudCard>
-        </EditForm>
+        </EditForm>        
+        @if (excelLoading)
+        {
+            <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+        }
     </MudContainer>
-    <MudContainer MaxWidth="MaxWidth.Large" Class="ma-3">                
-            
-        <ParticipantTable Participants="participants" Loading="@loading" />
+    <MudContainer MaxWidth="MaxWidth.Large" Class="ma-3">                            
+        <ParticipantTable Participants="participants" Loading="@tableLoading" />
     </MudContainer>
 </div>
 
