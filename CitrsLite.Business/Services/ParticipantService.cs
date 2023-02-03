@@ -27,17 +27,17 @@ namespace CitrsLite.Business.Services
         {
             return new Participant()
             {
-                Name = formModel.Name,
-                Type = formModel.Type,
+                Name = formModel.Name!,
+                Type = formModel.Type!,
                 Description = formModel.Description,
-                PhoneNumber = formModel.PhoneNumber,
-                Address = formModel.Address,
-                City = formModel.City,
+                PhoneNumber = formModel.PhoneNumber!,
+                Address = formModel.Address!,
+                City = formModel.City!,
                 State = formModel.State ?? "FL",
                 IsActive = true,
-                CreatedBy = formModel.UserName,
+                CreatedBy = formModel.UserName!,
                 CreationDate = DateTime.Now,
-                ModifiedBy = formModel.UserName,
+                ModifiedBy = formModel.UserName!,
             };
         }
 
@@ -119,18 +119,7 @@ namespace CitrsLite.Business.Services
                 return await package.GetAsByteArrayAsync();
             }
         }
-
-        public int Create(ParticipantFormViewModel model)
-        {
-            Participant participant = BuildParticipant(model);
-
-            _data.Participants.Create(participant);
-            _data.SaveChanges();
-
-            return participant.Id;
-
-        }
-
+        
         public async Task<int> CreateAysnc(ParticipantFormViewModel model)
         {
             Participant participant = BuildParticipant(model);
@@ -147,18 +136,18 @@ namespace CitrsLite.Business.Services
             var participant = await _data.Participants
                 .GetFirstAsync(p => p.Id == model.Id);
 
-            participant.Name = model.Name;
-            participant.Type = model.Type;
+            participant.Name = model.Name!;
+            participant.Type = model.Type!;
             participant.Description = model.Description;
-            participant.PhoneNumber = model.PhoneNumber;
-            participant.Address = model.Address;
-            participant.City = model.City;
+            participant.PhoneNumber = model.PhoneNumber!;
+            participant.Address = model.Address!;
+            participant.City = model.City!;
             participant.State = model.State;
-            participant.ModifiedBy = model.UserName;
+            participant.ModifiedBy = model.UserName!;
             participant.ModificationDate = DateTime.Now;
 
             _data.Participants.Edit(participant);
             await _data.SaveChangesAsync();
-        }
+        }        
     }
 }

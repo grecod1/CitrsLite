@@ -29,7 +29,13 @@
                 </MudCardContent>
                 <MudDivider></MudDivider>
                 <MudCardActions Class="gap-3">
-                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="@($"Participant/Edit/{Id}")">Edit</MudButton>
+                    <MudButton 
+                        Variant="Variant.Filled" 
+                        Color="Color.Primary" 
+                        Href="@($"Participant/Edit/{Id}")"
+                        EndIcon="@Icons.Material.Filled.Edit">
+                        Edit
+                    </MudButton>
                 </MudCardActions>
             </MudCard>
 

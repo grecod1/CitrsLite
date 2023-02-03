@@ -9,12 +9,17 @@ namespace CitrsLite.Pages.Participants
     {
         private IEnumerable<Participant>? participants;
         private bool tableLoading = false;
-        private bool excelLoading = false;
+        private bool participantsLoading = false;
+        private string[]? labels;
+        private double[]? chartData;
 
         private async Task getParticipants()
         {
             tableLoading = true;
-            participants = await ParticipantService.GetParticipantsAsync(Model);            
+            participantsLoading = true;
+            participants = await ParticipantService.GetParticipantsAsync(Model);
+            generateChart(participants);
+            participantsLoading = false;
             tableLoading = false;            
         }
 
@@ -28,11 +33,24 @@ namespace CitrsLite.Pages.Participants
 
         private async Task getExcel()
         {
-            excelLoading = true;
+            participantsLoading = true;
             var fileName = "participants.xlxs";
             var url = $"/participant/excel?Name={Model.Name}&Type={Model.Type}&City={Model.City}";            
             await JS.InvokeVoidAsync("triggerFileDownload",fileName ,url);
-            excelLoading = false;
+            participantsLoading = false;
+        }
+
+        private void generateChart(IEnumerable<Participant> participants)
+        {
+            labels = participants.Select(p => p.Type).Distinct().ToArray();
+
+            IList<double> counts = new List<double>();
+            foreach (string label in labels)
+            {
+                counts.Add(participants.Count(p => p.Type == label));
+            }
+
+            chartData = counts.ToArray();
         }
 
     }
