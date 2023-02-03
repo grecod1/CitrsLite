@@ -7,10 +7,10 @@
 @inject ParticipantService ParticipantService;
 @inject IJSRuntime JS;
 
-<div class="d-flex flex-wrap justify-center">
+<div class="d-flex flex-wrap">
     <MudContainer MaxWidth="MaxWidth.Small" Class="ma-3">
         <EditForm Model="Model" OnValidSubmit="getParticipants">
-            <MudCard>
+            <MudCard Elevation="3">
                 <MudCardHeader>
                     <MudText Typo="Typo.h3">Participant Search</MudText>
                 </MudCardHeader>
@@ -34,19 +34,22 @@
                 </MudCardContent>
                 <MudCardActions Class="gap-3">
                     <MudButton ButtonType="ButtonType.Submit"
-                               Variant="Variant.Filled"
+                               Variant="Variant.Filled"           
+                               EndIcon="@Icons.Material.Filled.Search"
                                Color="Color.Primary">
                         Search
                     </MudButton>
-                    <MudButton ButtonType="ButtonType.Button"
+                    <MudButton ButtonType="ButtonType.Button"%
                                Variant="Variant.Filled"
                                Color="Color.Secondary"
+                               EndIcon="@Icons.Material.Filled.Clear"
                                OnClick="reset">
                         Reset
                     </MudButton>
                     <MudButton ButtonType="ButtonType.Button"
                                Variant="Variant.Filled"
                                Color="Color.Info"
+                               EndIcon="@Icons.Material.Filled.GridOn"
                                OnClick="getExcel">
                         Excel
                     </MudButton>                            
@@ -58,7 +61,7 @@
             <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
         }
     </MudContainer>
-    <MudContainer MaxWidth="MaxWidth.Large" Class="ma-3">                            
+    <MudContainer MaxWidth="MaxWidth.Medium" Class="ma-3">                            
         <ParticipantTable Participants="participants" Loading="@tableLoading" />
     </MudContainer>
 </div>
