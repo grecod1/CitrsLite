@@ -55,13 +55,23 @@
                 </MudCardActions>
             </MudCard>
         </EditForm>        
-        @if (excelLoading)
+        @if (participantsLoading)
         {
             <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+        }
+        @if (participants != null)
+        {            
+            <div class="my-2">
+                <Chart Labels="labels" Data="chartData"></Chart>
+            </div>
+                
+            
         }
     </MudContainer>
     <MudContainer MaxWidth="MaxWidth.Medium" Class="ma-3">                            
         <ParticipantTable Participants="participants" Loading="@tableLoading" />
     </MudContainer>
+    
+    
 </div>
 
