@@ -1,15 +1,21 @@
 ﻿using CitrsLite.Business.Services;
 using CitrsLite.Business.ViewModels.ParticipantViewModels;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace CitrsLite.Controllers
 {
     public class ParticipantController : Controller
     {   
         private ParticipantService _participantService;
-        public ParticipantController(ParticipantService participantService)
+        private IWebHostEnvironment _appEnvironment;
+
+        public ParticipantController(ParticipantService participantService, 
+            IWebHostEnvironment appEnvironment)
         {
-            _participantService = participantService;
+            _participantService = participantService;            
+            _appEnvironment = appEnvironment;
         }
 
         [HttpGet]
@@ -21,6 +27,16 @@ namespace CitrsLite.Controllers
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
             return File(excelData, contentType, "report.xlsx");
+        }
+
+        [HttpGet]        
+        public async Task<IActionResult> Pdf(int id)
+        {            
+
+            
+            byte[] pdfData = await _participantService.GetPDFAysnc(id, _appEnvironment.WebRootPath);
+
+            return File(pdfData, "application/pdf", "participant.pdf");
         }
     }
 }

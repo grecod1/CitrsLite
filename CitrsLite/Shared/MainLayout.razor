@@ -21,7 +21,7 @@
     </MudAppBar>
     <MudDrawer Variant="DrawerVariant.Mini"
                ClipMode="DrawerClipMode.Always"
-               Elevation="1"
+               Elevation="2"                          
                @bind-Open="@_drawerOpen">
         <MudNavMenu>
             <MudNavLink Href="/participant/add" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Add">
@@ -55,7 +55,8 @@
                 Secondary = Colors.Lime.Darken4,
                 Info = Colors.Teal.Lighten2,
                 Success = Colors.Green.Darken4,
-                Surface = Colors.Lime.Lighten5
+                Surface = Colors.Lime.Lighten5,
+                DrawerBackground = Colors.Lime.Lighten5
             }
         };
 }

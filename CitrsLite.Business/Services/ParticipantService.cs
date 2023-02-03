@@ -1,6 +1,9 @@
 ﻿using CitrsLite.Business.Repositories;
 using CitrsLite.Business.ViewModels.ParticipantViewModels;
 using CitrsLite.Data.Models;
+using iText.Html2pdf;
+using iText.IO.Source;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using OfficeOpenXml;
 using System;
@@ -85,7 +88,7 @@ namespace CitrsLite.Business.Services
         public async Task<IEnumerable<Participant>> GetParticipantsAsync(ParticipantIndexViewModel? model = null)
         {
             var participants = await _data.Participants
-                .GetListAsync(p => model == null|| model.Type == null || p.Type == model.Type);
+                .GetListAsync(p => model == null || model.Type == null || p.Type == model.Type);
 
             return participants
                 .Where(p => model?.Name == null || p.Name.Contains(model.Name))
@@ -119,7 +122,34 @@ namespace CitrsLite.Business.Services
                 return await package.GetAsByteArrayAsync();
             }
         }
-        
+
+        public async Task<byte[]> GetPDFAysnc(int id, string path)
+        {
+            var participant = await _data.Participants.GetFirstAsync(p => p.Id == id);
+
+            var templateString = "";
+
+
+            using (StreamReader reader = new StreamReader(path + "/Templates/ParticipantTemplate.html"))
+            {
+                templateString = reader.ReadToEnd();
+            }
+
+
+            templateString.Replace("(Name)", participant.Name);
+            templateString.Replace("(Type)", participant.Type);
+            templateString.Replace("(Description)", participant.Description);
+
+
+            using (MemoryStream stream = new MemoryStream())
+            {
+                HtmlConverter.ConvertToPdf(templateString, stream);
+
+                return stream.ToArray();
+
+            }
+        }
+
         public async Task<int> CreateAysnc(ParticipantFormViewModel model)
         {
             Participant participant = BuildParticipant(model);
@@ -148,6 +178,6 @@ namespace CitrsLite.Business.Services
 
             _data.Participants.Edit(participant);
             await _data.SaveChangesAsync();
-        }        
+        }
     }
 }
