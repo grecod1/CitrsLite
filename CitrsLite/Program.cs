@@ -35,7 +35,6 @@ builder.Services.AddHttpClient();
 builder.Services.AddMudServices();
 builder.Services.AddMudBlazorResizeListener();
 
-
 // Service Classes
 builder.Services.AddSingleton<WeatherForecastService>();
 

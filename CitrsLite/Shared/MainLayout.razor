@@ -1,36 +1,35 @@
 ﻿@inherits LayoutComponentBase
 
-<MudThemeProvider />
+<MudThemeProvider Theme="CitrsLite" IsDarkMode="isDarkMode" />
 <MudDialogProvider />
 <MudSnackbarProvider />
 
 <MudLayout>
-    <MudAppBar Elevation="1" Style="@($"background:{Colors.Lime.Darken4}")">
-        
-        <MudGrid Justify="Justify.FlexStart" Spacing="3">
-            <MudIconButton Icon="@Icons.Material.Filled.Menu"
-                           Color="Color.Inherit"
-                           Edge="Edge.Start"
-                           OnClick="@((e) => DrawerToggle())" />
-            <MudText Typo="Typo.h6" Class="my-auto">
-                <MudNavLink Href="/">C.I.T.R.S Lite Participants</MudNavLink>
-            </MudText>            
-        </MudGrid>
+    <MudAppBar Elevation="1" Color="Color.Primary">
 
+        <MudIconButton Icon="@Icons.Material.Filled.Menu"
+                       Color="Color.Inherit"
+                       Edge="Edge.Start"
+                       OnClick="@((e) => DrawerToggle())" />
+        <MudText Typo="Typo.h6" Class="my-auto">
+            <MudNavLink Href="/">C.I.T.R.S Lite Participants</MudNavLink>
+        </MudText>
+        <MudSpacer></MudSpacer>
+        <MudToggleIconButton @bind-Toggled="@isDarkMode"
+                             Icon="@Icons.Material.Filled.DarkMode" Color="Color.Default" Title="Off"
+                             ToggledIcon="@Icons.Material.Filled.LightMode" ToggledTitle="On" />
     </MudAppBar>
-    <MudDrawer  
-        Variant="DrawerVariant.Mini"         
-        ClipMode="DrawerClipMode.Always"
-        Style="@($"background:{Colors.Lime.Lighten4}; color:{Colors.Lime.Darken4}")"        
-        Elevation="1"
+    <MudDrawer Variant="DrawerVariant.Mini"
+               ClipMode="DrawerClipMode.Always"
+               Elevation="1"
                @bind-Open="@_drawerOpen">
         <MudNavMenu>
-            <MudNavLink Href="/participant/add" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Add">          
+            <MudNavLink Href="/participant/add" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Add">
                 Create
             </MudNavLink>
             <MudNavLink Href="/participants" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Search">
                 Search
-                </MudNavLink>                                    
+            </MudNavLink>
         </MudNavMenu>
     </MudDrawer>
     <MudMainContent MaxWidth="MaxWidth.ExtraLarge">
@@ -40,9 +39,25 @@
 
 @code {
     bool _drawerOpen = false;
-
+    bool isDarkMode = false;
+    
     void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
     }
+
+    
+    MudTheme CitrsLite = new MudTheme()
+        {
+            Palette = new Palette()
+            {
+                Primary = Colors.Orange.Darken4,
+                Secondary = Colors.Lime.Darken4,
+                Info = Colors.Teal.Lighten2,
+                Success = Colors.Green.Darken4,
+                Surface = Colors.Lime.Lighten5
+            }
+        };
 }
+
+    
