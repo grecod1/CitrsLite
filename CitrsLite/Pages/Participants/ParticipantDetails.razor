@@ -2,22 +2,24 @@
 @using CitrsLite.Business.Services;
 @using CitrsLite.Business.ViewModels.ParticipantViewModels;
 @inject ParticipantService ParticipantService;
+@inject ParticipantDetailsViewModel Model;
+
 <div class="d-flex flex-wrap justify-center">
     <MudContainer MaxWidth="MaxWidth.Small" Class="ma-3">
         @if(Model?.Name != null)
         {
             <MudCard Elevation="3">
                 <MudCardHeader>
-                    <MudText Typo="Typo.h3">@Model?.Name</MudText>
+                    <MudText Typo="Typo.h3">@Model.Name</MudText>
                 </MudCardHeader>
                 <MudCardContent>
                     <MudText Typo="Typo.subtitle1">Information</MudText>
                     <MudList>
-                        <MudListItem><strong>Type: </strong> @Model?.Type</MudListItem>
+                        <MudListItem><strong>Type: </strong> @Model.Type</MudListItem>
                         <MudDivider></MudDivider>
-                        <MudListItem><strong>City: </strong> @Model?.City</MudListItem>
+                        <MudListItem><strong>City: </strong> @Model.City</MudListItem>
                         <MudDivider></MudDivider>
-                        <MudListItem><strong>Phone: </strong> @Model?.PhoneNumber</MudListItem>
+                        <MudListItem><strong>Phone: </strong> @Model.PhoneNumber</MudListItem>
                         <MudDivider></MudDivider>
                     </MudList>
                     <MudText Typo="Typo.subtitle1">Description</MudText>

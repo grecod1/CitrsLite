@@ -1,4 +1,6 @@
-﻿using CitrsLite.Data.Models;
+﻿using CitrsLite.Business.ViewModels.ParticipantViewModels;
+using CitrsLite.Data.Models;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
 namespace CitrsLite.Pages.Participants
@@ -6,13 +8,14 @@ namespace CitrsLite.Pages.Participants
     public partial class ParticipantIndex
     {
         private IEnumerable<Participant>? participants;
-        private bool loading = false;
+        private bool tableLoading = false;
+        private bool excelLoading = false;
 
         private async Task getParticipants()
         {
-            loading = true;
+            tableLoading = true;
             participants = await ParticipantService.GetParticipantsAsync(Model);            
-            loading = false;            
+            tableLoading = false;            
         }
 
         private void reset()
@@ -25,11 +28,11 @@ namespace CitrsLite.Pages.Participants
 
         private async Task getExcel()
         {
-            loading = true;
+            excelLoading = true;
             var fileName = "participants.xlxs";
             var url = $"/participant/excel?Name={Model.Name}&Type={Model.Type}&City={Model.City}";            
             await JS.InvokeVoidAsync("triggerFileDownload",fileName ,url);
-            loading = false;
+            excelLoading = false;
         }
 
     }

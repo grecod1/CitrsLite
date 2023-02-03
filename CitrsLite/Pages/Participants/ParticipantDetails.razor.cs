@@ -5,9 +5,6 @@ namespace CitrsLite.Pages.Participants
 {
     public partial class ParticipantDetails
     {
-        [Inject]
-        public ParticipantDetailsViewModel? Model { get; set; }
-
         [Parameter]
         public int Id { get; set; }
 

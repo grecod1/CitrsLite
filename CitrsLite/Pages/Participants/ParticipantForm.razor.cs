@@ -12,11 +12,6 @@ namespace CitrsLite.Pages.Participants
     public partial class ParticipantForm
     {
         string heading = "New Participant";
-
-
-        [Inject]
-        public ParticipantFormViewModel Model { get; set; }
-
         
         protected override async Task OnParametersSetAsync() => await setPropertiesAsync();
 
