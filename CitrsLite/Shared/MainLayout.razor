@@ -5,7 +5,7 @@
 <MudSnackbarProvider />
 
 <MudLayout>
-    <MudAppBar Style="@($"background:{Colors.Lime.Darken4}")">
+    <MudAppBar Elevation="1" Style="@($"background:{Colors.Lime.Darken4}")">
         
         <MudGrid Justify="Justify.FlexStart" Spacing="3">
             <MudIconButton Icon="@Icons.Material.Filled.Menu"
@@ -13,33 +13,27 @@
                            Edge="Edge.Start"
                            OnClick="@((e) => DrawerToggle())" />
             <MudText Typo="Typo.h6" Class="my-auto">
-                <MudNavLink Href="/">C.I.T.R.S Lite</MudNavLink>
-            </MudText>
-            <MudItem>
-                <MudNavLink Class="" Href="/participants" Match="NavLinkMatch.Prefix">Participant</MudNavLink>
-            </MudItem>
-            <MudItem>
-                <MudNavLink Href="/varietyClone/add" Match="NavLinkMatch.Prefix">Variety Clones</MudNavLink>
-            </MudItem>
+                <MudNavLink Href="/">C.I.T.R.S Lite Participants</MudNavLink>
+            </MudText>            
         </MudGrid>
 
     </MudAppBar>
-    <MudDrawer Variant="DrawerVariant.Temporary" Style="@($"background:{Colors.Lime.Lighten4}; color:{Colors.Lime.Darken4}")"
+    <MudDrawer  
+        Variant="DrawerVariant.Mini" 
+        OpenMiniOnHover="true" 
+        ClipMode="DrawerClipMode.Always"
+        Style="@($"background:{Colors.Lime.Lighten4}; color:{Colors.Lime.Darken4}")"        
+        Elevation="1"
                @bind-Open="@_drawerOpen">
         <MudNavMenu>
-            <MudNavLink Href="/" Match="NavLinkMatch.Prefix">Dashboard</MudNavLink>
-            <MudNavLink Href="/participant/add" Match="NavLinkMatch.Prefix">Add Participant</MudNavLink>
-            <MudNavLink Href="/participants" Match="NavLinkMatch.Prefix">Participants</MudNavLink>
-            <MudNavLink Href="/varietyClone/add" Match="NavLinkMatch.Prefix">Variety Clones</MudNavLink>
-            <MudNavGroup Title="Settings" Expanded="true">
-                <MudNavLink Href="/users" Match="NavLinkMatch.Prefix">Users</MudNavLink>
-                <MudNavLink Href="/security" Match="NavLinkMatch.Prefix">Security</MudNavLink>
-            </MudNavGroup>
-            <MudNavLink Href="/about" Match="NavLinkMatch.Prefix">About</MudNavLink>
+            <MudNavLink Href="/participant/add" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Add">          
+                Create
+            </MudNavLink>
+            <MudNavLink Href="/participants" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Search">
+                Search
+                </MudNavLink>                                    
         </MudNavMenu>
     </MudDrawer>
-
-
     <MudMainContent MaxWidth="MaxWidth.ExtraLarge">
         @Body
     </MudMainContent>
