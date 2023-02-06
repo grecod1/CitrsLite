@@ -145,11 +145,12 @@ namespace CitrsLite.Business.Services
             templateString = templateString.Replace("(Type)", participant.Type);
             templateString = templateString.Replace("(Description)", participant.Description);
 
-            byte[] bytes = new byte[long.MaxValue];
+            
 
 
             using (MemoryStream stream = new MemoryStream())
-            {
+            {                
+
                 await Task.Run(() =>
                 {
                     using (PdfWriter pdfWriter = new PdfWriter(stream))
