@@ -53,14 +53,14 @@ namespace CitrsLite.Business.Services
 
 
 
-                            
+                            SmtpClient client = new SmtpClient("relay.freshfromflorida.com", 25);
+                            client.Send(mailMessage);
 
 
                         }
 
                     });
-                    SmtpClient client = new SmtpClient("relay.freshfromflorida.com", 25);
-                    await client.SendMailAsync(mailMessage);
+                    
                 }                                         
 
                 
