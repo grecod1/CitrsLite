@@ -9,8 +9,16 @@ namespace CitrsLite.Business.Services
 {
     public class EmailService
     {
-        public async Task Email(int participantId, string template)
+        private ParticipantService _participantService;
+        public EmailService(ParticipantService participantService)
         {
+            _participantService = participantService;
+        }
+
+        public async Task EmailAsync(int participantId, string path)
+        {
+            var template = await _participantService.GetTemplateAsync(participantId, path);
+            
             MailMessage mailMessage = new MailMessage();
             mailMessage.IsBodyHtml= true;
             mailMessage.Body = template;
@@ -20,15 +28,11 @@ namespace CitrsLite.Business.Services
 
             SmtpClient client = new SmtpClient("relay.freshfromflorida.com", 25);
 
-            try
-            {
-                client.Send(mailMessage);
 
-            }
-            catch (Exception exception)
-            {
-                throw;
-            }
+            await client.SendMailAsync(mailMessage);
+            
+
+            
         }
     }
 }
