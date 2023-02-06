@@ -68,7 +68,6 @@ namespace CitrsLite.Business.Services
                     State = participant.State,
                     IsActive = participant.IsActive
                 };
-
             }
             else
             {
@@ -140,31 +139,22 @@ namespace CitrsLite.Business.Services
                 templateString = reader.ReadToEnd();
             }
 
-
             templateString = templateString.Replace("(Name)", participant.Name);
             templateString = templateString.Replace("(Type)", participant.Type);
             templateString = templateString.Replace("(Description)", participant.Description);
-
             
-
-
             using (MemoryStream stream = new MemoryStream())
             {                
-
                 await Task.Run(() =>
                 {
                     using (PdfWriter pdfWriter = new PdfWriter(stream))
                     {
                         HtmlConverter.ConvertToPdf(templateString, pdfWriter);
-
-
                     }
                 });
 
                 return stream.ToArray();
             }
-
-
         }
 
         public async Task<int> CreateAysnc(ParticipantFormViewModel model)
