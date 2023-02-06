@@ -1,9 +1,12 @@
 ﻿using CitrsLite.Business.Repositories;
 using CitrsLite.Business.ViewModels.ParticipantViewModels;
 using CitrsLite.Data.Models;
+using IronPdf;
 using iText.Html2pdf;
 using iText.IO.Source;
+using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
+using iText.Layout;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using OfficeOpenXml;
@@ -139,17 +142,14 @@ namespace CitrsLite.Business.Services
 
             templateString.Replace("(Name)", participant.Name);
             templateString.Replace("(Type)", participant.Type);
-            templateString.Replace("(Description)", participant.Description);            
+            templateString.Replace("(Description)", participant.Description);
 
             
+            
 
-            using var stream = new MemoryStream();
 
-            ConverterProperties converterProperties = new ConverterProperties();            
 
-            HtmlConverter.ConvertToPdf(templateString, stream, converterProperties);
-
-            return stream.ToArray();
+            return new byte[] { 0 };
             
         }
 
