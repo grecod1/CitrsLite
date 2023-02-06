@@ -129,12 +129,11 @@ namespace CitrsLite.Business.Services
             }
         }
 
-        public byte[] GetPDF(int id, string path)
+        public async Task<byte[]> GetPDFAsync(int id, string path)
         {
-            var participant =  _data.Participants.GetList(p => p.Id == id).FirstOrDefault();
+            var participant = await _data.Participants.GetFirstAsync(p => p.Id == id);
 
             var templateString = "";
-
 
             using (StreamReader reader = new StreamReader(path + "/Templates/ParticipantTemplate.html"))
             {
@@ -146,19 +145,25 @@ namespace CitrsLite.Business.Services
             templateString = templateString.Replace("(Type)", participant.Type);
             templateString = templateString.Replace("(Description)", participant.Description);
 
-            
+            byte[] bytes;
 
-            using (MemoryStream stream = new MemoryStream())            
+
+            using (MemoryStream stream = new MemoryStream())
             {
-                using (PdfWriter pdfWriter = new PdfWriter(stream))
+                await Task.Run(() =>
                 {
-                    HtmlConverter.ConvertToPdf(templateString, pdfWriter);
+                    using (PdfWriter pdfWriter = new PdfWriter(stream))
+                    {
+                        HtmlConverter.ConvertToPdf(templateString, pdfWriter);
 
-                    return stream.ToArray();
-                }                
+
+                    }
+                });
+
+                return stream.ToArray();
             }
 
-                      
+
         }
 
         public async Task<int> CreateAysnc(ParticipantFormViewModel model)
