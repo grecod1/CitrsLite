@@ -31,9 +31,7 @@ namespace CitrsLite.Controllers
 
         [HttpGet]        
         public async Task<IActionResult> Pdf(int id)
-        {            
-
-            
+        {                        
             var pdfData = await  _participantService.GetPDFAsync(id, _appEnvironment.WebRootPath);
 
             return File(pdfData, "application/pdf", "participant.pdf");
