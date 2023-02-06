@@ -51,22 +51,15 @@ namespace CitrsLite.Business.Services
                                                         
                             mailMessage.Attachments.Add(new Attachment(stream, "participant.pdf"));
 
-
-
+                            // Attemping to resolve bug.
                             SmtpClient client = new SmtpClient("relay.freshfromflorida.com", 25);
                             client.Send(mailMessage);
-
 
                         }
 
                     });
                     
                 }                                         
-
-                
-
-
-
             }
             catch (Exception ex)
             {
