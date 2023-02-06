@@ -34,7 +34,7 @@ namespace CitrsLite.Controllers
         {            
 
             
-            var pdfData = await _participantService.GetPDFAysnc(id, _appEnvironment.WebRootPath);
+            var pdfData =  _participantService.GetPDF(id, _appEnvironment.WebRootPath);
 
             return File(pdfData, "application/pdf", "participant.pdf");
         }

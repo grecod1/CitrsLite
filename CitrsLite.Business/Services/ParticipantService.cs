@@ -1,17 +1,19 @@
 ﻿using CitrsLite.Business.Repositories;
 using CitrsLite.Business.ViewModels.ParticipantViewModels;
 using CitrsLite.Data.Models;
-using IronPdf;
 using iText.Html2pdf;
 using iText.IO.Source;
 using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
+using iText.Kernel.Pdf.Annot;
 using iText.Layout;
+using iText.Pdfa;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http.Headers;
@@ -127,9 +129,9 @@ namespace CitrsLite.Business.Services
             }
         }
 
-        public async Task<byte[]> GetPDFAysnc(int id, string path)
+        public byte[] GetPDF(int id, string path)
         {
-            var participant = await _data.Participants.GetFirstAsync(p => p.Id == id);
+            var participant =  _data.Participants.GetList(p => p.Id == id).FirstOrDefault();
 
             var templateString = "";
 
@@ -140,17 +142,23 @@ namespace CitrsLite.Business.Services
             }
 
 
-            templateString.Replace("(Name)", participant.Name);
-            templateString.Replace("(Type)", participant.Type);
-            templateString.Replace("(Description)", participant.Description);
+            templateString = templateString.Replace("(Name)", participant.Name);
+            templateString = templateString.Replace("(Type)", participant.Type);
+            templateString = templateString.Replace("(Description)", participant.Description);
 
             
-            
 
+            using (MemoryStream stream = new MemoryStream())            
+            {
+                using (PdfWriter pdfWriter = new PdfWriter(stream))
+                {
+                    HtmlConverter.ConvertToPdf(templateString, pdfWriter);
 
+                    return stream.ToArray();
+                }                
+            }
 
-            return new byte[] { 0 };
-            
+                      
         }
 
         public async Task<int> CreateAysnc(ParticipantFormViewModel model)
