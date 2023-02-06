@@ -3,10 +3,11 @@
 @using CitrsLite.Business.ViewModels.ParticipantViewModels;
 @inject ParticipantService ParticipantService;
 @inject ParticipantDetailsViewModel Model;
+@inject IJSRuntime JS;
 
 <div class="d-flex flex-wrap justify-center">
     <MudContainer MaxWidth="MaxWidth.Small" Class="ma-3">
-        @if(Model?.Name != null)
+        @if (Model?.Name != null)
         {
             <MudCard Elevation="3">
                 <MudCardHeader>
@@ -29,12 +30,17 @@
                 </MudCardContent>
                 <MudDivider></MudDivider>
                 <MudCardActions Class="gap-3">
-                    <MudButton 
-                        Variant="Variant.Filled" 
-                        Color="Color.Primary" 
-                        Href="@($"Participant/Edit/{Id}")"
-                        EndIcon="@Icons.Material.Filled.Edit">
+                    <MudButton Variant="Variant.Filled"
+                           Color="Color.Primary"
+                           Href="@($"Participant/Edit/{Id}")"
+                           EndIcon="@Icons.Material.Filled.Edit">
                         Edit
+                    </MudButton>
+                    <MudButton Variant="Variant.Filled"
+                           Color="Color.Info"
+                           OnClick="getPdfAsync"
+                           EndIcon="@Icons.Material.Filled.PictureAsPdf">
+                        PDF
                     </MudButton>
                 </MudCardActions>
             </MudCard>
@@ -46,13 +52,13 @@
             <MudSkeleton SkeletonType="SkeletonType.Text" />
             <MudSkeleton SkeletonType="SkeletonType.Text" />
             <MudSkeleton SkeletonType="SkeletonType.Text" />
-            <MudSkeleton SkeletonType="SkeletonType.Rectangle" Height="25rem"/>
+            <MudSkeleton SkeletonType="SkeletonType.Rectangle" Height="25rem" />
             <MudDivider Class="my-4"></MudDivider>
-            <MudSkeleton SkeletonType="SkeletonType.Rectangle" Width="7rem" Height="3rem"/>
+            <MudSkeleton SkeletonType="SkeletonType.Rectangle" Width="7rem" Height="3rem" />
         }
 
     </MudContainer>
     <MudContainer MaxWidth="MaxWidth.Small" Class="ma-3">
-        <Chart Labels="labels" Data="chartData"></Chart>        
+        <Chart Labels="labels" Data="chartData"></Chart>
     </MudContainer>
 </div>

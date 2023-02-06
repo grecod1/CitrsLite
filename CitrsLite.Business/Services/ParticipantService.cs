@@ -1,10 +1,19 @@
 ﻿using CitrsLite.Business.Repositories;
 using CitrsLite.Business.ViewModels.ParticipantViewModels;
 using CitrsLite.Data.Models;
+using iText.Html2pdf;
+using iText.IO.Source;
+using iText.Kernel.Geom;
+using iText.Kernel.Pdf;
+using iText.Kernel.Pdf.Annot;
+using iText.Layout;
+using iText.Pdfa;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http.Headers;
@@ -85,7 +94,7 @@ namespace CitrsLite.Business.Services
         public async Task<IEnumerable<Participant>> GetParticipantsAsync(ParticipantIndexViewModel? model = null)
         {
             var participants = await _data.Participants
-                .GetListAsync(p => model == null|| model.Type == null || p.Type == model.Type);
+                .GetListAsync(p => model == null || model.Type == null || p.Type == model.Type);
 
             return participants
                 .Where(p => model?.Name == null || p.Name.Contains(model.Name))
@@ -119,7 +128,45 @@ namespace CitrsLite.Business.Services
                 return await package.GetAsByteArrayAsync();
             }
         }
-        
+
+        public async Task<byte[]> GetPDFAsync(int id, string path)
+        {
+            var participant = await _data.Participants.GetFirstAsync(p => p.Id == id);
+
+            var templateString = "";
+
+            using (StreamReader reader = new StreamReader(path + "/Templates/ParticipantTemplate.html"))
+            {
+                templateString = reader.ReadToEnd();
+            }
+
+
+            templateString = templateString.Replace("(Name)", participant.Name);
+            templateString = templateString.Replace("(Type)", participant.Type);
+            templateString = templateString.Replace("(Description)", participant.Description);
+
+            
+
+
+            using (MemoryStream stream = new MemoryStream())
+            {                
+
+                await Task.Run(() =>
+                {
+                    using (PdfWriter pdfWriter = new PdfWriter(stream))
+                    {
+                        HtmlConverter.ConvertToPdf(templateString, pdfWriter);
+
+
+                    }
+                });
+
+                return stream.ToArray();
+            }
+
+
+        }
+
         public async Task<int> CreateAysnc(ParticipantFormViewModel model)
         {
             Participant participant = BuildParticipant(model);
@@ -148,6 +195,6 @@ namespace CitrsLite.Business.Services
 
             _data.Participants.Edit(participant);
             await _data.SaveChangesAsync();
-        }        
+        }
     }
 }

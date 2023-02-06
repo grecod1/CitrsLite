@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,6 +31,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddHttpClient();
+
 
 // Mud Blazor
 builder.Services.AddMudServices();
@@ -67,10 +69,11 @@ if (app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 app.UseRouting();
-app.MapControllerRoute("default", "{controller=Home}/{action=Index}");
+app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapFallbackToPage("/_Host");
+
 
 app.UseEndpoints(endpoints => endpoints.MapControllers());
 

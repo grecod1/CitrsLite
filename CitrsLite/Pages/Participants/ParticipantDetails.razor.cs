@@ -1,5 +1,6 @@
 ﻿using CitrsLite.Business.ViewModels.ParticipantViewModels;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 
 namespace CitrsLite.Pages.Participants
 {
@@ -18,6 +19,12 @@ namespace CitrsLite.Pages.Participants
             
         }
 
+        private async Task getPdfAsync()
+        {
+            var fileName = "participants.pdf";
+            var url = $"/participant/pdf/{Id}";
+            await JS.InvokeVoidAsync("triggerFileDownload", fileName, url);
+        }
 
         private async Task generateChartData()
         {

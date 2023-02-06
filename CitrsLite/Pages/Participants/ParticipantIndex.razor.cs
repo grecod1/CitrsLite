@@ -28,7 +28,7 @@ namespace CitrsLite.Pages.Participants
             Model.Name = null;
             Model.Type = null;
             Model.City = null;
-            Model.Phone = null;
+            Model.Phone = null;            
         }
 
         private async Task getExcel()

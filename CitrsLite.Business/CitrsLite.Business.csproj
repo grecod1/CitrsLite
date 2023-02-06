@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="EPPlus" Version="6.1.2" />
+    <PackageReference Include="itext7" Version="7.2.5" />
+    <PackageReference Include="iText7.pdfhtml" Version="4.0.5" />
   </ItemGroup>
 
   <ItemGroup>
