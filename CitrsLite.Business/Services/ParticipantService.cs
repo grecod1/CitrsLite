@@ -145,7 +145,7 @@ namespace CitrsLite.Business.Services
             templateString = templateString.Replace("(Type)", participant.Type);
             templateString = templateString.Replace("(Description)", participant.Description);
 
-            byte[] bytes;
+            byte[] bytes = new byte[long.MaxValue];
 
 
             using (MemoryStream stream = new MemoryStream())
