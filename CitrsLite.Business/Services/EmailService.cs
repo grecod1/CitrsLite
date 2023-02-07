@@ -27,12 +27,7 @@ namespace CitrsLite.Business.Services
 
 
 
-                MailMessage mailMessage = new MailMessage();
-                mailMessage.IsBodyHtml = true;
-                mailMessage.Body = template;
-                mailMessage.To.Add(new MailAddress("Daniel.Greco@fdacs.gov"));
-                mailMessage.From = (new MailAddress("Citrs@fdacs.gov", "Citrs"));
-                mailMessage.Subject = "Testing Attachment";
+                
                 
 
                 using (MemoryStream stream = new MemoryStream())
@@ -48,7 +43,12 @@ namespace CitrsLite.Business.Services
                             pdfWriter.SetCloseStream(false);
 
 
-                                                        
+                            MailMessage mailMessage = new MailMessage();
+                            mailMessage.IsBodyHtml = true;
+                            mailMessage.Body = template;
+                            mailMessage.To.Add(new MailAddress("Daniel.Greco@fdacs.gov"));
+                            mailMessage.From = (new MailAddress("Citrs@fdacs.gov", "Citrs"));
+                            mailMessage.Subject = "Testing Attachment";
                             mailMessage.Attachments.Add(new Attachment(stream, "participant.pdf"));
 
                             // Attemping to resolve bug.
