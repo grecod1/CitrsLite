@@ -40,11 +40,15 @@ builder.Services.AddMudBlazorResizeListener();
 // Service Classes
 builder.Services.AddSingleton<WeatherForecastService>();
 
+builder.Services.AddSingleton<EmailService>();
+
 builder.Services.AddSingleton<IUnitOfWork, UnitOfWork>(u => 
     new UnitOfWork(connectionString: builder.Configuration!.GetConnectionString("CitrsDatabase")!));
 
 builder.Services.AddSingleton<ParticipantService, ParticipantService>(p => 
     new ParticipantService(connectionString: builder.Configuration!.GetConnectionString("CitrsDatabase")!));
+
+
 
 // View Models
 builder.Services.AddScoped<VarietyCloneFormViewModel>();

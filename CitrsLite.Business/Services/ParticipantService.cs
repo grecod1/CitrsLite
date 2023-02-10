@@ -128,7 +128,7 @@ namespace CitrsLite.Business.Services
             }
         }
 
-        public async Task<byte[]> GetPDFAsync(int id, string path)
+        public async Task<string> GetTemplateAsync(int id, string path)
         {
             var participant = await _data.Participants.GetFirstAsync(p => p.Id == id);
 
@@ -142,6 +142,14 @@ namespace CitrsLite.Business.Services
             templateString = templateString.Replace("(Name)", participant.Name);
             templateString = templateString.Replace("(Type)", participant.Type);
             templateString = templateString.Replace("(Description)", participant.Description);
+
+            return templateString;
+
+        }
+
+        public async Task<byte[]> GetPDFAsync(int id, string path)
+        {
+            var templateString = await GetTemplateAsync(id, path);
             
             using (MemoryStream stream = new MemoryStream())
             {                

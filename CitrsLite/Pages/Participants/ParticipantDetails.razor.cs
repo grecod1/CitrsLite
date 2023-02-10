@@ -26,6 +26,11 @@ namespace CitrsLite.Pages.Participants
             await JS.InvokeVoidAsync("triggerFileDownload", fileName, url);
         }
 
+        private async Task emailAsync()
+        {
+            await EmailService.EmailAsync(Id, WebEnvironment.WebRootPath);
+        }
+
         private async Task generateChartData()
         {
             var participants = await ParticipantService

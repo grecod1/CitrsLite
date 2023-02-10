@@ -2,7 +2,9 @@
 @using CitrsLite.Business.Services;
 @using CitrsLite.Business.ViewModels.ParticipantViewModels;
 @inject ParticipantService ParticipantService;
+@inject EmailService EmailService;
 @inject ParticipantDetailsViewModel Model;
+@inject IWebHostEnvironment WebEnvironment;
 @inject IJSRuntime JS;
 
 <div class="d-flex flex-wrap justify-center">
@@ -41,6 +43,12 @@
                            OnClick="getPdfAsync"
                            EndIcon="@Icons.Material.Filled.PictureAsPdf">
                         PDF
+                    </MudButton>
+                    <MudButton Variant="Variant.Filled"
+                        Color="Color.Success"
+                        OnClick="emailAsync"
+                        EndIcon="@Icons.Material.Filled.Email">
+                        Email
                     </MudButton>
                 </MudCardActions>
             </MudCard>
