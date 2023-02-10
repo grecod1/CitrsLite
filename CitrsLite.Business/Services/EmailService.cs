@@ -25,10 +25,13 @@ namespace CitrsLite.Business.Services
             {
                 var template = await _participantService.GetTemplateAsync(participantId, path);
 
+                MailMessage mailMessage = new MailMessage();
+                mailMessage.IsBodyHtml = true;
+                mailMessage.Body = template;
+                mailMessage.To.Add(new MailAddress("Daniel.Greco@fdacs.gov"));
+                mailMessage.From = (new MailAddress("Citrs@fdacs.gov", "Citrs"));
+                mailMessage.Subject = "Testing Attachment";
 
-
-                
-                
 
                 using (MemoryStream stream = new MemoryStream())
                 {
@@ -39,17 +42,16 @@ namespace CitrsLite.Business.Services
                         {
                             stream.Position = 0;
                             pdfWriter.IsCloseStream();
-                            HtmlConverter.ConvertToPdf(template, pdfWriter);
                             pdfWriter.SetCloseStream(false);
+                            HtmlConverter.ConvertToPdf(template, pdfWriter);
+                            byte[] document = stream.ToArray();
 
 
-                            MailMessage mailMessage = new MailMessage();
-                            mailMessage.IsBodyHtml = true;
-                            mailMessage.Body = template;
-                            mailMessage.To.Add(new MailAddress("Daniel.Greco@fdacs.gov"));
-                            mailMessage.From = (new MailAddress("Citrs@fdacs.gov", "Citrs"));
-                            mailMessage.Subject = "Testing Attachment";
-                            mailMessage.Attachments.Add(new Attachment(stream, "participant.pdf"));
+                            
+                            mailMessage.Attachments
+                                .Add(new Attachment(new MemoryStream(document), 
+                                    "participant.pdf", 
+                                    "application/pdf"));
 
                             // Attemping to resolve bug.
                             SmtpClient client = new SmtpClient("relay.freshfromflorida.com", 25);
