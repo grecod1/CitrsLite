@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitrsLite.Data", "CitrsLite
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitrsLite.Business", "CitrsLite.Business\CitrsLite.Business.csproj", "{8565EB2A-494E-4AC8-9CD5-7E95A3EBC3A8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitrsLite.API", "CitrsLite.API\CitrsLite.API.csproj", "{D26BFDAA-1BB7-433B-8DB6-0DCF9275F748}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{8565EB2A-494E-4AC8-9CD5-7E95A3EBC3A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8565EB2A-494E-4AC8-9CD5-7E95A3EBC3A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8565EB2A-494E-4AC8-9CD5-7E95A3EBC3A8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D26BFDAA-1BB7-433B-8DB6-0DCF9275F748}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D26BFDAA-1BB7-433B-8DB6-0DCF9275F748}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D26BFDAA-1BB7-433B-8DB6-0DCF9275F748}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D26BFDAA-1BB7-433B-8DB6-0DCF9275F748}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

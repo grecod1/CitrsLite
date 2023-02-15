@@ -1,4 +1,3 @@
-using CitrsLite.API.Controllers;
 using CitrsLite.Business.Repositories;
 using CitrsLite.Business.Services;
 using CitrsLite.Business.ViewModels.ParticipantViewModels;
@@ -27,7 +26,6 @@ builder.Services.AddAuthorization(options =>
 // Native to Blazor
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddHttpClient();
@@ -62,12 +60,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");    
-}
-
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
 }
 
 app.UseStaticFiles();

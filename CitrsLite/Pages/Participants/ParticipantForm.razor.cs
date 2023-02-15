@@ -13,6 +13,7 @@ namespace CitrsLite.Pages.Participants
     {
         string heading = "New Participant";
         
+
         protected override async Task OnParametersSetAsync() => await setPropertiesAsync();
 
         [Parameter]
