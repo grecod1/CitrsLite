@@ -70,7 +70,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapFallbackToPage("/_Host");
 
-
+// Testing publish setting
 app.UseEndpoints(endpoints => endpoints.MapControllers());
 
 app.MapBlazorHub();
